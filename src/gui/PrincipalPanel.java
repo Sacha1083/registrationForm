@@ -15,7 +15,7 @@ public class PrincipalPanel extends JPanel {
         gbc.weighty = 1.0; // Expandir verticalmente
         gbc.insets = new Insets(0, 10, 0, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JLabel panelInformation = new JLabel(Instructions.readInstructions());
+        JLabel panelInformation = new JLabel(TextData.readInstructions());
         panelInformation.setFont(new Font("Arial", Font.BOLD, 12));
         add(panelInformation, gbc);
 
