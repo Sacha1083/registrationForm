@@ -25,8 +25,18 @@ public class TextData {
                 .append("<p>A message will be displayed confirming whether the file has been saved successfully (if you selected that option).</p>")
                 .append("<p>Click 'Finish' to close the program.</p>")
                 .append("<h2>6.- Success Notification:</h2>")
-                .append("<p>If the registration and, if applicable, the file export were successful, a pop-up window will notify you of the success of the process.</p>")
-                .append("</html>");
+                .append("<p>If the registration and, if applicable, the file export were successful, a pop-up window will notify you of the success of the process.</p>");
+        sb.append("</html>");
+        return sb.toString();
+    }
+
+    public static String readTitleFormPanel() {
+        StringBuilder sb = new StringBuilder();
+
+            sb.append("<html>")
+                    .append("<center><h1>User Form</h1></center>");
+            sb.append("</html>");
+
         return sb.toString();
     }
 }
