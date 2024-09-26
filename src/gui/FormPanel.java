@@ -18,7 +18,7 @@ public class FormPanel extends JPanel {
         titleForm.setFont(TextFont.titleFont());
         add(titleForm, gbc);
 
-        // Form panel
+        // Form
         JPanel formPanel = new JPanel(new GridBagLayout());
         GridBagConstraints inputConstrain = new GridBagConstraints();
         inputConstrain.gridy = 0;
@@ -29,6 +29,7 @@ public class FormPanel extends JPanel {
         labelName.setFont(TextFont.textFormFont());
         formPanel.add(labelName, inputConstrain);
 
+        // Name
         inputConstrain.gridx = 1;
         inputConstrain.fill = GridBagConstraints.HORIZONTAL;
         JTextField name = new JTextField();
@@ -43,6 +44,7 @@ public class FormPanel extends JPanel {
         labelMail.setFont(TextFont.textFormFont());
         formPanel.add(labelMail, inputConstrain);
 
+        // E-Mail
         inputConstrain.gridx = 1;
         inputConstrain.fill = GridBagConstraints.HORIZONTAL;
         JTextField eMail = new JTextField();
@@ -57,6 +59,7 @@ public class FormPanel extends JPanel {
         labelPassword.setFont(TextFont.textFormFont());
         formPanel.add(labelPassword, inputConstrain);
 
+        // Password
         inputConstrain.gridx = 1;
         inputConstrain.fill = GridBagConstraints.HORIZONTAL;
         JPasswordField password = new JPasswordField();
@@ -64,7 +67,7 @@ public class FormPanel extends JPanel {
         password.setPreferredSize(new Dimension(200, 30));
         formPanel.add(password, inputConstrain);
 
-        // añadir un boton de send al formulario
+        // Send Button
         inputConstrain.gridy = 3;
         inputConstrain.gridx = 1;
         inputConstrain.gridwidth = GridBagConstraints.REMAINDER;
@@ -80,19 +83,21 @@ public class FormPanel extends JPanel {
         });
         formPanel.add(sendButton, inputConstrain);
 
+        // Add formPanel
         gbc.gridy = 1;
         gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER; // Para que el formulario ocupe todo el ancho
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.NORTH;
         add(formPanel, gbc);
 
+        // Buttons
         gbc.gridy = 2;
         gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER; // Botón en la parte inferior derecha
-        gbc.anchor = GridBagConstraints.SOUTHEAST; // Para alinear el botón a la derecha
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.SOUTHEAST;
         gbc.fill = GridBagConstraints.NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton nextButton = new JButton("Next");
@@ -101,8 +106,8 @@ public class FormPanel extends JPanel {
 
         gbc.gridy = 2;
         gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER; // Botón en la parte inferior izquierda
-        gbc.anchor = GridBagConstraints.SOUTHWEST; // Para alinear el botón a la izquierda
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
         gbc.fill = GridBagConstraints.NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton backButton = new JButton("Back");

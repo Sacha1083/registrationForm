@@ -12,8 +12,8 @@ public class App extends JFrame {
 
     public App() {
         setTitle("App"); // Titulo
-        setSize(900, 640); // Tamaño
-        setMinimumSize(new Dimension(900, 640)); // Tamaño minimo
+        setSize(800, 700); // Tamaño
+        setMinimumSize(new Dimension(800, 700)); // Tamaño minimo
         setLocationRelativeTo(null); // Centrar
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/img/icon.png"))).getImage());

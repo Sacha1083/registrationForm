@@ -4,7 +4,6 @@ public class TextData {
     public static String readInstructions() {
         StringBuilder sb = new StringBuilder();
         sb.append("<html>")
-                .append("<center><h1>Instructions</h1></center>")
                 .append("<h2>1.- Welcome Screen:</h2>")
                 .append("<p>Read the instructions carefully on how to complete the form. When you are ready, click the 'Next' button to start the registration.</p>")
                 .append("<h2>2.- Personal Data Screen:</h2>")
@@ -26,6 +25,14 @@ public class TextData {
                 .append("<p>Click 'Finish' to close the program.</p>")
                 .append("<h2>6.- Success Notification:</h2>")
                 .append("<p>If the registration and, if applicable, the file export were successful, a pop-up window will notify you of the success of the process.</p>");
+        sb.append("</html>");
+        return sb.toString();
+    }
+
+    public static String readTitlePrincipalPanel() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html>")
+                .append("<center><h1>Instructions</h1></center>");
         sb.append("</html>");
         return sb.toString();
     }
