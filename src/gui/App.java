@@ -21,11 +21,13 @@ public class App extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        JPanel principalPanel = new PrincipalPanel(this);
+        JPanel principalPanel = new gui.PrincipalPanel(this);
         JPanel nextPanel = new gui.FormPanel(this);
+        JPanel countryPanel = new CountryPanel(this);
 
         mainPanel.add(principalPanel, "PrincipalPanel");
         mainPanel.add(nextPanel, "NextPanel");
+        mainPanel.add(countryPanel, "CountryPanel");
 
         add(mainPanel);
     }
