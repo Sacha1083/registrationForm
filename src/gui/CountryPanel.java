@@ -7,41 +7,58 @@ import java.util.Objects;
 
 public class CountryPanel extends JPanel {
     private static JComboBox<String> countrySelector;
+    private static JComboBox<String> provinceSelector;
+
     public CountryPanel(App app) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int height = (int) screenSize.getHeight() / 2;
-        int width = (int) (height * 0.33);
 
-        // Title
         gbc.gridy = 0; // Fila
-        gbc.gridx = 1; // Columna
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 0; // Columna
+        gbc.gridheight = GridBagConstraints.REMAINDER;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 0.4;
+        gbc.weighty = 1.0;
+
+        JLabel imageLabel = new JLabel();
+        imageLabel.setHorizontalAlignment(JLabel.LEFT);
+        imageLabel.setVerticalAlignment(JLabel.TOP);
+
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/img/country.jpg")));
+        Image originalImage = imageIcon.getImage();
+
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                Dimension size = getSize();
+                int newHeight = size.height;
+                int newWidth = (int) (newHeight * 0.75);
+
+                Image scaledImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+                imageLabel.setIcon(new ImageIcon(scaledImage));
+            }
+        });
+
+        add(imageLabel, gbc);
+
+        gbc.gridy = 0;
+        gbc.gridx = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.6;
+        gbc.weighty = 0.0;
         gbc.anchor = GridBagConstraints.NORTH;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 20, 10, 20);
         JLabel titleForm = new JLabel("Select a country and province");
         titleForm.setFont(TextFont.titleFont());
         add(titleForm, gbc);
 
-        // Image
-        gbc.gridy = 1;
-        gbc.gridx = 0;
-        gbc.gridwidth = 1;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        ImageIcon image = new ImageIcon(Objects.requireNonNull(getClass().getResource("/img/country.jpg")));
-        JLabel imageLabel = new JLabel();
-        imageLabel.setIcon(new ImageIcon(image.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH)));
-        add(imageLabel, gbc);
-
-        // Panel for the country and province selectors
-        JPanel countryPanel = new JPanel(new GridBagLayout());
+        JPanel selectorPanel = new JPanel(new GridBagLayout());
         GridBagConstraints inputConstrain = new GridBagConstraints();
         inputConstrain.gridy = 0;
         inputConstrain.gridx = 0;
+        inputConstrain.fill = GridBagConstraints.HORIZONTAL;
         inputConstrain.insets = new Insets(10, 10, 10, 10);
-        inputConstrain.anchor = GridBagConstraints.WEST;
+        inputConstrain.anchor = GridBagConstraints.CENTER;
 
         // Country
         String[] countries = {"Spain", "Swiss"};
@@ -51,21 +68,22 @@ public class CountryPanel extends JPanel {
         // Province
         String[] provincesSpain = {"Madrid", "Barcelona", "Valencia"};
         String[] provincesSwiss = {"Zurich", "Geneva", "Basel"};
-        JComboBox<String> provinceSelector = new JComboBox<>(provincesSpain);
+        provinceSelector = new JComboBox<>(provincesSpain);
+        provinceSelector.setPreferredSize(new Dimension(200, 30));
 
-        // Panel para los selectores
-        JPanel selectorPanel = new JPanel(new GridBagLayout());
-        gbc.gridy = 0;
-        gbc.gridx = 0;
-        selectorPanel.add(countrySelector, gbc);
-        gbc.gridy = 1;
-        selectorPanel.add(provinceSelector, gbc);
+        // Add country and province selectors to the panel
+        selectorPanel.add(titleForm, inputConstrain);
+        inputConstrain.gridy = 1;
+        selectorPanel.add(countrySelector, inputConstrain);
+        inputConstrain.gridy = 2;
+        selectorPanel.add(provinceSelector, inputConstrain);
 
+        // Add the selector panel to the main panel
         gbc.gridy = 1;
-        gbc.gridx = 1;
+        gbc.weighty = 1.0;
         add(selectorPanel, gbc);
 
-        countrySelector.addActionListener(_ -> {
+        countrySelector.addActionListener(e -> {
             String country = (String) countrySelector.getSelectedItem();
             provinceSelector.removeAllItems();
             if (Objects.equals(country, "Spain")) {
@@ -75,25 +93,23 @@ public class CountryPanel extends JPanel {
             }
         });
 
-        // Buttons
         gbc.gridy = 2;
-        gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.SOUTHEAST;
+        gbc.gridx = 1;
+        gbc.weighty = 0.0;
+        gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.NONE;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        JButton nextButton = new JButton("Next");
-        nextButton.addActionListener(e -> app.nextPanel());
-        add(nextButton, gbc);
-
-        gbc.gridy = 2;
-        gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.SOUTHWEST;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.insets = new Insets(10, 10, 10, 10);
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> app.previousPanel());
         add(backButton, gbc);
+
+        gbc.gridx = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        JButton sendButton = new JButton("Send");
+        sendButton.addActionListener(e -> {
+            String country = (String) countrySelector.getSelectedItem();
+            String province = (String) provinceSelector.getSelectedItem();
+            JOptionPane.showMessageDialog(this, "Country: " + country + "\nProvince: " + province);
+        });
+        add(sendButton, gbc);
     }
 }
