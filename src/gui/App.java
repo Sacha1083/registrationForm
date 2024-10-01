@@ -12,8 +12,8 @@ public class App extends JFrame {
 
     public App() {
         setTitle("App"); // Titulo
-        setSize(800, 700); // Tamaño
-        setMinimumSize(new Dimension(800, 700)); // Tamaño minimo
+        setSize(900, 700); // Tamaño
+        setMinimumSize(new Dimension(900, 700)); // Tamaño minimo
         setLocationRelativeTo(null); // Centrar
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/img/icon.png"))).getImage());
@@ -21,11 +21,13 @@ public class App extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        JPanel principalPanel = new PrincipalPanel(this);
+        JPanel principalPanel = new gui.PrincipalPanel(this);
         JPanel nextPanel = new gui.FormPanel(this);
+        JPanel countryPanel = new CountryPanel(this);
 
         mainPanel.add(principalPanel, "PrincipalPanel");
         mainPanel.add(nextPanel, "NextPanel");
+        mainPanel.add(countryPanel, "CountryPanel");
 
         add(mainPanel);
     }
