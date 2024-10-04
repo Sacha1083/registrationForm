@@ -9,6 +9,9 @@ import java.util.Objects;
 public class App extends JFrame {
     private static CardLayout cardLayout;
     private static JPanel mainPanel;
+    private static PrincipalPanel principalPanel;
+    private static LoginPanel nextPanel;
+    private static CountryPanel countryPanel;
 
     public App() {
         setTitle("App"); // Titulo
@@ -21,9 +24,9 @@ public class App extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        JPanel principalPanel = new gui.PrincipalPanel(this);
-        JPanel nextPanel = new gui.FormPanel(this);
-        JPanel countryPanel = new CountryPanel(this);
+        principalPanel = new gui.PrincipalPanel(this);
+        nextPanel = new LoginPanel(this);
+        countryPanel = new CountryPanel(this);
 
         mainPanel.add(principalPanel, "PrincipalPanel");
         mainPanel.add(nextPanel, "NextPanel");
