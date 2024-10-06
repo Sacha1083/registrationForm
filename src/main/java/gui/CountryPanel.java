@@ -26,7 +26,7 @@ public class CountryPanel extends JPanel {
         imageLabel.setHorizontalAlignment(JLabel.LEFT);
         imageLabel.setVerticalAlignment(JLabel.TOP);
 
-        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/img/country.jpg")));
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("img/country.jpg")));
         Image originalImage = imageIcon.getImage();
 
         // Listener for resizing image
