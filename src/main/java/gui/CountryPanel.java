@@ -2,16 +2,33 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class CountryPanel extends JPanel {
+    private static File countryFile;
     private static JComboBox<String> countrySelector;
     private static JComboBox<String> provinceSelector;
 
     public CountryPanel(App app) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+
+        List<String> countryData = null;
+        try {
+            countryFile = new File(Objects.requireNonNull(CountryPanel.class.getClassLoader().getResource("files/country.txt")).getFile());
+            countryData = Files.readAllLines(countryFile.toPath());
+        } catch (IOException e) {
+            JDialog dialog = new JDialog();
+            dialog.setAlwaysOnTop(true);
+            JOptionPane.showMessageDialog(dialog, "Error reading country data file", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error reading country data file");
+            System.exit(0);
+        }
 
         // Image Section
         gbc.gridy = 0;
@@ -26,7 +43,16 @@ public class CountryPanel extends JPanel {
         imageLabel.setHorizontalAlignment(JLabel.LEFT);
         imageLabel.setVerticalAlignment(JLabel.TOP);
 
-        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("img/country.jpg")));
+        ImageIcon imageIcon = null;
+        try {
+            imageIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("img/country.jpg")));
+        } catch (NullPointerException e) {
+            JDialog dialog = new JDialog();
+            dialog.setAlwaysOnTop(true);
+            JOptionPane.showMessageDialog(dialog, "Error loading image", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error loading image");
+            System.exit(0);
+        }
         Image originalImage = imageIcon.getImage();
 
         // Listener for resizing image
@@ -69,15 +95,24 @@ public class CountryPanel extends JPanel {
         inputConstrain.anchor = GridBagConstraints.CENTER;
 
         // Country
-        String[] countries = {"Spain", "Swiss"};
+        String[] countries = countryData.getFirst().split(";");
         countrySelector = new JComboBox<>(countries);
         countrySelector.setPreferredSize(new Dimension(200, 30));
 
         // Province
-        String[] provincesSpain = {"Madrid", "Barcelona", "Valencia"};
-        String[] provincesSwiss = {"Zurich", "Geneva", "Basel"};
-        provinceSelector = new JComboBox<>(provincesSpain);
+        String [] provinces = countryData.getLast().split(";");
+        provinceSelector = new JComboBox<>(provinces[0].split(","));
         provinceSelector.setPreferredSize(new Dimension(200, 30));
+
+        // Add listener to country selector
+        countrySelector.addActionListener(e -> {
+            String country = (String) countrySelector.getSelectedItem();
+            provinceSelector.removeAllItems();
+            int countryIndex = Arrays.asList(countries).indexOf(country);
+            if (countryIndex != -1) {
+                Arrays.stream(provinces[countryIndex].split(",")).forEach(provinceSelector::addItem);
+            }
+        });
 
         // Add country and province selectors to the panel
         inputConstrain.gridy = 0;
@@ -94,17 +129,6 @@ public class CountryPanel extends JPanel {
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(selectorPanel, gbc);
-
-        // Add listener to country selector
-        countrySelector.addActionListener(e -> {
-            String country = (String) countrySelector.getSelectedItem();
-            provinceSelector.removeAllItems();
-            if (Objects.equals(country, "Spain")) {
-                Arrays.stream(provincesSpain).forEach(provinceSelector::addItem);
-            } else {
-                Arrays.stream(provincesSwiss).forEach(provinceSelector::addItem);
-            }
-        });
 
         // Buttons Section
         gbc.gridy = 2;
@@ -126,5 +150,13 @@ public class CountryPanel extends JPanel {
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> app.previousPanel());
         add(backButton, gbc);
+    }
+
+    public String getCountry() {
+        return (String) countrySelector.getSelectedItem();
+    }
+
+    public String getProvince() {
+        return (String) provinceSelector.getSelectedItem();
     }
 }

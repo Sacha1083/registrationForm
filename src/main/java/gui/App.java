@@ -19,7 +19,15 @@ public class App extends JFrame {
         setMinimumSize(new Dimension(900, 700)); // Tamaño minimo
         setLocationRelativeTo(null); // Centrar
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("img/icon.png"))).getImage());
+        try {
+            setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("img/icon.png"))).getImage());
+        } catch (NullPointerException e) {
+            JDialog dialog = new JDialog();
+            dialog.setAlwaysOnTop(true);
+            JOptionPane.showMessageDialog(dialog, "Error loading app icon", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error loading app icon");
+            System.exit(0);
+        }
 
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
