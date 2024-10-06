@@ -10,8 +10,9 @@ public class App extends JFrame {
     private static CardLayout cardLayout;
     private static JPanel mainPanel;
     private static PrincipalPanel principalPanel;
-    private static LoginPanel nextPanel;
+    private static LoginPanel loginPanel;
     private static CountryPanel countryPanel;
+    private static DisplayData displayData;
 
     public App() {
         setTitle("App"); // Titulo
@@ -33,22 +34,50 @@ public class App extends JFrame {
         mainPanel = new JPanel(cardLayout);
 
         principalPanel = new gui.PrincipalPanel(this);
-        nextPanel = new LoginPanel(this);
+        loginPanel = new LoginPanel(this);
         countryPanel = new CountryPanel(this);
+        displayData = new DisplayData(this);
 
         mainPanel.add(principalPanel, "PrincipalPanel");
-        mainPanel.add(nextPanel, "NextPanel");
+        mainPanel.add(loginPanel, "NextPanel");
         mainPanel.add(countryPanel, "CountryPanel");
+        mainPanel.add(displayData, "DisplayData");
 
         add(mainPanel);
     }
 
     public void nextPanel() {
         cardLayout.next(mainPanel);
+        displayData.updateData(this);
     }
 
     public void previousPanel() {
         cardLayout.previous(mainPanel);
+    }
+
+    public String getUserName() {
+        return loginPanel.getName();
+    }
+
+    public String geteMail() {
+        return loginPanel.geteMail();
+    }
+
+    public String getPassword() {
+        return loginPanel.getPassword();
+    }
+
+    public String getCountry() {
+        return countryPanel.getCountry();
+    }
+
+    public String getProvince() {
+        return countryPanel.getProvince();
+    }
+
+    public void clearFields() {
+        loginPanel.clearFields();
+        countryPanel.clearFields();
     }
 
     public static void main(String[] args) {

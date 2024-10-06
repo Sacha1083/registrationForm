@@ -159,4 +159,9 @@ public class CountryPanel extends JPanel {
     public String getProvince() {
         return (String) provinceSelector.getSelectedItem();
     }
+
+    public void clearFields() {
+        countrySelector.setSelectedIndex(0);
+        provinceSelector.setSelectedIndex(0);
+    }
 }
