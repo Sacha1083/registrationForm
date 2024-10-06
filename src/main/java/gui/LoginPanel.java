@@ -70,22 +70,6 @@ public class LoginPanel extends JPanel {
         password.setPreferredSize(new Dimension(200, 30));
         formPanel.add(password, inputConstrain);
 
-        // Send Button
-        inputConstrain.gridy = 3;
-        inputConstrain.gridx = 1;
-        inputConstrain.gridwidth = GridBagConstraints.REMAINDER;
-        inputConstrain.fill = GridBagConstraints.NONE;
-        JButton sendButton = new JButton("Send");
-        sendButton.addActionListener(e -> {
-            String nameText = name.getText();
-            String eMailText = eMail.getText();
-            String passwordText = new String(password.getPassword());
-            System.out.println("Name: " + nameText);
-            System.out.println("E-Mail: " + eMailText);
-            System.out.println("Password: " + passwordText);
-        });
-        formPanel.add(sendButton, inputConstrain);
-
         // Add formPanel
         gbc.gridy = 1;
         gbc.gridx = 0;
@@ -104,7 +88,34 @@ public class LoginPanel extends JPanel {
         gbc.fill = GridBagConstraints.NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton nextButton = new JButton("Next");
-        nextButton.addActionListener(e -> app.nextPanel());
+        nextButton.addActionListener(e -> {
+            // Get data
+            String nameText = name.getText();
+            String eMailText = eMail.getText();
+            String passwordText = new String(password.getPassword());
+
+            // Validations
+            if (!eMailText.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+                JOptionPane.showMessageDialog(this, "Invalid e-mail format", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!passwordText.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,16}$")) {
+                JOptionPane.showMessageDialog(this, "Invalid password format", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (nameText.isEmpty() || eMailText.isEmpty() || passwordText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "All fields are required", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Print data and go to next panel
+            System.out.println("Name: " + nameText);
+            System.out.println("E-Mail: " + eMailText);
+            System.out.println("Password: " + passwordText);
+            app.nextPanel();
+        });
         add(nextButton, gbc);
 
         gbc.gridy = 2;
