@@ -95,6 +95,11 @@ public class LoginPanel extends JPanel {
             String passwordText = new String(password.getPassword());
 
             // Validations
+            if (nameText.isEmpty() || eMailText.isEmpty() || passwordText.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "All fields are required", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             if (!eMailText.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
                 JOptionPane.showMessageDialog(this, "Invalid e-mail format", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -102,11 +107,6 @@ public class LoginPanel extends JPanel {
 
             if (!passwordText.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,16}$")) {
                 JOptionPane.showMessageDialog(this, "Invalid password format", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            if (nameText.isEmpty() || eMailText.isEmpty() || passwordText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "All fields are required", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -129,16 +129,16 @@ public class LoginPanel extends JPanel {
         add(backButton, gbc);
     }
 
-    public JTextField getNameField() {
-        return name;
+    public String getName() {
+        return name.getText();
     }
 
-    public JTextField getEMail() {
-        return eMail;
+    public String geteMail() {
+        return eMail.getText();
     }
 
-    public JPasswordField getPassword() {
-        return password;
+    public String getPassword() {
+        return new String(password.getPassword());
     }
 
     public void clearFields() {
