@@ -14,7 +14,7 @@ public class LoginPanel extends JPanel {
         // Title
         gbc.gridy = 0;
         gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER; // Para que el título ocupe todo el ancho
+        gbc.gridwidth = GridBagConstraints.REMAINDER; // Use the entire row
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.NORTH;
         JLabel titleForm = new JLabel(TextData.readTitleFormPanel());
