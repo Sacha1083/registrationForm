@@ -6,31 +6,35 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static java.awt.GridBagConstraints.*;
+
 public class DisplayData extends JPanel {
-    private JLabel nameLabel;
-    private JLabel emailLabel;
-    private JLabel passwordLabel;
-    private JLabel countryLabel;
-    private JLabel provinceLabel;
-    private JCheckBox saveToFileCheckBox;
+    private final JLabel nameLabel;
+    private final JLabel emailLabel;
+    private final JLabel passwordLabel;
+    private final JLabel countryLabel;
+    private final JLabel provinceLabel;
+    private final JCheckBox saveToFileCheckBox;
 
     public DisplayData(App app) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Title
         gbc.gridy = 0;
         gbc.gridx = 0;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridwidth = REMAINDER;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = NORTH;
         JLabel titleLabel = new JLabel("User Data");
         titleLabel.setFont(TextFont.titleFont());
         add(titleLabel, gbc);
 
-        gbc.gridwidth = 1;
-        gbc.anchor = GridBagConstraints.WEST;
+        // Form Panel
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints formGbc = new GridBagConstraints();
+        formGbc.insets = new Insets(10, 10, 10, 10);
+        formGbc.anchor = WEST;
 
         // Labels and Fields
         nameLabel = new JLabel();
@@ -45,65 +49,81 @@ public class DisplayData extends JPanel {
         provinceLabel.setFont(TextFont.textFormFont());
 
         // Name
-        gbc.gridy = 1;
-        gbc.gridx = 0;
-        add(new JLabel("Name: "), gbc);
-        gbc.gridx = 1;
-        add(nameLabel, gbc);
+        formGbc.gridy = 0; // Row
+        formGbc.gridx = 0; // Column
+        formPanel.add(new JLabel("Name: "), formGbc);
+        formGbc.gridx = 1;
+        formGbc.fill = HORIZONTAL;
+        formPanel.add(nameLabel, formGbc);
 
         // Email
-        gbc.gridy = 2;
-        gbc.gridx = 0;
-        add(new JLabel("E-Mail: "), gbc);
-        gbc.gridx = 1;
-        add(emailLabel, gbc);
+        formGbc.gridy = 1;
+        formGbc.gridx = 0;
+        formGbc.fill = NONE;
+        formPanel.add(new JLabel("E-Mail: "), formGbc);
+        formGbc.gridx = 1;
+        formGbc.fill = HORIZONTAL;
+        formPanel.add(emailLabel, formGbc);
 
         // Password
-        gbc.gridy = 3;
-        gbc.gridx = 0;
-        add(new JLabel("Password: "), gbc);
-        gbc.gridx = 1;
-        add(passwordLabel, gbc);
+        formGbc.gridy = 2;
+        formGbc.gridx = 0;
+        formGbc.fill = NONE;
+        formPanel.add(new JLabel("Password: "), formGbc);
+        formGbc.gridx = 1;
+        formGbc.fill = HORIZONTAL;
+        formPanel.add(passwordLabel, formGbc);
 
         // Country
-        gbc.gridy = 4;
-        gbc.gridx = 0;
-        add(new JLabel("Country: "), gbc);
-        gbc.gridx = 1;
-        add(countryLabel, gbc);
+        formGbc.gridy = 3;
+        formGbc.gridx = 0;
+        formGbc.fill = NONE;
+        formPanel.add(new JLabel("Country: "), formGbc);
+        formGbc.gridx = 1;
+        formGbc.fill = HORIZONTAL;
+        formPanel.add(countryLabel, formGbc);
 
         // Province
-        gbc.gridy = 5;
-        gbc.gridx = 0;
-        add(new JLabel("Province: "), gbc);
-        gbc.gridx = 1;
-        add(provinceLabel, gbc);
+        formGbc.gridy = 4;
+        formGbc.gridx = 0;
+        formGbc.fill = NONE;
+        formPanel.add(new JLabel("Province: "), formGbc);
+        formGbc.gridx = 1;
+        formGbc.fill = HORIZONTAL;
+        formPanel.add(provinceLabel, formGbc);
 
         // Save to file checkbox
         saveToFileCheckBox = new JCheckBox("Save to file");
-        gbc.gridy = 6;
+        formGbc.gridy = 5;
+        formGbc.gridx = 0;
+        formGbc.gridwidth = 2;
+        formGbc.anchor = CENTER;
+        formPanel.add(saveToFileCheckBox, formGbc);
+
+        // Add form panel
+        gbc.gridy = 1;
         gbc.gridx = 0;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        add(saveToFileCheckBox, gbc);
+        gbc.gridwidth = REMAINDER;
+        gbc.fill = BOTH;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.anchor = NORTH;
+        add(formPanel, gbc);
 
         // Botones
-        gbc.gridwidth = 1;
-        gbc.gridy = 7;
-        gbc.gridx = 0;
-        gbc.anchor = GridBagConstraints.LAST_LINE_START;
-        gbc.fill = GridBagConstraints.NONE;  // Evitar que el botón se expanda
-        gbc.weightx = 0;
         gbc.weighty = 0;
+        gbc.gridwidth = 1;
+        gbc.gridy = 2;
+        gbc.gridx = 0;
+        gbc.anchor = SOUTHWEST;
+        gbc.fill = NONE;
         JButton backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(100, 30));  // Tamaño fijo para evitar expansión
         backButton.addActionListener(e -> app.previousPanel());
         add(backButton, gbc);
 
         gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.LAST_LINE_END;
+        gbc.anchor = SOUTHEAST;
         JButton exitButton = new JButton("Exit");
-        exitButton.setPreferredSize(new Dimension(100, 30));  // Tamaño fijo para evitar expansión
         exitButton.addActionListener(e -> {
             if (saveToFileCheckBox.isSelected()) {
                 saveDataToFile();

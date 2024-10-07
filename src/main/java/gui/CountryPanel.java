@@ -2,9 +2,9 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -18,11 +18,14 @@ public class CountryPanel extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        List<String> countryData = null;
-        try {
-            countryFile = new File(Objects.requireNonNull(CountryPanel.class.getClassLoader().getResource("files/country.txt")).getFile());
-            countryData = Files.readAllLines(countryFile.toPath());
-        } catch (IOException e) {
+        List<String> countryData = new ArrayList<>();
+        try (InputStream inputStream = getClass().getResourceAsStream("/files/country.txt");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream), StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                countryData.add(line);
+            }
+        } catch (Exception e) {
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
             JOptionPane.showMessageDialog(dialog, "Error reading country data file", "Error", JOptionPane.ERROR_MESSAGE);
