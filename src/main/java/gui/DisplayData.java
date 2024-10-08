@@ -1,5 +1,7 @@
 package gui;
 
+import util.TextFont;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -49,8 +51,8 @@ public class DisplayData extends JPanel {
         provinceLabel.setFont(TextFont.textFormFont());
 
         // Name
-        formGbc.gridy = 0; // Row
-        formGbc.gridx = 0; // Column
+        formGbc.gridy = 0;
+        formGbc.gridx = 0;
         formPanel.add(new JLabel("Name: "), formGbc);
         formGbc.gridx = 1;
         formGbc.fill = HORIZONTAL;

@@ -9,16 +9,16 @@ import java.util.Objects;
 public class App extends JFrame {
     private static CardLayout cardLayout;
     private static JPanel mainPanel;
-    private static PrincipalPanel principalPanel;
     private static LoginPanel loginPanel;
     private static CountryPanel countryPanel;
     private static DisplayData displayData;
 
     public App() {
-        setTitle("App"); // Titulo
-        setSize(900, 700); // Tamaño
-        setMinimumSize(new Dimension(900, 700)); // Tamaño minimo
-        setLocationRelativeTo(null); // Centrar
+        // Set the title, size, location, close operation and icon of the app
+        setTitle("App");
+        setSize(900, 700);
+        setMinimumSize(new Dimension(900, 700));
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         try {
             setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("img/icon.png"))).getImage());
@@ -30,10 +30,11 @@ public class App extends JFrame {
             System.exit(0);
         }
 
+        // Create the main panel and add the panels
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        principalPanel = new gui.PrincipalPanel(this);
+        PrincipalPanel principalPanel = new PrincipalPanel(this);
         loginPanel = new LoginPanel(this);
         countryPanel = new CountryPanel(this);
         displayData = new DisplayData(this);
@@ -56,7 +57,7 @@ public class App extends JFrame {
     }
 
     public String getUserName() {
-        return loginPanel.getName();
+        return loginPanel.getUserName();
     }
 
     public String geteMail() {
@@ -73,11 +74,6 @@ public class App extends JFrame {
 
     public String getProvince() {
         return countryPanel.getProvince();
-    }
-
-    public void clearFields() {
-        loginPanel.clearFields();
-        countryPanel.clearFields();
     }
 
     public static void main(String[] args) {
