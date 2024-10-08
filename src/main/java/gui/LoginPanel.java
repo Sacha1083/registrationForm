@@ -1,7 +1,13 @@
 package gui;
 
+import gui.listeners.LoginListener;
+import util.TextData;
+import util.TextFont;
+
 import javax.swing.*;
 import java.awt.*;
+
+import static java.awt.GridBagConstraints.*;
 
 public class LoginPanel extends JPanel {
     private final JTextField name;
@@ -14,9 +20,9 @@ public class LoginPanel extends JPanel {
         // Title
         gbc.gridy = 0;
         gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER; // Use the entire row
+        gbc.gridwidth = REMAINDER;
         gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = NORTH;
         JLabel titleForm = new JLabel(TextData.readTitleFormPanel());
         titleForm.setFont(TextFont.titleFont());
         add(titleForm, gbc);
@@ -27,14 +33,14 @@ public class LoginPanel extends JPanel {
         inputConstrain.gridy = 0;
         inputConstrain.gridx = 0;
         inputConstrain.insets = new Insets(10, 10, 10, 10);
-        inputConstrain.anchor = GridBagConstraints.WEST;
+        inputConstrain.anchor = WEST;
         JLabel labelName = new JLabel("<html><h3>Name: </h3></html>");
         labelName.setFont(TextFont.textFormFont());
         formPanel.add(labelName, inputConstrain);
 
         // Name
         inputConstrain.gridx = 1;
-        inputConstrain.fill = GridBagConstraints.HORIZONTAL;
+        inputConstrain.fill = HORIZONTAL;
         name = new JTextField();
         name.setFont(TextFont.textFont());
         name.setPreferredSize(new Dimension(200, 30));
@@ -42,94 +48,76 @@ public class LoginPanel extends JPanel {
 
         inputConstrain.gridy = 1;
         inputConstrain.gridx = 0;
-        inputConstrain.fill = GridBagConstraints.NONE;
+        inputConstrain.fill = NONE;
         JLabel labelMail = new JLabel("<html><h3>E-Mail: </h3></html>");
         labelMail.setFont(TextFont.textFormFont());
         formPanel.add(labelMail, inputConstrain);
 
         // E-Mail
         inputConstrain.gridx = 1;
-        inputConstrain.fill = GridBagConstraints.HORIZONTAL;
+        inputConstrain.fill = HORIZONTAL;
         eMail = new JTextField();
         eMail.setFont(TextFont.textFont());
         eMail.setPreferredSize(new Dimension(200, 30));
         formPanel.add(eMail, inputConstrain);
 
+        // Password Label and Field
         inputConstrain.gridy = 2;
         inputConstrain.gridx = 0;
-        inputConstrain.fill = GridBagConstraints.NONE;
+        inputConstrain.fill = NONE;
         JLabel labelPassword = new JLabel("<html><h3>Password: </h3></html>");
         labelPassword.setFont(TextFont.textFormFont());
         formPanel.add(labelPassword, inputConstrain);
 
-        // Password
         inputConstrain.gridx = 1;
-        inputConstrain.fill = GridBagConstraints.HORIZONTAL;
+        inputConstrain.fill = HORIZONTAL;
         password = new JPasswordField();
         password.setFont(TextFont.textFont());
         password.setPreferredSize(new Dimension(200, 30));
         formPanel.add(password, inputConstrain);
 
+        // Clear Button
+        inputConstrain.gridy = 3;
+        inputConstrain.gridx = 1;
+        inputConstrain.gridwidth = REMAINDER;
+        inputConstrain.fill = NONE;
+        JButton clearButton = new JButton("Clear");
+        clearButton.addActionListener(e -> clearFields());
+        formPanel.add(clearButton, inputConstrain);
+
         // Add formPanel
         gbc.gridy = 1;
         gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridwidth = REMAINDER;
+        gbc.fill = BOTH;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = NORTH;
         add(formPanel, gbc);
 
         // Buttons
         gbc.gridy = 2;
         gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.SOUTHEAST;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.gridwidth = REMAINDER;
+        gbc.anchor = SOUTHEAST;
+        gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton nextButton = new JButton("Next");
-        nextButton.addActionListener(e -> {
-            // Get data
-            String nameText = name.getText();
-            String eMailText = eMail.getText();
-            String passwordText = new String(password.getPassword());
-
-            // Validations
-            if (nameText.isEmpty() || eMailText.isEmpty() || passwordText.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "All fields are required", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            if (!eMailText.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
-                JOptionPane.showMessageDialog(this, "Invalid e-mail format", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            if (!passwordText.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,16}$")) {
-                JOptionPane.showMessageDialog(this, "Invalid password format", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Print data and go to next panel
-            System.out.println("Name: " + nameText);
-            System.out.println("E-Mail: " + eMailText);
-            System.out.println("Password: " + passwordText);
-            app.nextPanel();
-        });
+        nextButton.addActionListener(new LoginListener(app, "login", name, eMail, password));
         add(nextButton, gbc);
 
         gbc.gridy = 2;
         gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.SOUTHWEST;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.gridwidth = REMAINDER;
+        gbc.anchor = SOUTHWEST;
+        gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton backButton = new JButton("Back");
-        backButton.addActionListener(e -> app.previousPanel());
+        backButton.addActionListener(new LoginListener(app, "back", name, eMail, password));
         add(backButton, gbc);
     }
 
-    public String getName() {
+    public String getUserName() {
         return name.getText();
     }
 

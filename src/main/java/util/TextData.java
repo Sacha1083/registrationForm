@@ -1,4 +1,4 @@
-package gui;
+package util;
 
 public class TextData {
     public static String readInstructions() {

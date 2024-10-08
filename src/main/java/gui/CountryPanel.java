@@ -1,5 +1,7 @@
 package gui;
 
+import util.TextFont;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -9,8 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import static java.awt.GridBagConstraints.*;
+
 public class CountryPanel extends JPanel {
-    private static File countryFile;
     private static JComboBox<String> countrySelector;
     private static JComboBox<String> provinceSelector;
 
@@ -18,6 +21,7 @@ public class CountryPanel extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
+        // Read country data from file
         List<String> countryData = new ArrayList<>();
         try (InputStream inputStream = getClass().getResourceAsStream("/files/country.txt");
              BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream), StandardCharsets.UTF_8))) {
@@ -38,7 +42,7 @@ public class CountryPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridheight = 2;
         gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill = BOTH;
         gbc.weightx = 0.3;
         gbc.weighty = 1.0;
 
@@ -76,15 +80,14 @@ public class CountryPanel extends JPanel {
         gbc.gridy = 0;
         gbc.gridx = 1;
         gbc.gridheight = 1;
-        gbc.gridwidth = 2;  // Title spans across the next 2 columns
-        gbc.weightx = 0.7;  // Adjust weight to balance space between image and form
+        gbc.gridwidth = 2;
+        gbc.weightx = 0.7;
         gbc.weighty = 0.0;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = HORIZONTAL;
         gbc.insets = new Insets(10, 20, 10, 20);
-        gbc.anchor = GridBagConstraints.CENTER; // Center the title horizontally
+        gbc.anchor = CENTER;
         JLabel titleForm = new JLabel("Select a country and province");
-        titleForm.setHorizontalAlignment(SwingConstants.CENTER); // Center the text
+        titleForm.setHorizontalAlignment(SwingConstants.CENTER);
         titleForm.setFont(TextFont.titleFont());
         add(titleForm, gbc);
 
@@ -93,9 +96,9 @@ public class CountryPanel extends JPanel {
         GridBagConstraints inputConstrain = new GridBagConstraints();
         inputConstrain.gridy = 0;
         inputConstrain.gridx = 0;
-        inputConstrain.fill = GridBagConstraints.HORIZONTAL;
+        inputConstrain.fill = HORIZONTAL;
         inputConstrain.insets = new Insets(10, 10, 10, 10);
-        inputConstrain.anchor = GridBagConstraints.CENTER;
+        inputConstrain.anchor = CENTER;
 
         // Country
         String[] countries = countryData.getFirst().split(";");
@@ -126,29 +129,28 @@ public class CountryPanel extends JPanel {
         // Add the selector panel to the main panel
         gbc.gridy = 1;
         gbc.gridx = 1;
-        gbc.gridwidth = 2; // Spanning across 2 columns
+        gbc.gridwidth = 2;
         gbc.weightx = 0.7;
         gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = NORTH;
+        gbc.fill = HORIZONTAL;
         add(selectorPanel, gbc);
 
         // Buttons Section
         gbc.gridy = 2;
         gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.SOUTHEAST;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.gridwidth = REMAINDER;
+        gbc.anchor = SOUTHEAST;
+        gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton nextButton = new JButton("Next");
         nextButton.addActionListener(e -> app.nextPanel());
         add(nextButton, gbc);
 
         gbc.gridy = 2;
-        gbc.gridx = 0;
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.SOUTHWEST;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.gridwidth = REMAINDER;
+        gbc.anchor = SOUTHWEST;
+        gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> app.previousPanel());
@@ -161,10 +163,5 @@ public class CountryPanel extends JPanel {
 
     public String getProvince() {
         return (String) provinceSelector.getSelectedItem();
-    }
-
-    public void clearFields() {
-        countrySelector.setSelectedIndex(0);
-        provinceSelector.setSelectedIndex(0);
     }
 }
