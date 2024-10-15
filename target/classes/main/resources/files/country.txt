@@ -1,2 +1,0 @@
-Spain;Swiss
-Madrid,Barcelona,Valencia;Bern,Zurich,Geneva
