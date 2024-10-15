@@ -125,12 +125,12 @@ public class DisplayData extends JPanel {
 
         gbc.gridx = 1;
         gbc.anchor = SOUTHEAST;
-        JButton exitButton = new JButton("Exit");
+        JButton exitButton = new JButton("Next");
         exitButton.addActionListener(e -> {
             if (saveToFileCheckBox.isSelected()) {
                 saveDataToFile();
             }
-            System.exit(0);
+            app.nextPanel();
         });
         add(exitButton, gbc);
 
@@ -147,10 +147,10 @@ public class DisplayData extends JPanel {
 
     private void saveDataToFile() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setSelectedFile(new File("user_data.txt"));
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnValue = fileChooser.showSaveDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
+            File file = new File(fileChooser.getSelectedFile(), "user_data.txt");
             try (FileWriter writer = new FileWriter(file)) {
                 writer.write("Name: " + nameLabel.getText() + "\n");
                 writer.write("E-Mail: " + emailLabel.getText() + "\n");
@@ -159,7 +159,7 @@ public class DisplayData extends JPanel {
                 writer.write("Province: " + provinceLabel.getText() + "\n");
                 JOptionPane.showMessageDialog(this, "File saved successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Error saving file", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Error saving file.\nMessage: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
