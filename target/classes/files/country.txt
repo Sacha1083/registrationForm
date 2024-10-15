@@ -1,2 +1,3 @@
 Spain;Swiss
 Madrid,Barcelona,Valencia;Bern,Zurich,Geneva
+/img/countrys/spain.png;/img/countrys/swiss.png
