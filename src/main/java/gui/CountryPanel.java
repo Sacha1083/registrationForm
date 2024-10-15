@@ -14,7 +14,7 @@ import java.util.Objects;
 import static java.awt.GridBagConstraints.*;
 
 public class CountryPanel extends JPanel {
-    private static JComboBox<String> countrySelector;
+    private static JComboBox<CountryItem> countrySelector;
     private static JComboBox<String> provinceSelector;
 
     public CountryPanel(App app) {
@@ -101,20 +101,26 @@ public class CountryPanel extends JPanel {
         inputConstrain.anchor = CENTER;
 
         // Country
-        String[] countries = countryData.getFirst().split(";");
-        countrySelector = new JComboBox<>(countries);
-        countrySelector.setPreferredSize(new Dimension(200, 30));
+        String[] countries = countryData.get(0).split(";");
+        String[] imagePaths = countryData.get(2).split(";");
+        CountryItem[] countryItems = new CountryItem[countries.length];
+        for (int i = 0; i < countries.length; i++) {
+            countryItems[i] = new CountryItem(countries[i], imagePaths[i]);
+        }
+        countrySelector = new JComboBox<>(countryItems);
+        countrySelector.setPreferredSize(new Dimension(200, 80));
+        countrySelector.setRenderer(new CountryItemRenderer());
 
         // Province
-        String [] provinces = countryData.getLast().split(";");
+        String[] provinces = countryData.get(1).split(";");
         provinceSelector = new JComboBox<>(provinces[0].split(","));
-        provinceSelector.setPreferredSize(new Dimension(200, 30));
+        provinceSelector.setPreferredSize(new Dimension(200, 80));
 
         // Add listener to country selector
         countrySelector.addActionListener(e -> {
-            String country = (String) countrySelector.getSelectedItem();
+            CountryItem selectedCountry = (CountryItem) countrySelector.getSelectedItem();
             provinceSelector.removeAllItems();
-            int countryIndex = Arrays.asList(countries).indexOf(country);
+            int countryIndex = Arrays.asList(countries).indexOf(Objects.requireNonNull(selectedCountry).getName());
             if (countryIndex != -1) {
                 Arrays.stream(provinces[countryIndex].split(",")).forEach(provinceSelector::addItem);
             }
@@ -158,10 +164,52 @@ public class CountryPanel extends JPanel {
     }
 
     public String getCountry() {
-        return (String) countrySelector.getSelectedItem();
+        return ((CountryItem) Objects.requireNonNull(countrySelector.getSelectedItem())).getName();
     }
 
     public String getProvince() {
         return (String) provinceSelector.getSelectedItem();
+    }
+
+    private static class CountryItem {
+        private final String name;
+        private final String imagePath;
+
+        public CountryItem(String name, String imagePath) {
+            this.name = name;
+            this.imagePath = imagePath;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getImagePath() {
+            return imagePath;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    private static class CountryItemRenderer extends JLabel implements ListCellRenderer<CountryItem> {
+        @Override
+        public Component getListCellRendererComponent(JList<? extends CountryItem> list, CountryItem value, int index, boolean isSelected, boolean cellHasFocus) {
+            setText(value.getName());
+            ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(value.getImagePath())));
+            Image image = icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            setIcon(new ImageIcon(image));
+            if (isSelected) {
+                setBackground(list.getSelectionBackground());
+                setForeground(list.getSelectionForeground());
+            } else {
+                setBackground(list.getBackground());
+                setForeground(list.getForeground());
+            }
+            setOpaque(true);
+            return this;
+        }
     }
 }
