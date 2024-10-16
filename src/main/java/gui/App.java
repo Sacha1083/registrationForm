@@ -12,6 +12,7 @@ public class App extends JFrame {
     private static LoginPanel loginPanel;
     private static CountryPanel countryPanel;
     private static DisplayData displayData;
+    private static FinishPanel finishPanel;
 
     public App() {
         // Set the title, size, location, close operation and icon of the app
@@ -38,11 +39,13 @@ public class App extends JFrame {
         loginPanel = new LoginPanel(this);
         countryPanel = new CountryPanel(this);
         displayData = new DisplayData(this);
+        finishPanel = new FinishPanel(this);
 
         mainPanel.add(principalPanel, "PrincipalPanel");
         mainPanel.add(loginPanel, "NextPanel");
         mainPanel.add(countryPanel, "CountryPanel");
         mainPanel.add(displayData, "DisplayData");
+        mainPanel.add(finishPanel, "FinishPanel");
 
         add(mainPanel);
     }
