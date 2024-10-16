@@ -9,11 +9,9 @@ import java.util.Objects;
 public class App extends JFrame {
     private static CardLayout cardLayout;
     private static JPanel mainPanel;
-    private static PrincipalPanel principalPanel;
     private static LoginPanel loginPanel;
     private static CountryPanel countryPanel;
     private static DisplayData displayData;
-    private static FinishPanel finishPanel;
 
     public App() {
         // Set the title, size, location, close operation and icon of the app
@@ -36,17 +34,15 @@ public class App extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        principalPanel = new PrincipalPanel(this);
+        PrincipalPanel principalPanel = new PrincipalPanel(this);
         loginPanel = new LoginPanel(this);
         countryPanel = new CountryPanel(this);
         displayData = new DisplayData(this);
-        finishPanel = new FinishPanel(this);
 
         mainPanel.add(principalPanel, "PrincipalPanel");
         mainPanel.add(loginPanel, "NextPanel");
         mainPanel.add(countryPanel, "CountryPanel");
         mainPanel.add(displayData, "DisplayData");
-        mainPanel.add(finishPanel, "FinishPanel");
 
         add(mainPanel);
     }
@@ -81,10 +77,23 @@ public class App extends JFrame {
     }
 
     public static void main(String[] args) {
+        FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
+        String[] options = {"Light Theme", "Dark Theme"};
+        int choice = JOptionPane.showOptionDialog(null, "Choose a theme", "Theme Selection",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
         try {
-            FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
+            if (choice == 1) {
+                FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacDarkLaf());
+            } else {
+                FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
+            }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            JDialog dialog = new JDialog();
+            dialog.setAlwaysOnTop(true);
+            JOptionPane.showMessageDialog(dialog, "Error loading theme", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error loading theme");
+            System.exit(0);
         }
 
         java.awt.EventQueue.invokeLater(() -> {
