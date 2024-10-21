@@ -12,15 +12,44 @@ public class App extends JFrame {
     private static LoginPanel loginPanel;
     private static CountryPanel countryPanel;
     private static DisplayData displayData;
-    private static FinishPanel finishPanel;
 
     public App() {
-        // Set the title, size, location, close operation and icon of the app
+        // Configure the app & app icon
+        configApp();
+
+        // Create the main panel and add the panels
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
+
+        // App panels
+        PrincipalPanel principalPanel = new PrincipalPanel(this);
+        loginPanel = new LoginPanel(this);
+        countryPanel = new CountryPanel(this);
+        displayData = new DisplayData(this);
+        FinishPanel finishPanel = new FinishPanel(this);
+
+        mainPanel.add(principalPanel, "PrincipalPanel");
+        mainPanel.add(loginPanel, "NextPanel");
+        mainPanel.add(countryPanel, "CountryPanel");
+        mainPanel.add(displayData, "DisplayData");
+        mainPanel.add(finishPanel, "FinishPanel");
+
+        // Add the main panel to the principal frame
+        add(mainPanel);
+    }
+
+    // Set the title, size, location and close operation
+    private void configApp() {
         setTitle("App");
         setSize(900, 700);
         setMinimumSize(new Dimension(900, 700));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        addIcon();
+    }
+
+    // Add the app icon
+    private void addIcon() {
         try {
             setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("img/icon.png"))).getImage());
         } catch (NullPointerException e) {
@@ -30,35 +59,20 @@ public class App extends JFrame {
             System.out.println("Error loading app icon");
             System.exit(0);
         }
-
-        // Create the main panel and add the panels
-        cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
-
-        PrincipalPanel principalPanel = new PrincipalPanel(this);
-        loginPanel = new LoginPanel(this);
-        countryPanel = new CountryPanel(this);
-        displayData = new DisplayData(this);
-        finishPanel = new FinishPanel(this);
-
-        mainPanel.add(principalPanel, "PrincipalPanel");
-        mainPanel.add(loginPanel, "NextPanel");
-        mainPanel.add(countryPanel, "CountryPanel");
-        mainPanel.add(displayData, "DisplayData");
-        mainPanel.add(finishPanel, "FinishPanel");
-
-        add(mainPanel);
     }
 
+    // Method to next panel
     public void nextPanel() {
         cardLayout.next(mainPanel);
         displayData.updateData(this);
     }
 
+    // Method to previous panel
     public void previousPanel() {
         cardLayout.previous(mainPanel);
     }
 
+    // Getters
     public String getUserName() {
         return loginPanel.getUserName();
     }
@@ -79,29 +93,38 @@ public class App extends JFrame {
         return countryPanel.getProvince();
     }
 
+    // Start the app
     public static void main(String[] args) {
-        FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
-        String[] options = {"Light Theme", "Dark Theme"};
-        int choice = JOptionPane.showOptionDialog(null, "Choose a theme", "Theme Selection",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
         try {
-            if (choice == 1) {
-                FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacDarkLaf());
-            } else {
-                FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
+            FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
+            String[] options = {"Light Theme", "Dark Theme"};
+            int choice = JOptionPane.showOptionDialog(null, "Choose a theme", "Theme Selection",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+            try {
+                if (choice == 1) {
+                    FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacDarkLaf());
+                } else {
+                    FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
+                }
+            } catch (Exception e) {
+                JDialog dialog = new JDialog();
+                dialog.setAlwaysOnTop(true);
+                JOptionPane.showMessageDialog(dialog, "Error loading theme", "Error", JOptionPane.ERROR_MESSAGE);
+                System.out.println("Error loading theme");
+                System.exit(1);
             }
+
+            java.awt.EventQueue.invokeLater(() -> {
+                App app = new App();
+                app.setVisible(true);
+            });
         } catch (Exception e) {
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
-            JOptionPane.showMessageDialog(dialog, "Error loading theme", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Error loading theme");
-            System.exit(0);
+            JOptionPane.showMessageDialog(dialog, "Error loading program", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error loading program");
+            System.exit(1);
         }
-
-        java.awt.EventQueue.invokeLater(() -> {
-            App app = new App();
-            app.setVisible(true);
-        });
     }
 }
