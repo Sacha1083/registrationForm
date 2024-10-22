@@ -1,4 +1,3 @@
-// LoginListener.java
 package gui.listeners;
 
 import gui.App;
@@ -23,6 +22,7 @@ public class LoginListener extends Component implements ActionListener {
         this.password = password;
     }
 
+    // Method to perform the action
     @Override
     public void actionPerformed(ActionEvent e) {
         if (option.equals("login")) {
@@ -34,6 +34,7 @@ public class LoginListener extends Component implements ActionListener {
         }
     }
 
+    // Method to validate the login
     private void login() {
         // Get data
         String nameText = name.getText();
@@ -56,6 +57,7 @@ public class LoginListener extends Component implements ActionListener {
             return;
         }
 
+        // Next panel if everything is correct
         app.nextPanel();
     }
 }
