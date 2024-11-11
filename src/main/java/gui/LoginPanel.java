@@ -51,6 +51,7 @@ public class LoginPanel extends JPanel {
         inputConstrain.fill = NONE;
         JLabel labelMail = new JLabel("<html><h3>E-Mail: </h3></html>");
         labelMail.setToolTipText("Tienes que introducir un correo electrónico válido. Ejemplo: example@example.es");
+        labelMail.setToolTipText(labelMail.getToolTipText());
         labelMail.setFont(TextFont.textFormFont());
         formPanel.add(labelMail, inputConstrain);
 
@@ -59,6 +60,7 @@ public class LoginPanel extends JPanel {
         inputConstrain.fill = HORIZONTAL;
         eMail = new JTextField();
         eMail.setToolTipText("Tienes que introducir un correo electrónico válido. Ejemplo: example@example.es");
+        eMail.setToolTipText(eMail.getToolTipText());
         eMail.setFont(TextFont.textFont());
         eMail.setPreferredSize(new Dimension(200, 30));
         formPanel.add(eMail, inputConstrain);
@@ -69,6 +71,7 @@ public class LoginPanel extends JPanel {
         inputConstrain.fill = NONE;
         JLabel labelPassword = new JLabel("<html><h3>Password: </h3></html>");
         labelPassword.setToolTipText("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayúscula y un carácter no alfanumérico.");
+        labelPassword.setToolTipText(labelPassword.getToolTipText());
         labelPassword.setFont(TextFont.textFormFont());
         formPanel.add(labelPassword, inputConstrain);
 
@@ -76,6 +79,7 @@ public class LoginPanel extends JPanel {
         inputConstrain.fill = HORIZONTAL;
         password = new JPasswordField();
         password.setToolTipText("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayúscula y un carácter no alfanumérico.");
+        password.setToolTipText(password.getToolTipText());
         password.setFont(TextFont.textFont());
         password.setPreferredSize(new Dimension(200, 30));
         formPanel.add(password, inputConstrain);

@@ -124,8 +124,10 @@ public class App extends JFrame {
 
             try {
                 if (choice == 1) {
+                    System.out.println("Dark Theme Selected");
                     FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacDarkLaf());
                 } else if (choice == 0) {
+                    System.out.println("Light Theme Selected");
                     FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
                 } else {
                     System.out.println("User canceled theme selection");
@@ -139,6 +141,7 @@ public class App extends JFrame {
                 System.exit(1);
             }
 
+            // Start the app
             java.awt.EventQueue.invokeLater(() -> {
                 App app = new App();
                 app.setVisible(true);
