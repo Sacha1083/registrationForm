@@ -1,6 +1,7 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,14 +99,37 @@ public class App extends JFrame {
         try {
             FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
             String[] options = {"Light Theme", "Dark Theme"};
-            int choice = JOptionPane.showOptionDialog(null, "Choose a theme", "Theme Selection",
+
+            // Create a custom panel with a gradient background
+            JPanel panel = new JPanel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+                    Graphics2D g2d = (Graphics2D) g;
+                    int width = getWidth();
+                    int height = getHeight();
+                    Color color1 = Color.LIGHT_GRAY;
+                    Color color2 = Color.WHITE;
+                    GradientPaint gp = new GradientPaint(0, 0, color1, 0, height, color2);
+                    g2d.setPaint(gp);
+                    g2d.fillRect(0, 0, width, height);
+                }
+            };
+            JLabel label = new JLabel("Choose a theme");
+            label.setFont(TextFont.textFormFont());
+            panel.add(label);
+
+            int choice = JOptionPane.showOptionDialog(null, panel, "Theme Selection",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
             try {
                 if (choice == 1) {
                     FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacDarkLaf());
-                } else {
+                } else if (choice == 0) {
                     FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
+                } else {
+                    System.out.println("User canceled theme selection");
+                    System.exit(0);
                 }
             } catch (Exception e) {
                 JDialog dialog = new JDialog();
