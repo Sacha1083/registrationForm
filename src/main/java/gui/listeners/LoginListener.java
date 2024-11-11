@@ -15,6 +15,7 @@ public class LoginListener extends Component implements ActionListener {
     private final JPasswordField password;
 
     public LoginListener(App app, String option, JTextField name, JTextField eMail, JPasswordField password) {
+        System.out.println("LoginListener created");
         this.app = app;
         this.option = option;
         this.name = name;
@@ -25,9 +26,12 @@ public class LoginListener extends Component implements ActionListener {
     // Method to perform the action
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println("Action performed");
         if (option.equals("login")) {
+            System.out.println("Login");
             login();
         } else if (option.equals("back")) {
+            System.out.println("Back");
             app.previousPanel();
         } else {
             System.out.println("❗ Invalid option ❗");
@@ -43,21 +47,25 @@ public class LoginListener extends Component implements ActionListener {
 
         // Validations
         if (nameText.isEmpty() || eMailText.isEmpty() || passwordText.isEmpty()) {
+            System.out.println("All fields are required");
             JOptionPane.showMessageDialog(this, "All fields are required", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (!eMailText.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+            System.out.println("Invalid e-mail format");
             JOptionPane.showMessageDialog(this, "Invalid e-mail format", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (!passwordText.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,16}$")) {
+            System.out.println("Invalid password format");
             JOptionPane.showMessageDialog(this, "Invalid password format", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Next panel if everything is correct
+        System.out.println("Next panel");
         app.nextPanel();
     }
 }
