@@ -4,6 +4,8 @@ import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +18,7 @@ public class DisplayData extends JPanel {
     private final JLabel passwordLabel;
     private final JLabel countryLabel;
     private final JLabel provinceLabel;
-    private final JCheckBox saveToFileCheckBox;
+    private final JButton saveToFile;
 
     public DisplayData(App app) {
         setLayout(new GridBagLayout());
@@ -94,13 +96,30 @@ public class DisplayData extends JPanel {
         formGbc.fill = HORIZONTAL;
         formPanel.add(provinceLabel, formGbc);
 
-        // Save to file checkbox
-        saveToFileCheckBox = new JCheckBox("Save to file");
+        // Save to file
+        saveToFile = new JButton("Export");
         formGbc.gridy = 5;
         formGbc.gridx = 0;
         formGbc.gridwidth = 2;
         formGbc.anchor = CENTER;
-        formPanel.add(saveToFileCheckBox, formGbc);
+        formPanel.add(saveToFile, formGbc);
+
+        saveToFile.addActionListener(e -> saveDataToFile());
+
+        // Ctrl + E to export
+        KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK);
+        InputMap inputMap = saveToFile.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = saveToFile.getActionMap();
+
+        // Asociar la acción al InputMap y ActionMap
+        inputMap.put(keyStroke, "saveAction");
+        actionMap.put("saveAction", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveDataToFile();
+            }
+        });
+
 
         // Add form panel
         gbc.gridy = 1;
@@ -127,14 +146,7 @@ public class DisplayData extends JPanel {
         gbc.anchor = SOUTHEAST;
         JButton exitButton = new JButton("Next");
         exitButton.addActionListener(e -> {
-            if (saveToFileCheckBox.isSelected()) {
-                if (saveDataToFile()) {
-                    saveToFileCheckBox.setSelected(false);
-                    app.nextPanel();
-                }
-            } else {
-                app.nextPanel();
-            }
+            app.nextPanel();
         });
         add(exitButton, gbc);
 
@@ -149,8 +161,7 @@ public class DisplayData extends JPanel {
         provinceLabel.setText(app.getProvince());
     }
 
-    private boolean saveDataToFile() {
-        boolean saved = false;
+    private void saveDataToFile() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int returnValue = fileChooser.showSaveDialog(this);
@@ -162,12 +173,10 @@ public class DisplayData extends JPanel {
                 writer.write("Password: " + passwordLabel.getText() + "\n");
                 writer.write("Country: " + countryLabel.getText() + "\n");
                 writer.write("Province: " + provinceLabel.getText() + "\n");
-                saved = true;
                 JOptionPane.showMessageDialog(this, "File saved successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(this, "Error saving file.\nMessage: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        return saved;
     }
 }
