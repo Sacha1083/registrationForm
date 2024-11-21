@@ -137,9 +137,13 @@ public class App extends JFrame {
                 JDialog dialog = new JDialog();
                 dialog.setAlwaysOnTop(true);
                 JOptionPane.showMessageDialog(dialog, "Error loading theme", "Error", JOptionPane.ERROR_MESSAGE);
-                System.out.println("Error loading theme");
+                System.out.println("Error loading theme - " + e.getMessage());
                 System.exit(1);
             }
+
+            // Show splash screen
+            SplashScreen splash = new SplashScreen(3000);
+            splash.showSplash();
 
             // Start the app
             java.awt.EventQueue.invokeLater(() -> {
@@ -150,7 +154,7 @@ public class App extends JFrame {
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
             JOptionPane.showMessageDialog(dialog, "Error loading program", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Error loading program");
+            System.out.println("Error loading program - " + e.getMessage());
             System.exit(1);
         }
     }
