@@ -47,6 +47,13 @@ public class FinishPanel extends JPanel {
         gbc.anchor = SOUTHEAST;
         JButton finishButton = new JButton("Finish");
         finishButton.addActionListener(e -> System.exit(0));
+        finishButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
+        finishButton.getActionMap().put("clickButton", new AbstractAction() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+                finishButton.doClick();
+            }
+        });
         add(finishButton, gbc);
     }
 }

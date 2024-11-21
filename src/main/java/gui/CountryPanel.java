@@ -151,6 +151,13 @@ public class CountryPanel extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton nextButton = new JButton("Next");
         nextButton.addActionListener(e -> app.nextPanel());
+        nextButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
+        nextButton.getActionMap().put("clickButton", new AbstractAction() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+                nextButton.doClick();
+            }
+        });
         add(nextButton, gbc);
 
         gbc.gridy = 2;

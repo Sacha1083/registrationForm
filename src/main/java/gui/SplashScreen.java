@@ -48,7 +48,7 @@ public class SplashScreen extends JWindow  {
         for (int i = 0; i <= 100; i++) {
             progressBar.setValue(i);
             try {
-                Thread.sleep(duration / 60); // Dividir la duración total en 100 pasos
+                Thread.sleep(duration / 100);
             } catch (InterruptedException e) {
                 System.out.println("Error in the splash screen - " + e.getMessage());
             }
