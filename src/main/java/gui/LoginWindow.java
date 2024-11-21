@@ -8,13 +8,36 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.awt.GridBagConstraints.*;
 
 public class LoginWindow extends JWindow {
     public static JPanel getLoginWindow() {
-        String users = Paths.get(System.getProperty("user.dir"),"user.dad").toString();
+        String users = Paths.get(System.getProperty("user.dir"), "user.dad").toString();
+        List<Usuario> userList = new ArrayList<>();
+        try (FileInputStream fis = new FileInputStream(users);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+
+            while (true) {
+                try {
+                    userList.add((Usuario) ois.readObject());
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                    break;
+                } catch (IOException e) {
+                    if (e.getMessage().contains("EOFException")) {
+                        break;
+                    } else {
+                        e.printStackTrace();
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         JPanel content = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 

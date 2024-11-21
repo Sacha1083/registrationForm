@@ -1,31 +1,45 @@
 package gui;
 
 import java.io.*;
+import java.util.Objects;
 
 public class Usuario implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    private String nombre;
     private String email;
+    private String password;
 
-    public Usuario(String nombre, String email) {
-        this.nombre = nombre;
+    public Usuario(String email, String password) {
         this.email = email;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.password = password;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(email, usuario.email) && Objects.equals(password, usuario.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, password);
     }
 }
