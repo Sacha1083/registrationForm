@@ -6,7 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class SplashScreen extends JFrame {
+// https://docs.oracle.com/javase/tutorial/uiswing/examples/misc/SplashDemoProject/src/misc/SplashDemo.java
+public class SplashScreen extends JWindow  {
     private final int duration;
 
     public SplashScreen(int duration) {
@@ -18,7 +19,6 @@ public class SplashScreen extends JFrame {
         setContentPane(content);
         setSize(900, 800);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JLabel label = new JLabel();
         try {
