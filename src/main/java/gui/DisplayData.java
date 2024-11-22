@@ -144,11 +144,18 @@ public class DisplayData extends JPanel {
 
         gbc.gridx = 1;
         gbc.anchor = SOUTHEAST;
-        JButton exitButton = new JButton("Next");
-        exitButton.addActionListener(e -> {
+        JButton nextButton = new JButton("Next");
+        nextButton.addActionListener(e -> {
             app.nextPanel();
         });
-        add(exitButton, gbc);
+        nextButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
+        nextButton.getActionMap().put("clickButton", new AbstractAction() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
+                nextButton.doClick();
+            }
+        });
+        add(nextButton, gbc);
 
         updateData(app);
     }
