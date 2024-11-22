@@ -16,18 +16,11 @@ import java.util.concurrent.CountDownLatch;
 import static java.awt.GridBagConstraints.*;
 
 public class LoginWindow extends JFrame {
-    private final CountDownLatch latch;
+    private CountDownLatch latch;
 
     public LoginWindow(CountDownLatch latch) {
-        this.latch = latch;
-        setTitle("Login");
-        setSize(400, 300);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setContentPane(getLoginWindow());
-    }
+        configLoginPanel(latch);
 
-    public JPanel getLoginWindow() {
         String users = Paths.get(System.getProperty("user.dir"), "user.dad").toString();
         List<Usuario> userList = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(users);
@@ -49,7 +42,7 @@ public class LoginWindow extends JFrame {
         System.out.println("User List:");
         userList.forEach(System.out::println);
 
-        JPanel content = new JPanel(new GridBagLayout());
+        setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
         // User Label
@@ -58,13 +51,13 @@ public class LoginWindow extends JFrame {
         gbc.fill = NONE;
         JLabel labelUser = new JLabel("<html><h3>User:    </h3></html>");
         labelUser.setFont(TextFont.textFormFont());
-        content.add(labelUser, gbc);
+        add(labelUser, gbc);
 
         // User TextField
         gbc.gridx = 1;
         gbc.fill = HORIZONTAL;
         JTextField userTextField = new JTextField(20);
-        content.add(userTextField, gbc);
+        add(userTextField, gbc);
 
         // Password Label
         gbc.gridy = 1;
@@ -73,13 +66,13 @@ public class LoginWindow extends JFrame {
         JLabel labelPassword = new JLabel("<html><h3>Password:    </h3></html>");
         labelPassword.setToolTipText("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayúscula y un carácter no alfanumérico.");
         labelPassword.setFont(TextFont.textFormFont());
-        content.add(labelPassword, gbc);
+        add(labelPassword, gbc);
 
         // Password TextField
         gbc.gridx = 1;
         gbc.fill = HORIZONTAL;
         JPasswordField passwordField = new JPasswordField(20);
-        content.add(passwordField, gbc);
+        add(passwordField, gbc);
 
         // Exit Button
         gbc.gridy = 2;
@@ -89,7 +82,7 @@ public class LoginWindow extends JFrame {
         gbc.anchor = CENTER;
         JButton exit = new JButton("Exit");
         exit.addActionListener(l -> System.exit(0));
-        content.add(exit, gbc);
+        add(exit, gbc);
 
         // Login Button
         gbc.gridx = 1;
@@ -119,8 +112,14 @@ public class LoginWindow extends JFrame {
             }
         });
 
-        content.add(login, gbc);
+        add(login, gbc);
+    }
 
-        return content;
+    private void configLoginPanel(CountDownLatch latch) {
+        this.latch = latch;
+        setTitle("Login");
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }

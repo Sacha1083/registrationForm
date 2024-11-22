@@ -78,7 +78,7 @@ public class Main {
 
                 // Show splash screen
                 try {
-                    SplashScreen splash = new SplashScreen(1000);
+                    SplashScreen splash = new SplashScreen();
                     splash.showSplash();
                 } catch (Exception ex) {
                     System.out.println("Error loading splash screen - " + ex.getMessage());
@@ -110,19 +110,17 @@ public class Main {
         String users = Paths.get(System.getProperty("user.dir"),"user.dad").toString();
         File userFile = new File(users);
 
-        if (userFile.exists()) {
-            return true;
-        } else {
+        if (!userFile.exists()) {
             System.out.println("Creating new user file because it does not exist");
             Usuario nuevoUsuario = new Usuario("admin", "admin", "admin");
-            try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(Paths.get(System.getProperty("user.dir"), "user.dad").toString(), true));
+            try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(Paths.get(System.getProperty("user.dir"), "user.dad").toString(), false));
                  ObjectOutputStream oos = new ObjectOutputStream(bos)) {
                 oos.writeObject(nuevoUsuario);
             } catch (IOException e) {
                 System.out.println("Error: " + e.getMessage());
                 return false;
             }
-            return true;
         }
+        return true;
     }
 }
