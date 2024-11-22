@@ -5,8 +5,7 @@ import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.concurrent.CountDownLatch;
 
@@ -114,11 +113,16 @@ public class Main {
         if (userFile.exists()) {
             return true;
         } else {
-            try {
-                return userFile.createNewFile();
+            System.out.println("Creating new user file because it does not exist");
+            Usuario nuevoUsuario = new Usuario("admin", "admin", "admin");
+            try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(Paths.get(System.getProperty("user.dir"), "user.dad").toString(), true));
+                 ObjectOutputStream oos = new ObjectOutputStream(bos)) {
+                oos.writeObject(nuevoUsuario);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                System.out.println("Error: " + e.getMessage());
+                return false;
             }
+            return true;
         }
     }
 }

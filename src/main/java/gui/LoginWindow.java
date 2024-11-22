@@ -56,7 +56,7 @@ public class LoginWindow extends JFrame {
         gbc.gridy = 0;
         gbc.gridx = 0;
         gbc.fill = NONE;
-        JLabel labelUser = new JLabel("<html><h3>User: </h3></html>");
+        JLabel labelUser = new JLabel("<html><h3>User:    </h3></html>");
         labelUser.setFont(TextFont.textFormFont());
         content.add(labelUser, gbc);
 
@@ -70,7 +70,7 @@ public class LoginWindow extends JFrame {
         gbc.gridy = 1;
         gbc.gridx = 0;
         gbc.fill = NONE;
-        JLabel labelPassword = new JLabel("<html><h3>Password: </h3></html>");
+        JLabel labelPassword = new JLabel("<html><h3>Password:    </h3></html>");
         labelPassword.setToolTipText("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayúscula y un carácter no alfanumérico.");
         labelPassword.setFont(TextFont.textFormFont());
         content.add(labelPassword, gbc);
@@ -107,7 +107,7 @@ public class LoginWindow extends JFrame {
         login.addActionListener(e -> {
             boolean found = false;
             for (Usuario user : userList) {
-                if (user.getName().equals(userTextField.getText()) && user.getPassword().equals(new String(passwordField.getPassword()))) {
+                if (user.getEmail().equals(userTextField.getText()) && user.getPassword().equals(new String(passwordField.getPassword()))) {
                     JOptionPane.showMessageDialog(null, "Welcome " + user.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
                     found = true;
                     setVisible(false);
