@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.concurrent.CountDownLatch;
 
 public class Main {
     /**
@@ -62,33 +63,26 @@ public class Main {
                 }
 
                 // Login JWindow
-                try {
-                    JDialog loginDialog = new JDialog((Frame) null, "Login", true);
-                    new LoginWindow();
-                    loginDialog.setContentPane(LoginWindow.getLoginWindow());
-                    loginDialog.setMinimumSize(new Dimension(800, 600));
-                    loginDialog.setSize(900, 800);
-                    loginDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                    loginDialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                        @Override
-                        public void windowClosed(java.awt.event.WindowEvent e) {
-                            System.exit(0);
-                        }
-                    });
-                    loginDialog.pack();
-                    loginDialog.setLocationRelativeTo(null);
-                    loginDialog.setVisible(true);
-                } catch (Exception e) {
-                    System.out.println("Error loading login window - " + e.getMessage());
-                    System.exit(2);
-                }
+                CountDownLatch latch = new CountDownLatch(1);
+                Thread loginThread = new Thread(() -> {
+                    try {
+                        LoginWindow loginWindow = new LoginWindow(latch);
+                        loginWindow.setVisible(true);
+                    } catch (Exception e) {
+                        System.out.println("Error loading login window - " + e.getMessage());
+                        System.exit(2);
+                    }
+                });
+                loginThread.start();
+                latch.await();
+
 
                 // Show splash screen
                 try {
                     SplashScreen splash = new SplashScreen(1000);
                     splash.showSplash();
-                } catch (Exception e) {
-                    System.out.println("Error loading splash screen - " + e.getMessage());
+                } catch (Exception ex) {
+                    System.out.println("Error loading splash screen - " + ex.getMessage());
                     System.exit(3);
                 }
 

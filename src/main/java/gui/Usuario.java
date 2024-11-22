@@ -6,12 +6,18 @@ import java.util.Objects;
 public class Usuario implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+    private String name;
     private String email;
     private String password;
 
-    public Usuario(String email, String password) {
+    public Usuario(String name, String email, String password) {
+        this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getEmail() {
@@ -20,6 +26,10 @@ public class Usuario implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setEmail(String email) {
@@ -32,14 +42,26 @@ public class Usuario implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(email, usuario.email) && Objects.equals(password, usuario.password);
+        return Objects.equals(name, usuario.name) && Objects.equals(email, usuario.email) && Objects.equals(password, usuario.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, password);
+        return Objects.hash(name, email, password);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("------------------- Usuario -------------------\n");
+        sb.append("Name: ").append(name).append("\n");
+        sb.append("Email: ").append(email).append("\n");
+        sb.append("Password: ").append(password).append("\n");
+        sb.append("------------------------------------------------\n");
+
+        return sb.toString();
     }
 }

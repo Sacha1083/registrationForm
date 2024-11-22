@@ -4,17 +4,30 @@ import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import static java.awt.GridBagConstraints.*;
 
-public class LoginWindow extends JWindow {
-    public static JPanel getLoginWindow() {
+public class LoginWindow extends JFrame {
+    private final CountDownLatch latch;
+
+    public LoginWindow(CountDownLatch latch) {
+        this.latch = latch;
+        setTitle("Login");
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setContentPane(getLoginWindow());
+    }
+
+    public JPanel getLoginWindow() {
         String users = Paths.get(System.getProperty("user.dir"), "user.dad").toString();
         List<Usuario> userList = new ArrayList<>();
         try (FileInputStream fis = new FileInputStream(users);
@@ -24,20 +37,18 @@ public class LoginWindow extends JWindow {
                 try {
                     userList.add((Usuario) ois.readObject());
                 } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                    System.out.println("Error: " + e.getMessage());
                     break;
-                } catch (IOException e) {
-                    if (e.getMessage().contains("EOFException")) {
-                        break;
-                    } else {
-                        e.printStackTrace();
-                        break;
-                    }
+                } catch (EOFException e) {
+                    break;
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
+        System.out.println("User List:");
+        userList.forEach(System.out::println);
+
         JPanel content = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -94,7 +105,18 @@ public class LoginWindow extends JWindow {
         });
 
         login.addActionListener(e -> {
-            // Add login action here
+            boolean found = false;
+            for (Usuario user : userList) {
+                if (user.getName().equals(userTextField.getText()) && user.getPassword().equals(new String(passwordField.getPassword()))) {
+                    JOptionPane.showMessageDialog(null, "Welcome " + user.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
+                    found = true;
+                    setVisible(false);
+                    latch.countDown();
+                }
+            }
+            if (!found) {
+                JOptionPane.showMessageDialog(null, "Incorrect username or password", "Login", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         content.add(login, gbc);
