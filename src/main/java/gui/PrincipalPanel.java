@@ -22,7 +22,7 @@ public class PrincipalPanel extends JPanel {
         gbc.gridwidth = REMAINDER;
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = NORTH;
-        JLabel titleForm = new JLabel(TextData.readTitlePrincipalPanel());
+        JLabel titleForm = new JLabel(TextData.getText("title.instructions"));
         titleForm.setFont(TextFont.titleFont());
         add(titleForm, gbc);
 
@@ -34,13 +34,10 @@ public class PrincipalPanel extends JPanel {
         gbc.insets = new Insets(0, 10, 0, 10);
         gbc.fill = HORIZONTAL;
         gbc.anchor = CENTER;
-        JLabel panelInformation = new JLabel(TextData.readInstructions());
+        JLabel panelInformation = new JLabel(TextData.getText("instructions.html"));
         panelInformation.setFont(TextFont.textFont());
         panelInformation.setHorizontalAlignment(SwingConstants.CENTER);
         add(panelInformation, gbc);
-
-        Locale locale = new Locale("es");
-        ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 
         // Button configuration
         gbc.gridy = 2;
@@ -48,7 +45,7 @@ public class PrincipalPanel extends JPanel {
         gbc.anchor = SOUTHEAST;
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
-        JButton nextButton = new JButton(bundle.getString("button.submit"));
+        JButton nextButton = new JButton(TextData.getText("button.next"));
         nextButton.addActionListener(e -> app.nextPanel());
         nextButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         nextButton.getActionMap().put("clickButton", new AbstractAction() {

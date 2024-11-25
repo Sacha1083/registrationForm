@@ -1,6 +1,7 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import util.TextData;
 import util.TextFont;
 
 import javax.swing.*;
@@ -35,6 +36,10 @@ public class Main {
                         g2d.fillRect(0, 0, width, height);
                     }
                 };
+
+                // Initialize TextData to set the language
+                new TextData();
+
                 JLabel label = new JLabel("Choose a theme");
                 label.setFont(TextFont.textFormFont());
                 panel.add(label);
