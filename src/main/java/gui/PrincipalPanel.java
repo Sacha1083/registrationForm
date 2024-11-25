@@ -5,6 +5,8 @@ import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static java.awt.GridBagConstraints.*;
 
@@ -37,13 +39,16 @@ public class PrincipalPanel extends JPanel {
         panelInformation.setHorizontalAlignment(SwingConstants.CENTER);
         add(panelInformation, gbc);
 
+        Locale locale = new Locale("es");
+        ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+
         // Button configuration
         gbc.gridy = 2;
         gbc.gridwidth = REMAINDER;
         gbc.anchor = SOUTHEAST;
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
-        JButton nextButton = new JButton("Next");
+        JButton nextButton = new JButton(bundle.getString("button.submit"));
         nextButton.addActionListener(e -> app.nextPanel());
         nextButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         nextButton.getActionMap().put("clickButton", new AbstractAction() {
