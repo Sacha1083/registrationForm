@@ -2,6 +2,7 @@ package util;
 
 import javax.swing.*;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class TextData {
@@ -27,7 +28,11 @@ public class TextData {
     }
 
     public static String getText(String keyValue) {
-        return bundle.getString(keyValue);
+        try {
+            return bundle.getString(keyValue);
+        } catch (MissingResourceException e) {
+            return "Key not found: " + keyValue;
+        }
     }
 
     public static String readTitleFormPanel() {

@@ -13,13 +13,13 @@ import java.util.concurrent.CountDownLatch;
 public class Main {
     /**
      * Start the app
-     * @exits 0 - User canceled theme selection, 1 - Error loading theme, 2 - Error loading login window, 3 - Error loading splash screen, 4 - Error loading program
+     * @exits 0 - User canceled theme selection, 1 - Error loading theme, 2 - Error loading login window, 3 - Error loading splash screen, 4 - Error loading program 5 - File integrity check failed
      */
     public static void main(String[] args) {
         if (checkFileIntegrity()) {
             try {
                 FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
-                String[] options = {"Light Theme", "Dark Theme"};
+                String[] options = {TextData.getText("theme.light"), TextData.getText("theme.dark")};
 
                 // Create a custom panel with a gradient background
                 JPanel panel = new JPanel() {
@@ -40,29 +40,30 @@ public class Main {
                 // Initialize TextData to set the language
                 new TextData();
 
-                JLabel label = new JLabel("Choose a theme");
+                JLabel label = new JLabel(TextData.getText("theme.title"));
                 label.setFont(TextFont.textFormFont());
                 panel.add(label);
 
-                int choice = JOptionPane.showOptionDialog(null, panel, "Theme Selection",
+                int choice = JOptionPane.showOptionDialog(null, panel, TextData.getText("theme.window.title"),
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
                 try {
                     if (choice == 1) {
-                        System.out.println("Dark Theme Selected");
+                        System.out.println(TextData.getText("console&label.darkThemeSelected"));
                         FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacDarkLaf());
                     } else if (choice == 0) {
-                        System.out.println("Light Theme Selected");
+                        System.out.println(TextData.getText("console&label.lightThemeSelected"));
                         FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
                     } else {
-                        System.out.println("User canceled theme selection");
+                        System.out.println(TextData.getText("console&err.userCanceledThemeSelection"));
                         System.exit(0);
                     }
                 } catch (Exception e) {
                     JDialog dialog = new JDialog();
                     dialog.setAlwaysOnTop(true);
-                    JOptionPane.showMessageDialog(dialog, "Error loading theme", "Error", JOptionPane.ERROR_MESSAGE);
-                    System.out.println("Error loading theme - " + e.getMessage());
+                    String message = TextData.getText("console&err.errorLoadingTheme");
+                    JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
+                    System.out.println(message + " - " + e.getMessage());
                     System.exit(1);
                 }
 
@@ -73,7 +74,11 @@ public class Main {
                         LoginWindow loginWindow = new LoginWindow(latch);
                         loginWindow.setVisible(true);
                     } catch (Exception e) {
-                        System.out.println("Error loading login window - " + e.getMessage());
+                        String message = TextData.getText("console&err.errorLoadingLoginWindow");
+                        System.out.println(message + " - " + e.getMessage());
+                        JDialog dialog = new JDialog();
+                        dialog.setAlwaysOnTop(true);
+                        JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
                         System.exit(2);
                     }
                 });
@@ -86,7 +91,11 @@ public class Main {
                     SplashScreen splash = new SplashScreen();
                     splash.showSplash();
                 } catch (Exception ex) {
-                    System.out.println("Error loading splash screen - " + ex.getMessage());
+                    String message = TextData.getText("console&err.errorLoadingSplashScreen");
+                    System.out.println(message + " - " + ex.getMessage());
+                    JDialog dialog = new JDialog();
+                    dialog.setAlwaysOnTop(true);
+                    JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
                     System.exit(3);
                 }
 
@@ -96,18 +105,20 @@ public class Main {
                     app.setVisible(true);
                 });
             } catch (Exception e) {
+                String message = TextData.getText("console&err.errorLoadingProgram");
                 JDialog dialog = new JDialog();
                 dialog.setAlwaysOnTop(true);
-                JOptionPane.showMessageDialog(dialog, "Error loading program", "Error", JOptionPane.ERROR_MESSAGE);
-                System.out.println("Error loading program - " + e.getMessage());
+                JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
+                System.out.println(message + " - " + e.getMessage());
                 System.exit(4);
             }
         } else {
+            String message = TextData.getText("console&err.fileIntegrityCheckFailed");
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
-            JOptionPane.showMessageDialog(dialog, "Error loading program", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Error loading program - File integrity check failed");
-            System.exit(4);
+            JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(message);
+            System.exit(5);
         }
     }
 
@@ -116,7 +127,7 @@ public class Main {
         File userFile = new File(users);
 
         if (!userFile.exists()) {
-            System.out.println("Creating new user file because it does not exist");
+            System.out.println(TextData.getText("console&info.creatingNewUserFile"));
             Usuario nuevoUsuario = new Usuario("admin", "admin", "admin");
             try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(Paths.get(System.getProperty("user.dir"), "user.dad").toString(), false));
                  ObjectOutputStream oos = new ObjectOutputStream(bos)) {

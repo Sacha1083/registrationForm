@@ -1,5 +1,6 @@
 package gui;
 
+import util.TextData;
 import util.TextFont;
 
 import javax.swing.*;
@@ -49,7 +50,7 @@ public class LoginWindow extends JFrame {
         gbc.gridy = 0;
         gbc.gridx = 0;
         gbc.fill = NONE;
-        JLabel labelUser = new JLabel("<html><h3>User:    </h3></html>");
+        JLabel labelUser = new JLabel(TextData.getText("label.user"));
         labelUser.setFont(TextFont.textFormFont());
         add(labelUser, gbc);
 
@@ -63,8 +64,8 @@ public class LoginWindow extends JFrame {
         gbc.gridy = 1;
         gbc.gridx = 0;
         gbc.fill = NONE;
-        JLabel labelPassword = new JLabel("<html><h3>Password:    </h3></html>");
-        labelPassword.setToolTipText("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayúscula y un carácter no alfanumérico.");
+        JLabel labelPassword = new JLabel(TextData.getText("label.password"));
+        labelPassword.setToolTipText(TextData.getText("toltip.password"));
         labelPassword.setFont(TextFont.textFormFont());
         add(labelPassword, gbc);
 
