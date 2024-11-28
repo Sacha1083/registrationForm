@@ -36,12 +36,4 @@ public class TextData {
             return "Key not found: " + keyValue;
         }
     }
-
-    public static String readTitleFormPanel() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html>")
-                .append("<center><h1>Register User Form</h1></center>")
-                .append("</html>");
-        return sb.toString();
-    }
 }

@@ -17,7 +17,6 @@ import java.util.concurrent.CountDownLatch;
 import static java.awt.GridBagConstraints.*;
 
 public class LoginWindow extends JFrame {
-    private CountDownLatch latch;
 
     public LoginWindow(CountDownLatch latch) {
         configLoginPanel(latch);
@@ -81,7 +80,7 @@ public class LoginWindow extends JFrame {
         gbc.fill = NONE;
         gbc.gridwidth = 1;
         gbc.anchor = CENTER;
-        JButton exit = new JButton("Exit");
+        JButton exit = new JButton(TextData.getText("buttonExit"));
         exit.addActionListener(l -> System.exit(0));
         add(exit, gbc);
 
@@ -89,7 +88,7 @@ public class LoginWindow extends JFrame {
         gbc.gridx = 1;
         gbc.anchor = CENTER;
         gbc.insets = new Insets(10, 10, 10, 10);
-        JButton login = new JButton("Login");
+        JButton login = new JButton(TextData.getText("buttonLogin"));
         login.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         login.getActionMap().put("clickButton", new AbstractAction() {
             @Override
@@ -102,14 +101,14 @@ public class LoginWindow extends JFrame {
             boolean found = false;
             for (Usuario user : userList) {
                 if (user.getEmail().equals(userTextField.getText()) && user.getPassword().equals(new String(passwordField.getPassword()))) {
-                    JOptionPane.showMessageDialog(null, "Welcome " + user.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, TextData.getText("welcome") + user.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
                     found = true;
                     setVisible(false);
                     latch.countDown();
                 }
             }
             if (!found) {
-                JOptionPane.showMessageDialog(null, "Incorrect username or password", "Login", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, TextData.getText("incorrectLogin"), "Login", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -117,7 +116,6 @@ public class LoginWindow extends JFrame {
     }
 
     private void configLoginPanel(CountDownLatch latch) {
-        this.latch = latch;
         setTitle("Login");
         setSize(400, 300);
         setLocationRelativeTo(null);

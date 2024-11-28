@@ -1,6 +1,7 @@
 package gui;
 
 import gui.listeners.LoginListener;
+import org.w3c.dom.Text;
 import util.TextData;
 import util.TextFont;
 
@@ -23,7 +24,7 @@ public class RegisterPanel extends JPanel {
         gbc.gridwidth = REMAINDER;
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = NORTH;
-        JLabel titleForm = new JLabel(TextData.readTitleFormPanel());
+        JLabel titleForm = new JLabel(TextData.getText("titleFormPanel"));
         titleForm.setFont(TextFont.titleFont());
         add(titleForm, gbc);
 
@@ -34,7 +35,7 @@ public class RegisterPanel extends JPanel {
         inputConstrain.gridx = 0;
         inputConstrain.insets = new Insets(10, 10, 10, 10);
         inputConstrain.anchor = WEST;
-        JLabel labelName = new JLabel("<html><h3>Name: </h3></html>");
+        JLabel labelName = new JLabel(TextData.getText("label.user"));
         labelName.setFont(TextFont.textFormFont());
         formPanel.add(labelName, inputConstrain);
 
@@ -49,8 +50,8 @@ public class RegisterPanel extends JPanel {
         inputConstrain.gridy = 1;
         inputConstrain.gridx = 0;
         inputConstrain.fill = NONE;
-        JLabel labelMail = new JLabel("<html><h3>E-Mail: </h3></html>");
-        labelMail.setToolTipText("Tienes que introducir un correo electrónico válido. Ejemplo: example@example.es");
+        JLabel labelMail = new JLabel(TextData.getText("labelEmail"));
+        labelMail.setToolTipText(TextData.getText("toltipEmail"));
         labelMail.setToolTipText(labelMail.getToolTipText());
         labelMail.setFont(TextFont.textFormFont());
         formPanel.add(labelMail, inputConstrain);
@@ -59,7 +60,7 @@ public class RegisterPanel extends JPanel {
         inputConstrain.gridx = 1;
         inputConstrain.fill = HORIZONTAL;
         eMail = new JTextField();
-        eMail.setToolTipText("Tienes que introducir un correo electrónico válido. Ejemplo: example@example.es");
+        eMail.setToolTipText(TextData.getText("toltipEmail"));
         eMail.setToolTipText(eMail.getToolTipText());
         eMail.setFont(TextFont.textFont());
         eMail.setPreferredSize(new Dimension(200, 30));
@@ -70,7 +71,7 @@ public class RegisterPanel extends JPanel {
         inputConstrain.gridx = 0;
         inputConstrain.fill = NONE;
         JLabel labelPassword = new JLabel("<html><h3>Password: </h3></html>");
-        labelPassword.setToolTipText("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayúscula y un carácter no alfanumérico.");
+        labelPassword.setToolTipText(TextData.getText("toltip.password"));
         labelPassword.setToolTipText(labelPassword.getToolTipText());
         labelPassword.setFont(TextFont.textFormFont());
         formPanel.add(labelPassword, inputConstrain);
@@ -78,7 +79,7 @@ public class RegisterPanel extends JPanel {
         inputConstrain.gridx = 1;
         inputConstrain.fill = HORIZONTAL;
         password = new JPasswordField();
-        password.setToolTipText("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayúscula y un carácter no alfanumérico.");
+        password.setToolTipText(TextData.getText("toltip.password"));
         password.setToolTipText(password.getToolTipText());
         password.setFont(TextFont.textFont());
         password.setPreferredSize(new Dimension(200, 30));
@@ -89,7 +90,7 @@ public class RegisterPanel extends JPanel {
         inputConstrain.gridx = 1;
         inputConstrain.gridwidth = REMAINDER;
         inputConstrain.fill = NONE;
-        JButton clearButton = new JButton("Clear");
+        JButton clearButton = new JButton(TextData.getText("buttonClear"));
         clearButton.addActionListener(e -> clearFields());
         formPanel.add(clearButton, inputConstrain);
 
@@ -110,7 +111,7 @@ public class RegisterPanel extends JPanel {
         gbc.anchor = SOUTHEAST;
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
-        JButton nextButton = new JButton("Next");
+        JButton nextButton = new JButton(TextData.getText("button.next"));
         nextButton.addActionListener(new LoginListener(app, "login", name, eMail, password));
         nextButton.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         nextButton.getActionMap().put("clickButton", new AbstractAction() {
@@ -127,7 +128,7 @@ public class RegisterPanel extends JPanel {
         gbc.anchor = SOUTHWEST;
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
-        JButton backButton = new JButton("Back");
+        JButton backButton = new JButton(TextData.getText("buttonBack"));
         backButton.addActionListener(new LoginListener(app, "back", name, eMail, password));
         add(backButton, gbc);
     }
