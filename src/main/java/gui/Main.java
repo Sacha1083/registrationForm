@@ -16,9 +16,11 @@ public class Main {
      * @exits 0 - User canceled theme selection, 1 - Error loading theme, 2 - Error loading login window, 3 - Error loading splash screen, 4 - Error loading program 5 - File integrity check failed
      */
     public static void main(String[] args) {
+        FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
+        new TextData();
+
         if (checkFileIntegrity()) {
             try {
-                FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
                 String[] options = {TextData.getText("theme.light"), TextData.getText("theme.dark")};
 
                 // Create a custom panel with a gradient background
@@ -36,9 +38,6 @@ public class Main {
                         g2d.fillRect(0, 0, width, height);
                     }
                 };
-
-                // Initialize TextData to set the language
-                new TextData();
 
                 JLabel label = new JLabel(TextData.getText("theme.title"));
                 label.setFont(TextFont.textFormFont());
