@@ -14,7 +14,7 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public Usuario authenticateUser(String email, String password) {
-        password = Base64.getEncoder().encodeToString(email.getBytes());
+        password = Base64.getEncoder().encodeToString(password.getBytes());
         Usuario user = usuarioRepository.authenticateUser(email, password);
 
         // Decrypt the password
