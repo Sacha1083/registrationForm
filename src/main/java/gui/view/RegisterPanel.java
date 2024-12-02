@@ -1,7 +1,6 @@
-package gui;
+package gui.view;
 
 import gui.listeners.LoginListener;
-import org.w3c.dom.Text;
 import util.TextData;
 import util.TextFont;
 

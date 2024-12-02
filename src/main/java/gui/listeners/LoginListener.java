@@ -1,6 +1,6 @@
 package gui.listeners;
 
-import gui.App;
+import gui.view.App;
 import gui.Usuario;
 
 import javax.swing.*;

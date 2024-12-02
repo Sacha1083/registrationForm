@@ -1,6 +1,9 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import gui.view.App;
+import gui.view.LoginWindow;
+import gui.view.SplashScreen;
 import util.TextData;
 import util.TextFont;
 
@@ -88,7 +91,7 @@ public class Main {
 
                 // Show splash screen
                 try {
-                    SplashScreen splash = new SplashScreen();
+                    gui.view.SplashScreen splash = new SplashScreen();
                     splash.showSplash();
                 } catch (Exception ex) {
                     String message = TextData.getText("console&err.errorLoadingSplashScreen");
