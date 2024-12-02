@@ -1,6 +1,5 @@
-package gui.view;
+package gui;
 
-import gui.Usuario;
 import util.TextData;
 import util.TextFont;
 
