@@ -105,6 +105,7 @@ public class LoginWindow extends JFrame {
                     found = true;
                     setVisible(false);
                     latch.countDown();
+                    break;
                 }
             }
             if (!found) {

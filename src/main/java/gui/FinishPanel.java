@@ -1,5 +1,6 @@
 package gui;
 
+import util.TextData;
 import util.TextFont;
 
 import javax.swing.*;
@@ -20,7 +21,7 @@ public class FinishPanel extends JPanel {
         gbc.gridwidth = REMAINDER;
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = NORTH;
-        JLabel titleLabel = new JLabel("Finish");
+        JLabel titleLabel = new JLabel(TextData.getText("finishTitle"));
         titleLabel.setFont(TextFont.titleFont());
         add(titleLabel, gbc);
 
@@ -30,7 +31,7 @@ public class FinishPanel extends JPanel {
         gbc.gridwidth = REMAINDER;
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = CENTER;
-        JLabel messageLabel = new JLabel("Thank you for using the app!");
+        JLabel messageLabel = new JLabel(TextData.getText("finishMessage"));
         messageLabel.setFont(TextFont.textFormFont());
         add(messageLabel, gbc);
 
@@ -39,13 +40,13 @@ public class FinishPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridwidth = 1;
         gbc.anchor = SOUTHWEST;
-        JButton previousButton = new JButton("Previous");
+        JButton previousButton = new JButton(TextData.getText("buttonBack"));
         previousButton.addActionListener(e -> app.previousPanel());
         add(previousButton, gbc);
 
         gbc.gridx = 1;
         gbc.anchor = SOUTHEAST;
-        JButton finishButton = new JButton("Finish");
+        JButton finishButton = new JButton(TextData.getText("btnFinish"));
         finishButton.addActionListener(e -> System.exit(0));
         finishButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         finishButton.getActionMap().put("clickButton", new AbstractAction() {

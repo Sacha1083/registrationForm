@@ -80,6 +80,7 @@ public class Main {
                         JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
                         System.exit(2);
                     }
+
                 });
                 loginThread.start();
                 latch.await();

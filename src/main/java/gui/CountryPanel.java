@@ -1,5 +1,6 @@
 package gui;
 
+import util.TextData;
 import util.TextFont;
 
 import javax.swing.*;
@@ -30,10 +31,11 @@ public class CountryPanel extends JPanel {
                 countryData.add(line);
             }
         } catch (Exception e) {
+            String msg = TextData.getText("errReadingFile");
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
-            JOptionPane.showMessageDialog(dialog, "Error reading country data file", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Error reading country data file");
+            JOptionPane.showMessageDialog(dialog, msg, "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(msg);
             System.exit(0);
         }
 
@@ -54,10 +56,11 @@ public class CountryPanel extends JPanel {
         try {
             imageIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("img/country.jpg")));
         } catch (NullPointerException e) {
+            String msg = TextData.getText("errLoadImage");
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
-            JOptionPane.showMessageDialog(dialog, "Error loading image", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Error loading image");
+            JOptionPane.showMessageDialog(dialog, msg, "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println(msg);
             System.exit(0);
         }
         Image originalImage = imageIcon.getImage();
@@ -86,7 +89,7 @@ public class CountryPanel extends JPanel {
         gbc.fill = HORIZONTAL;
         gbc.insets = new Insets(10, 20, 10, 20);
         gbc.anchor = CENTER;
-        JLabel titleForm = new JLabel("Select a country and province");
+        JLabel titleForm = new JLabel(TextData.getText("titleCountryPanel"));
         titleForm.setHorizontalAlignment(SwingConstants.CENTER);
         titleForm.setFont(TextFont.titleFont());
         add(titleForm, gbc);
@@ -149,7 +152,7 @@ public class CountryPanel extends JPanel {
         gbc.anchor = SOUTHEAST;
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
-        JButton nextButton = new JButton("Next");
+        JButton nextButton = new JButton(TextData.getText("button.next"));
         nextButton.addActionListener(e -> app.nextPanel());
         nextButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         nextButton.getActionMap().put("clickButton", new AbstractAction() {
@@ -165,8 +168,13 @@ public class CountryPanel extends JPanel {
         gbc.anchor = SOUTHWEST;
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
-        JButton backButton = new JButton("Back");
-        backButton.addActionListener(e -> app.previousPanel());
+        JButton backButton = new JButton(TextData.getText("buttonBack"));
+        backButton.addActionListener(e -> {
+            int option = JOptionPane.showConfirmDialog(this, TextData.getText("userDataBackMessage"), TextData.getText("userDataBackTitle"), JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                app.previousPanel();
+            }
+        });
         add(backButton, gbc);
     }
 

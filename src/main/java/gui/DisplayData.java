@@ -1,5 +1,6 @@
 package gui;
 
+import util.TextData;
 import util.TextFont;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class DisplayData extends JPanel {
         gbc.gridwidth = REMAINDER;
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = NORTH;
-        JLabel titleLabel = new JLabel("User Data");
+        JLabel titleLabel = new JLabel(TextData.getText("userDataTitle"));
         titleLabel.setFont(TextFont.titleFont());
         add(titleLabel, gbc);
 
@@ -55,7 +56,7 @@ public class DisplayData extends JPanel {
         // Name
         formGbc.gridy = 0;
         formGbc.gridx = 0;
-        formPanel.add(new JLabel("Name: "), formGbc);
+        formPanel.add(new JLabel(TextData.getText("userDataName")), formGbc);
         formGbc.gridx = 1;
         formGbc.fill = HORIZONTAL;
         formPanel.add(nameLabel, formGbc);
@@ -64,7 +65,7 @@ public class DisplayData extends JPanel {
         formGbc.gridy = 1;
         formGbc.gridx = 0;
         formGbc.fill = NONE;
-        formPanel.add(new JLabel("E-Mail: "), formGbc);
+        formPanel.add(new JLabel(TextData.getText("userDataEmail")), formGbc);
         formGbc.gridx = 1;
         formGbc.fill = HORIZONTAL;
         formPanel.add(emailLabel, formGbc);
@@ -73,7 +74,7 @@ public class DisplayData extends JPanel {
         formGbc.gridy = 2;
         formGbc.gridx = 0;
         formGbc.fill = NONE;
-        formPanel.add(new JLabel("Password: "), formGbc);
+        formPanel.add(new JLabel(TextData.getText("userDataPassword")), formGbc);
         formGbc.gridx = 1;
         formGbc.fill = HORIZONTAL;
         formPanel.add(passwordLabel, formGbc);
@@ -82,7 +83,7 @@ public class DisplayData extends JPanel {
         formGbc.gridy = 3;
         formGbc.gridx = 0;
         formGbc.fill = NONE;
-        formPanel.add(new JLabel("Country: "), formGbc);
+        formPanel.add(new JLabel(TextData.getText("userDataCountry")), formGbc);
         formGbc.gridx = 1;
         formGbc.fill = HORIZONTAL;
         formPanel.add(countryLabel, formGbc);
@@ -91,13 +92,13 @@ public class DisplayData extends JPanel {
         formGbc.gridy = 4;
         formGbc.gridx = 0;
         formGbc.fill = NONE;
-        formPanel.add(new JLabel("Province: "), formGbc);
+        formPanel.add(new JLabel(TextData.getText("userDataProvince")), formGbc);
         formGbc.gridx = 1;
         formGbc.fill = HORIZONTAL;
         formPanel.add(provinceLabel, formGbc);
 
         // Save to file
-        saveToFile = new JButton("Export");
+        saveToFile = new JButton(TextData.getText("userDataExport"));
         formGbc.gridy = 5;
         formGbc.gridx = 0;
         formGbc.gridwidth = 2;
@@ -138,13 +139,13 @@ public class DisplayData extends JPanel {
         gbc.gridx = 0;
         gbc.anchor = SOUTHWEST;
         gbc.fill = NONE;
-        JButton backButton = new JButton("Back");
+        JButton backButton = new JButton(TextData.getText("buttonBack"));
         backButton.addActionListener(e -> app.previousPanel());
         add(backButton, gbc);
 
         gbc.gridx = 1;
         gbc.anchor = SOUTHEAST;
-        JButton nextButton = new JButton("Next");
+        JButton nextButton = new JButton(TextData.getText("button.next"));
         nextButton.addActionListener(e -> {
             app.nextPanel();
         });
@@ -175,14 +176,14 @@ public class DisplayData extends JPanel {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = new File(fileChooser.getSelectedFile(), "user_data.txt");
             try (FileWriter writer = new FileWriter(file)) {
-                writer.write("Name: " + nameLabel.getText() + "\n");
-                writer.write("E-Mail: " + emailLabel.getText() + "\n");
-                writer.write("Password: " + passwordLabel.getText() + "\n");
-                writer.write("Country: " + countryLabel.getText() + "\n");
-                writer.write("Province: " + provinceLabel.getText() + "\n");
-                JOptionPane.showMessageDialog(this, "File saved successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                writer.write(TextData.getText("userDataName") + nameLabel.getText() + "\n");
+                writer.write(TextData.getText("userDataEmail") + emailLabel.getText() + "\n");
+                writer.write(TextData.getText("userDataPassword") + passwordLabel.getText() + "\n");
+                writer.write(TextData.getText("userDataCountry") + countryLabel.getText() + "\n");
+                writer.write(TextData.getText("userDataProvince") + provinceLabel.getText() + "\n");
+                JOptionPane.showMessageDialog(this, TextData.getText("userDataFileSave"), "Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "Error saving file.\nMessage: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, TextData.getText("userDataFileSaveError") + "\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
