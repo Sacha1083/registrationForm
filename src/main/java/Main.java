@@ -2,7 +2,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import gui.App;
 import gui.LoginWindow;
 import gui.SplashScreen;
-import gui.Usuario;
+import gui.model.entity.Usuario;
 import util.TextData;
 import util.TextFont;
 

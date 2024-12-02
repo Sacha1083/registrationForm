@@ -1,7 +1,7 @@
 package gui.listeners;
 
 import gui.App;
-import gui.Usuario;
+import gui.model.entity.Usuario;
 
 import javax.swing.*;
 import java.awt.*;

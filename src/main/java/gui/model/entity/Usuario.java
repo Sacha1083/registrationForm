@@ -1,4 +1,4 @@
-package gui;
+package gui.model.entity;
 
 import java.io.*;
 import java.util.Objects;

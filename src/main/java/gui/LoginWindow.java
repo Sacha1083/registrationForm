@@ -1,5 +1,6 @@
 package gui;
 
+import gui.model.entity.Usuario;
 import util.TextData;
 import util.TextFont;
 
