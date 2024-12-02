@@ -10,39 +10,24 @@ public class UsuarioRepository {
 
     public static Connection connect() {
         Connection conn = null;
+
         try {
             conn = DriverManager.getConnection(DB_URL);
             System.out.println("Connection to SQLite has been established.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+
         return conn;
     }
 
-    public static void createTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS usuarios (\n"
-                + " id integer PRIMARY KEY,\n"
-                + " name text NOT NULL,\n"
-                + " email text NOT NULL,\n"
-                + " password text NOT NULL\n"
-                + ");";
+    public static void insertUser(Usuario user) {
+        String sql = "INSERT INTO usuarios(name, email, password) VALUES('" + user.getName() + "', '" + user.getEmail() + "', '" + user.getPassword() + "');";
 
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
-            System.out.println("Table created.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public static void insertUser(String name, String email, String password) {
-        String sql = "INSERT INTO usuarios(name, email, password) VALUES('" + name + "', '" + email + "', '" + password + "');";
-
-        try (Connection conn = connect();
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-            System.out.println("User inserted.");
+            System.out.println("User " + user.getName() + " inserted.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Usuario implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+    private int id;
     private String name;
     private String email;
     private String password;
@@ -14,6 +15,16 @@ public class Usuario implements Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+    public Usuario(int id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -26,6 +37,10 @@ public class Usuario implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -44,12 +59,12 @@ public class Usuario implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(name, usuario.name) && Objects.equals(email, usuario.email) && Objects.equals(password, usuario.password);
+        return id == usuario.id && Objects.equals(email, usuario.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, email, password);
+        return Objects.hash(id, email);
     }
 
     @Override
