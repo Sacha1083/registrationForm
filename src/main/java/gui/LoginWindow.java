@@ -1,5 +1,6 @@
 package gui;
 
+import util.TextData;
 import util.TextFont;
 
 import javax.swing.*;
@@ -16,7 +17,6 @@ import java.util.concurrent.CountDownLatch;
 import static java.awt.GridBagConstraints.*;
 
 public class LoginWindow extends JFrame {
-    private CountDownLatch latch;
 
     public LoginWindow(CountDownLatch latch) {
         configLoginPanel(latch);
@@ -49,7 +49,7 @@ public class LoginWindow extends JFrame {
         gbc.gridy = 0;
         gbc.gridx = 0;
         gbc.fill = NONE;
-        JLabel labelUser = new JLabel("<html><h3>User:    </h3></html>");
+        JLabel labelUser = new JLabel(TextData.getText("label.user"));
         labelUser.setFont(TextFont.textFormFont());
         add(labelUser, gbc);
 
@@ -63,8 +63,8 @@ public class LoginWindow extends JFrame {
         gbc.gridy = 1;
         gbc.gridx = 0;
         gbc.fill = NONE;
-        JLabel labelPassword = new JLabel("<html><h3>Password:    </h3></html>");
-        labelPassword.setToolTipText("La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayúscula y un carácter no alfanumérico.");
+        JLabel labelPassword = new JLabel(TextData.getText("label.password"));
+        labelPassword.setToolTipText(TextData.getText("toltip.password"));
         labelPassword.setFont(TextFont.textFormFont());
         add(labelPassword, gbc);
 
@@ -80,7 +80,7 @@ public class LoginWindow extends JFrame {
         gbc.fill = NONE;
         gbc.gridwidth = 1;
         gbc.anchor = CENTER;
-        JButton exit = new JButton("Exit");
+        JButton exit = new JButton(TextData.getText("buttonExit"));
         exit.addActionListener(l -> System.exit(0));
         add(exit, gbc);
 
@@ -88,7 +88,7 @@ public class LoginWindow extends JFrame {
         gbc.gridx = 1;
         gbc.anchor = CENTER;
         gbc.insets = new Insets(10, 10, 10, 10);
-        JButton login = new JButton("Login");
+        JButton login = new JButton(TextData.getText("buttonLogin"));
         login.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         login.getActionMap().put("clickButton", new AbstractAction() {
             @Override
@@ -101,14 +101,15 @@ public class LoginWindow extends JFrame {
             boolean found = false;
             for (Usuario user : userList) {
                 if (user.getEmail().equals(userTextField.getText()) && user.getPassword().equals(new String(passwordField.getPassword()))) {
-                    JOptionPane.showMessageDialog(null, "Welcome " + user.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, TextData.getText("welcome") + user.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
                     found = true;
                     setVisible(false);
                     latch.countDown();
+                    break;
                 }
             }
             if (!found) {
-                JOptionPane.showMessageDialog(null, "Incorrect username or password", "Login", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, TextData.getText("incorrectLogin"), "Login", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -116,7 +117,6 @@ public class LoginWindow extends JFrame {
     }
 
     private void configLoginPanel(CountDownLatch latch) {
-        this.latch = latch;
         setTitle("Login");
         setSize(400, 300);
         setLocationRelativeTo(null);

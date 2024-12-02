@@ -2,10 +2,12 @@ package util;
 
 import javax.swing.*;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class TextData {
     private static ResourceBundle bundle;
+    private static Locale locale;
 
     public TextData() {
         JDialog dialog = new JDialog();
@@ -13,7 +15,7 @@ public class TextData {
         String[] options = {"English", "Spanish"};
         int choice = JOptionPane.showOptionDialog(dialog, "Choose a language", "Language Selection",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        Locale locale;
+        // Locale locale;
         if (choice == 1) {
             locale = Locale.forLanguageTag("es");
             bundle = ResourceBundle.getBundle("messages", locale);
@@ -27,16 +29,11 @@ public class TextData {
     }
 
     public static String getText(String keyValue) {
-        return bundle.getString(keyValue);
-    }
-
-    public static String readTitleFormPanel() {
-        StringBuilder sb = new StringBuilder();
-
-            sb.append("<html>")
-                    .append("<center><h1>Register User Form</h1></center>");
-            sb.append("</html>");
-
-        return sb.toString();
+        bundle = ResourceBundle.getBundle("messages", locale);
+        try {
+            return bundle.getString(keyValue);
+        } catch (MissingResourceException e) {
+            return "Key not found: " + keyValue;
+        }
     }
 }
