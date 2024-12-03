@@ -4,6 +4,6 @@ import gui.model.entity.Usuario;
 
 public interface IUsuarioService {
     Usuario authenticateUser(String email, String password);
-    boolean addUser(Usuario user);
-    boolean deleteUser(int id);
+    Boolean addUser(Usuario user);
+    Boolean deleteUser(int id);
 }

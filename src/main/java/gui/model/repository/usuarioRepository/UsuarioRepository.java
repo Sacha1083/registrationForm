@@ -5,17 +5,15 @@ import gui.model.entity.Usuario;
 import java.sql.*;
 
 public class UsuarioRepository implements IUsuarioRepository{
-    private static Connection conn = null;
+    private static Connection conn;
     private final String DB_URL = "jdbc:sqlite:src/main/resources/userData.db";
 
     public Connection getConnection() {
-        if (conn == null) {
-            try {
-                conn = DriverManager.getConnection(DB_URL);
-                System.out.println("Connection to SQLite has been established.");
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+        try {
+            conn = DriverManager.getConnection(DB_URL);
+            System.out.println("Connection to SQLite has been established.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return conn;
     }
@@ -42,11 +40,11 @@ public class UsuarioRepository implements IUsuarioRepository{
         return usuario;
     }
 
-    public boolean insertUser(Usuario user) {
+    public Boolean insertUser(Usuario user) {
         String sql = "INSERT INTO Users(name, email, password) VALUES(?, ?, ?);";
-        boolean insert;
+        Boolean insert;
 
-        try (Connection conn = DriverManager.getConnection(DB_URL);
+        try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, user.getName());
@@ -56,15 +54,15 @@ public class UsuarioRepository implements IUsuarioRepository{
             insert = pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            insert = false;
+            insert = null;
         }
 
         return insert;
     }
 
-    public boolean deleteUser(int id) {
+    public Boolean deleteUser(int id) {
         String sql = "DELETE FROM Users WHERE id = ?;";
-        boolean delete;
+        Boolean delete;
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -73,7 +71,7 @@ public class UsuarioRepository implements IUsuarioRepository{
             delete = pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            delete = false;
+            delete = null;
         }
 
         return delete;

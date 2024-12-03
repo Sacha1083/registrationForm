@@ -51,7 +51,7 @@ public class SplashScreen extends JWindow  {
             try {
                 Thread.sleep((int) (Math.random() * 100));
                 if (Math.random() < 0.1) {
-                    Thread.sleep(500);
+                    Thread.sleep(200);
                 }
             } catch (InterruptedException e) {
                 System.out.println("Error in the splash screen - " + e.getMessage());
