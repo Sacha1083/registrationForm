@@ -87,6 +87,8 @@ public class LoginWindow extends JFrame {
                 latch.countDown();
             } else {
                 JOptionPane.showMessageDialog(null, TextData.getText("incorrectLogin"), "Login", JOptionPane.ERROR_MESSAGE);
+                userTextField.setText("");
+                passwordField.setText("");
             }
         });
 

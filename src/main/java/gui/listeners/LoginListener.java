@@ -80,17 +80,18 @@ public class LoginListener extends Component implements ActionListener {
         String msg;
 
         if (userAdded == null) {
-            System.out.println("Error al añadir el usuario");
-            JOptionPane.showMessageDialog(this, "Error al añadir el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+            msg = TextData.getText("userAddError");
+            System.out.println(msg);
+            JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         } else if (userAdded) {
             msg = TextData.getText("userAdded");
             System.out.println(msg);
             JOptionPane.showMessageDialog(this, msg, TextData.getText("successfullyTitle"), JOptionPane.INFORMATION_MESSAGE);
-
         } else {
-            System.out.println("User already exists");
-            JOptionPane.showMessageDialog(this, "User already exists", "Error", JOptionPane.ERROR_MESSAGE);
+            msg = TextData.getText("userExists");
+            System.out.println(msg);
+            JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
