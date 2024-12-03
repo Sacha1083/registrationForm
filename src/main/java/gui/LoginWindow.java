@@ -18,30 +18,10 @@ import java.util.concurrent.CountDownLatch;
 import static java.awt.GridBagConstraints.*;
 
 public class LoginWindow extends JFrame {
+    private UsuarioController usuarioController;
 
     public LoginWindow(CountDownLatch latch) {
         configLoginPanel(latch);
-
-        String users = Paths.get(System.getProperty("user.dir"), "user.dad").toString();
-        List<Usuario> userList = new ArrayList<>();
-        try (FileInputStream fis = new FileInputStream(users);
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
-
-            while (true) {
-                try {
-                    userList.add((Usuario) ois.readObject());
-                } catch (ClassNotFoundException e) {
-                    System.out.println("Error: " + e.getMessage());
-                    break;
-                } catch (EOFException e) {
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        System.out.println("User List:");
-        userList.forEach(System.out::println);
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -99,17 +79,13 @@ public class LoginWindow extends JFrame {
         });
 
         login.addActionListener(e -> {
-            boolean found = false;
-            for (Usuario user : userList) {
-                if (user.getEmail().equals(userTextField.getText()) && user.getPassword().equals(new String(passwordField.getPassword()))) {
-                    JOptionPane.showMessageDialog(null, TextData.getText("welcome") + user.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
-                    found = true;
-                    setVisible(false);
-                    latch.countDown();
-                    break;
-                }
-            }
-            if (!found) {
+            Usuario loginUsuario = usuarioController.authenticateUser(userTextField.getText(), new String(passwordField.getPassword()));
+
+            if (loginUsuario != null) {
+                JOptionPane.showMessageDialog(null, TextData.getText("welcome") + loginUsuario.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
+                setVisible(false);
+                latch.countDown();
+            } else {
                 JOptionPane.showMessageDialog(null, TextData.getText("incorrectLogin"), "Login", JOptionPane.ERROR_MESSAGE);
             }
         });
@@ -123,5 +99,6 @@ public class LoginWindow extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
+        usuarioController = new UsuarioController();
     }
 }

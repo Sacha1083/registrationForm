@@ -10,6 +10,10 @@ public class UsuarioController {
         usuarioService = new UsuarioService();
     }
 
+    public Usuario authenticateUser(String email, String password) {
+        return usuarioService.authenticateUser(email, password);
+    }
+
     public static void main(String[] args) {
         UsuarioService usuarioService1 = new UsuarioService();
         System.out.println(usuarioService1.authenticateUser("cargoncas@alu.edu.gva.es", "Carlos2024."));
