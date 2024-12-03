@@ -5,6 +5,10 @@ import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -13,8 +17,32 @@ import static java.awt.GridBagConstraints.*;
 public class PrincipalPanel extends JPanel {
 
     public PrincipalPanel(App app) {
+        JPanel principalPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Info");
+        JMenuItem menuItem = new JMenuItem("Ayuda");
+        menu.add(menuItem);
+        menuBar.add(menu);
+        add(menuBar, BorderLayout.NORTH);
+
+        menuItem.addActionListener(e -> {
+            URL url = null;
+            try {
+                url = new URL("https://github.com/Sacha1083/");
+                try {
+                    Desktop.getDesktop().browse(url.toURI());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (URISyntaxException exe) {
+                    exe.printStackTrace();
+                }
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            }
+        });
 
         // Title
         gbc.gridy = 0;
@@ -24,7 +52,7 @@ public class PrincipalPanel extends JPanel {
         gbc.anchor = NORTH;
         JLabel titleForm = new JLabel(TextData.getText("title.instructions"));
         titleForm.setFont(TextFont.titleFont());
-        add(titleForm, gbc);
+        principalPanel.add(titleForm, gbc);
 
         // Instructions
         gbc.gridx = 0;
@@ -37,7 +65,7 @@ public class PrincipalPanel extends JPanel {
         JLabel panelInformation = new JLabel(TextData.getText("instructions.html"));
         panelInformation.setFont(TextFont.textFont());
         panelInformation.setHorizontalAlignment(SwingConstants.CENTER);
-        add(panelInformation, gbc);
+        principalPanel.add(panelInformation, gbc);
 
         // Button configuration
         gbc.gridy = 2;
@@ -54,6 +82,7 @@ public class PrincipalPanel extends JPanel {
                 nextButton.doClick();
             }
         });
-        add(nextButton, gbc);
+        principalPanel.add(nextButton, gbc);
+        add(principalPanel, BorderLayout.CENTER);
     }
 }
