@@ -1,7 +1,9 @@
 package gui.listeners;
 
 import gui.App;
+import gui.UsuarioController;
 import gui.model.entity.Usuario;
+import util.TextData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +21,7 @@ public class LoginListener extends Component implements ActionListener {
     private final JTextField eMail;
     private final JPasswordField password;
     private List<Usuario> userList;
+    private UsuarioController usuarioController;
 
     public LoginListener(App app, String option, JTextField name, JTextField eMail, JPasswordField password) {
         System.out.println("LoginListener created");
@@ -28,6 +31,7 @@ public class LoginListener extends Component implements ActionListener {
         this.eMail = eMail;
         this.password = password;
         userList = new ArrayList<>();
+        usuarioController = new UsuarioController();
     }
 
     // Method to perform the action
@@ -71,47 +75,27 @@ public class LoginListener extends Component implements ActionListener {
             return;
         }
 
-        readUsersFile();
+        Usuario newUser = new Usuario(nameText, eMailText, passwordText);
+        Boolean userAdded = usuarioController.registerUser(newUser);
+        String msg;
 
-        Usuario nuevoUsuario = new Usuario(nameText, eMailText, passwordText);
-        if (userList.contains(nuevoUsuario)) {
+        if (userAdded == null) {
+            System.out.println("Error al añadir el usuario");
+            JOptionPane.showMessageDialog(this, "Error al añadir el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (userAdded) {
+            msg = TextData.getText("userAdded");
+            System.out.println(msg);
+            JOptionPane.showMessageDialog(this, msg, TextData.getText("successfullyTitle"), JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
             System.out.println("User already exists");
             JOptionPane.showMessageDialog(this, "User already exists", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        } else {
-            try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(Paths.get(System.getProperty("user.dir"), "user.dad").toString(), false));
-                 ObjectOutputStream oos = new ObjectOutputStream(bos)) {
-                oos.writeObject(nuevoUsuario);
-                for (Usuario user : userList) {
-                    oos.writeObject(user);
-                }
-            } catch (IOException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
         }
 
         // Next panel if everything is correct
         System.out.println("Next panel");
         app.nextPanel();
-    }
-
-    private void readUsersFile() {
-        String users = Paths.get(System.getProperty("user.dir"), "user.dad").toString();
-        try (FileInputStream fis = new FileInputStream(users);
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
-
-            while (true) {
-                try {
-                    userList.add((Usuario) ois.readObject());
-                } catch (ClassNotFoundException e) {
-                    System.out.println("Error: " + e.getMessage());
-                    break;
-                } catch (EOFException e) {
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
     }
 }

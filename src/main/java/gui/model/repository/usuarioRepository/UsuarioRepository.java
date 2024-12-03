@@ -42,9 +42,9 @@ public class UsuarioRepository implements IUsuarioRepository{
         return usuario;
     }
 
-    public boolean insertUser(Usuario user) {
+    public Boolean insertUser(Usuario user) {
         String sql = "INSERT INTO Users(name, email, password) VALUES(?, ?, ?);";
-        boolean insert;
+        Boolean insert;
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -56,15 +56,15 @@ public class UsuarioRepository implements IUsuarioRepository{
             insert = pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            insert = false;
+            insert = null;
         }
 
         return insert;
     }
 
-    public boolean deleteUser(int id) {
+    public Boolean deleteUser(int id) {
         String sql = "DELETE FROM Users WHERE id = ?;";
-        boolean delete;
+        Boolean delete;
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -73,7 +73,7 @@ public class UsuarioRepository implements IUsuarioRepository{
             delete = pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            delete = false;
+            delete = null;
         }
 
         return delete;

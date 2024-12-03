@@ -28,7 +28,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public boolean addUser(Usuario user) {
+    public Boolean addUser(Usuario user) {
         // Encrypt the password using base64
         user.setPassword(Base64.getEncoder().encodeToString(user.getPassword().getBytes()));
 
@@ -36,7 +36,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public boolean deleteUser(int id) {
+    public Boolean deleteUser(int id) {
         return usuarioRepository.deleteUser(id);
     }
 }

@@ -14,6 +14,10 @@ public class UsuarioController {
         return usuarioService.authenticateUser(email, password);
     }
 
+    public Boolean registerUser(Usuario user) {
+        return usuarioService.addUser(user);
+    }
+
     public static void main(String[] args) {
         UsuarioService usuarioService1 = new UsuarioService();
         System.out.println(usuarioService1.authenticateUser("cargoncas@alu.edu.gva.es", "Carlos2024."));
