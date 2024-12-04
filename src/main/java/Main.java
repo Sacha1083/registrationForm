@@ -12,7 +12,10 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.concurrent.CountDownLatch;
 
 public class Main {
@@ -38,21 +41,41 @@ public class Main {
     }
 
     private static boolean checkFileIntegrity() {
-        String users = Paths.get(System.getProperty("user.dir"),"user.dad").toString();
-        File userFile = new File(users);
+        Path userDataPath = Paths.get(System.getProperty("user.dir"), "data", "userData.db");
+        Path sourceFilePath = Paths.get("userData.db");
 
-        if (!userFile.exists()) {
-            System.out.println(TextData.getText("console&info.creatingNewUserFile"));
-            Usuario nuevoUsuario = new Usuario("admin", "admin", "admin");
-            try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(Paths.get(System.getProperty("user.dir"), "user.dad").toString(), false));
-                 ObjectOutputStream oos = new ObjectOutputStream(bos)) {
-                oos.writeObject(nuevoUsuario);
-            } catch (IOException e) {
-                System.out.println("Error: " + e.getMessage());
-                return false;
-            }
+        // Check if the folder exists, if not, create it.
+        try {
+            Files.createDirectories(userDataPath.getParent());
+        } catch (IOException e) {
+            System.err.println("Error al crear la carpeta de datos: " + e.getMessage());
+            return false;
         }
-        return true;
+
+        // If the file exists, return true.
+        if (Files.exists(userDataPath)) {
+            return true;
+        }
+
+        System.out.println(TextData.getText("console&info.creatingNewUserFile"));
+
+        // Verify if the source file exists.
+        if (!Files.exists(sourceFilePath)) {
+            System.err.println("El archivo fuente no existe: " + sourceFilePath);
+            return false;
+        }
+
+        try {
+            // Copy the source file to the user data folder.
+            Files.copy(sourceFilePath, userDataPath, StandardCopyOption.REPLACE_EXISTING);
+            return true;
+        } catch (IOException e) {
+            System.err.println("Error al copiar el archivo: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.err.println("Error desconocido: " + e.getMessage());
+            return false;
+        }
     }
 
     private static void loadApp() {
