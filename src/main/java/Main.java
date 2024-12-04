@@ -41,7 +41,7 @@ public class Main {
     }
 
     private static boolean checkFileIntegrity() {
-        Path userDataPath = Paths.get(System.getProperty("user.dir"), "data", "userData.db");
+        Path userDataPath = Paths.get(System.getProperty("user.dir"), "userData.db");
         Path sourceFilePath = Paths.get("userData.db");
 
         // Check if the folder exists, if not, create it.
