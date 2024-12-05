@@ -7,11 +7,12 @@ import java.awt.*;
 import java.util.List;
 
 public class StatisticsPanel {
-    public static void getStatisticsPanel(App app) {
+    public static void getStatisticsPanel(App app, JPanel previousPanel) {
         UsuarioController usuarioController = new UsuarioController();
         JPanel statisticsPanel = new JPanel(new BorderLayout());
         JPanel dataPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        statisticsPanel.setName("statisticsPanel");
 
         List<Usuario> usuarios = usuarioController.getAllUsers();
         String[] columnNames = {"ID", "Nombre", "Correo", "Contraseña"};
@@ -37,14 +38,19 @@ public class StatisticsPanel {
 
         JButton backButton = new JButton("Back");
 
-        statisticsPanel.add(Menu.getMenu(app), BorderLayout.NORTH);
+        statisticsPanel.add(Menu.getMenu(app, previousPanel), BorderLayout.NORTH);
         statisticsPanel.add(dataPanel, BorderLayout.CENTER);
         statisticsPanel.add(backButton, BorderLayout.SOUTH);
 
-        app.showStatistics(statisticsPanel);
+        if (!app.containsPanel(statisticsPanel)) {
+            app.showStatistics(statisticsPanel);
+            System.out.println("se añade el panel");
+        } else {
+            System.out.println("No se vuelve a añadir el panel");
+        }
 
         backButton.addActionListener(l -> {
-            app.quitStatistics(statisticsPanel);
+            app.quitStatistics(statisticsPanel, previousPanel);
         });
     }
 }

@@ -10,9 +10,11 @@ import java.util.Objects;
 public class App extends JFrame {
     private static CardLayout cardLayout;
     private static JPanel mainPanel;
+    private static PrincipalPanel principalPanel;
     private static RegisterPanel registerPanel;
     private static CountryPanel countryPanel;
     private static DisplayData displayData;
+    private static FinishPanel finishPanel;
     private UsuarioController usuarioController;
 
     public App() {
@@ -24,17 +26,17 @@ public class App extends JFrame {
         mainPanel = new JPanel(cardLayout);
 
         // App panels
-        PrincipalPanel principalPanel = new PrincipalPanel(this);
+        principalPanel = new PrincipalPanel(this);
         registerPanel = new RegisterPanel(this);
         countryPanel = new CountryPanel(this);
         displayData = new DisplayData(this);
-        FinishPanel finishPanel = new FinishPanel(this);
+        finishPanel = new FinishPanel(this);
 
-        mainPanel.add(principalPanel, "PrincipalPanel");
-        mainPanel.add(registerPanel, "NextPanel");
-        mainPanel.add(countryPanel, "CountryPanel");
-        mainPanel.add(displayData, "DisplayData");
-        mainPanel.add(finishPanel, "FinishPanel");
+        mainPanel.add(principalPanel, principalPanel.getName());
+        mainPanel.add(registerPanel, registerPanel.getName());
+        mainPanel.add(countryPanel, countryPanel.getName());
+        mainPanel.add(displayData, displayData.getName());
+        mainPanel.add(finishPanel, finishPanel.getName());
 
         // Add the main panel to the principal frame
         add(mainPanel);
@@ -75,7 +77,26 @@ public class App extends JFrame {
         cardLayout.previous(mainPanel);
     }
 
-    // Getters
+    public void showStatistics(JPanel statisticsPanel) {
+        mainPanel.add(statisticsPanel, statisticsPanel.getName());
+        cardLayout.show(mainPanel, statisticsPanel.getName());
+    }
+
+    public void quitStatistics(JPanel statisticsPanel, JPanel previousPanel) {
+        mainPanel.remove(statisticsPanel);
+        cardLayout.show(mainPanel, previousPanel.getName());
+    }
+
+    public boolean containsPanel(JPanel panel) {
+        List<Component> components = List.of(mainPanel.getComponents());
+        for (Component comp : components) {
+            if (comp.equals(panel)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getUserName() {
         return registerPanel.getUserName();
     }
@@ -94,15 +115,5 @@ public class App extends JFrame {
 
     public String getProvince() {
         return countryPanel.getProvince();
-    }
-
-    public void showStatistics(JPanel statisticsPanel) {
-        mainPanel.add(statisticsPanel, "dataPanel");
-        cardLayout.show(mainPanel, "dataPanel");
-    }
-
-    public void quitStatistics(JPanel statisticsPanel) {
-        mainPanel.remove(statisticsPanel);
-        cardLayout.show(mainPanel, "PrincipalPanel");
     }
 }

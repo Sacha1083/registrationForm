@@ -11,6 +11,7 @@ import static java.awt.GridBagConstraints.*;
 public class FinishPanel extends JPanel {
     public FinishPanel(App app) {
         setLayout(new GridBagLayout());
+        setName("FinishPanel");
         GridBagConstraints gbc = new GridBagConstraints();
 
         // Title

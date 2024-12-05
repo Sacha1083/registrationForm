@@ -23,6 +23,7 @@ public class DisplayData extends JPanel {
 
     public DisplayData(App app) {
         setLayout(new GridBagLayout());
+        setName("DisplayData");
         GridBagConstraints gbc = new GridBagConstraints();
 
         // Title
