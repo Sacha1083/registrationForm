@@ -1,6 +1,7 @@
 package gui;
 
 import gui.model.entity.Usuario;
+import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,18 +33,22 @@ public class StatisticsPanel {
 
             gbc.gridy = 0;
             gbc.gridx = 0;
-            dataPanel.add(new JLabel("Usuarios: "), gbc);
+            JLabel title = new JLabel("Usuarios: ");
+            title.setFont(TextFont.titleFont());
+            dataPanel.add(title, gbc);
 
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.gridwidth = 2;
             gbc.gridy = 1;
             dataPanel.add(scrollPane, gbc);
 
+            JPanel buttonsPanel = new JPanel(new FlowLayout());
             JButton backButton = new JButton("Back");
+            buttonsPanel.add(backButton);
 
             statisticsPanel.add(Menu.getMenu(app, previousPanel), BorderLayout.NORTH);
             statisticsPanel.add(dataPanel, BorderLayout.CENTER);
-            statisticsPanel.add(backButton, BorderLayout.SOUTH);
+            statisticsPanel.add(buttonsPanel, BorderLayout.SOUTH);
 
             app.showStatistics(statisticsPanel);
             System.out.println("Showing statistics panel");
