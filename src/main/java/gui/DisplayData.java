@@ -120,7 +120,7 @@ public class DisplayData extends JPanel {
                 saveDataToFile();
             }
         });
-        
+
         // Add form panel
         gbc.gridy = 1;
         gbc.gridx = 0;
