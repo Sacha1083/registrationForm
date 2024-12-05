@@ -2,13 +2,19 @@ package gui.model.repository.usuarioRepository;
 
 import gui.model.entity.Usuario;
 
+import java.nio.file.Paths;
 import java.sql.*;
 
 public class UsuarioRepository implements IUsuarioRepository{
-    private static Connection conn;
-    private final String DB_URL = "jdbc:sqlite:src/main/resources/userData.db";
+    private final String fileResource;
+    private Connection conn;
+
+    public UsuarioRepository() {
+        fileResource = Paths.get(System.getProperty("user.dir"), "data", "userData.db").toString();
+    }
 
     public Connection getConnection() {
+        String DB_URL = "jdbc:sqlite:" + fileResource;
         try {
             conn = DriverManager.getConnection(DB_URL);
             System.out.println("Connection to SQLite has been established.");

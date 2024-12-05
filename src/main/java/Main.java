@@ -12,10 +12,14 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.concurrent.CountDownLatch;
 
 public class Main {
+    private static Path userDataPath;
     /**
      * Start the app
      * @exits 0 - User canceled theme selection, 1 - Error loading theme, 2 - Error loading login window, 3 - Error loading splash screen, 4 - Error loading program 5 - File integrity check failed
@@ -28,6 +32,7 @@ public class Main {
             loadApp();
 
         } else {
+            // Hay un problema con los archivos. Por favor, reinstale el programa.
             String message = TextData.getText("console&err.fileIntegrityCheckFailed");
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
@@ -38,21 +43,12 @@ public class Main {
     }
 
     private static boolean checkFileIntegrity() {
-        String users = Paths.get(System.getProperty("user.dir"),"user.dad").toString();
-        File userFile = new File(users);
+        userDataPath = Paths.get(System.getProperty("user.dir"), "data", "userData.db");
+        return Files.exists(userDataPath);
+    }
 
-        if (!userFile.exists()) {
-            System.out.println(TextData.getText("console&info.creatingNewUserFile"));
-            Usuario nuevoUsuario = new Usuario("admin", "admin", "admin");
-            try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(Paths.get(System.getProperty("user.dir"), "user.dad").toString(), false));
-                 ObjectOutputStream oos = new ObjectOutputStream(bos)) {
-                oos.writeObject(nuevoUsuario);
-            } catch (IOException e) {
-                System.out.println("Error: " + e.getMessage());
-                return false;
-            }
-        }
-        return true;
+    private static Path getUserDataPath() {
+        return userDataPath;
     }
 
     private static void loadApp() {
