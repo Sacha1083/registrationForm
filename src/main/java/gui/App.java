@@ -110,7 +110,7 @@ public class App extends JFrame {
             data[i][2] = usuarios.get(i).getEmail();
             data[i][3] = usuarios.get(i).getPassword();
         }
-        
+
         JTable table = new JTable(data, columnNames);
         JScrollPane scrollPane = new JScrollPane(table);
 
