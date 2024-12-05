@@ -22,7 +22,7 @@ public class Menu {
         menuBar.add(fileMenu);
 
         showStatsMenuItem.addActionListener(e -> {
-            app.showStatistics(app);
+            StatisticsPanel.getStatisticsPanel(app);
         });
 
         exitMenuItem.addActionListener(e -> {
