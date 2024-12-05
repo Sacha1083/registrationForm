@@ -95,7 +95,6 @@ public class App extends JFrame {
         List<Component> panels = List.of(mainPanel.getComponents());
 
         for (Component p : panels) {
-            System.out.println(p.getName() + " | " + panel.getName());
             if (p.getName().equals(panel.getName())) {
                 return true;
             }
