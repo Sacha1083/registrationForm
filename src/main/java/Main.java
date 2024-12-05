@@ -19,6 +19,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.concurrent.CountDownLatch;
 
 public class Main {
+    private static Path userDataPath;
     /**
      * Start the app
      * @exits 0 - User canceled theme selection, 1 - Error loading theme, 2 - Error loading login window, 3 - Error loading splash screen, 4 - Error loading program 5 - File integrity check failed
@@ -31,6 +32,7 @@ public class Main {
             loadApp();
 
         } else {
+            // Hay un problema con los archivos. Por favor, reinstale el programa.
             String message = TextData.getText("console&err.fileIntegrityCheckFailed");
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
@@ -41,41 +43,12 @@ public class Main {
     }
 
     private static boolean checkFileIntegrity() {
-        Path userDataPath = Paths.get(System.getProperty("user.dir"), "data", "userData.db");
-        Path sourceFilePath = Paths.get("userData.db");
+        userDataPath = Paths.get(System.getProperty("user.dir"), "data", "userData.db");
+        return Files.exists(userDataPath);
+    }
 
-        // Check if the folder exists, if not, create it.
-        try {
-            Files.createDirectories(userDataPath.getParent());
-        } catch (IOException e) {
-            System.err.println("Error al crear la carpeta de datos: " + e.getMessage());
-            return false;
-        }
-
-        // If the file exists, return true.
-        if (Files.exists(userDataPath)) {
-            return true;
-        }
-
-        System.out.println(TextData.getText("console&info.creatingNewUserFile"));
-
-        // Verify if the source file exists.
-        if (!Files.exists(sourceFilePath)) {
-            System.err.println("El archivo fuente no existe: " + sourceFilePath);
-            return false;
-        }
-
-        try {
-            // Copy the source file to the user data folder.
-            Files.copy(sourceFilePath, userDataPath, StandardCopyOption.REPLACE_EXISTING);
-            return true;
-        } catch (IOException e) {
-            System.err.println("Error al copiar el archivo: " + e.getMessage());
-            return false;
-        } catch (Exception e) {
-            System.err.println("Error desconocido: " + e.getMessage());
-            return false;
-        }
+    private static Path getUserDataPath() {
+        return userDataPath;
     }
 
     private static void loadApp() {

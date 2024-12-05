@@ -6,10 +6,14 @@ import java.nio.file.Paths;
 import java.sql.*;
 
 public class UsuarioRepository implements IUsuarioRepository{
+    private final String fileResource;
     private Connection conn;
 
+    public UsuarioRepository() {
+        fileResource = Paths.get(System.getProperty("user.dir"), "data", "userData.db").toString();
+    }
+
     public Connection getConnection() {
-        String fileResource = Paths.get(System.getProperty("user.dir"), "data", "userData.db").toString();
         String DB_URL = "jdbc:sqlite:" + fileResource;
         try {
             conn = DriverManager.getConnection(DB_URL);
