@@ -1,7 +1,6 @@
 package gui;
 
-import gui.listeners.LoginListener;
-import org.w3c.dom.Text;
+import gui.listeners.RegisterListener;
 import util.TextData;
 import util.TextFont;
 
@@ -15,7 +14,8 @@ public class RegisterPanel extends JPanel {
     private final JTextField eMail;
     private final JPasswordField password;
     public RegisterPanel(App app) {
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
+        JPanel registerPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
         // Title
@@ -26,7 +26,7 @@ public class RegisterPanel extends JPanel {
         gbc.anchor = NORTH;
         JLabel titleForm = new JLabel(TextData.getText("titleFormPanel"));
         titleForm.setFont(TextFont.titleFont());
-        add(titleForm, gbc);
+        registerPanel.add(titleForm, gbc);
 
         // Form
         JPanel formPanel = new JPanel(new GridBagLayout());
@@ -102,7 +102,7 @@ public class RegisterPanel extends JPanel {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.anchor = NORTH;
-        add(formPanel, gbc);
+        registerPanel.add(formPanel, gbc);
 
         // Buttons
         gbc.gridy = 2;
@@ -112,7 +112,7 @@ public class RegisterPanel extends JPanel {
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton nextButton = new JButton(TextData.getText("button.next"));
-        nextButton.addActionListener(new LoginListener(app, "login", name, eMail, password));
+        nextButton.addActionListener(new RegisterListener(app, "login", name, eMail, password));
         nextButton.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         nextButton.getActionMap().put("clickButton", new AbstractAction() {
             @Override
@@ -120,7 +120,7 @@ public class RegisterPanel extends JPanel {
                 nextButton.doClick();
             }
         });
-        add(nextButton, gbc);
+        registerPanel.add(nextButton, gbc);
 
         gbc.gridy = 2;
         gbc.gridx = 0;
@@ -129,8 +129,11 @@ public class RegisterPanel extends JPanel {
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton backButton = new JButton(TextData.getText("buttonBack"));
-        backButton.addActionListener(new LoginListener(app, "back", name, eMail, password));
-        add(backButton, gbc);
+        backButton.addActionListener(new RegisterListener(app, "back", name, eMail, password));
+        registerPanel.add(backButton, gbc);
+
+        add(Menu.getMenu(app), BorderLayout.NORTH);
+        add(registerPanel, BorderLayout.CENTER);
     }
 
     public String getUserName() {

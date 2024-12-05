@@ -9,12 +9,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginListener extends Component implements ActionListener {
+public class RegisterListener extends Component implements ActionListener {
     private final App app;
     private final String option;
     private final JTextField name;
@@ -23,7 +21,7 @@ public class LoginListener extends Component implements ActionListener {
     private List<Usuario> userList;
     private UsuarioController usuarioController;
 
-    public LoginListener(App app, String option, JTextField name, JTextField eMail, JPasswordField password) {
+    public RegisterListener(App app, String option, JTextField name, JTextField eMail, JPasswordField password) {
         System.out.println("LoginListener created");
         this.app = app;
         this.option = option;

@@ -21,28 +21,7 @@ public class PrincipalPanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         setLayout(new BorderLayout());
 
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Info");
-        JMenuItem menuItem = new JMenuItem("Ayuda");
-        menu.add(menuItem);
-        menuBar.add(menu);
-        add(menuBar, BorderLayout.NORTH);
-
-        menuItem.addActionListener(e -> {
-            URL url = null;
-            try {
-                url = new URL("https://github.com/Sacha1083/");
-                try {
-                    Desktop.getDesktop().browse(url.toURI());
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (URISyntaxException exe) {
-                    exe.printStackTrace();
-                }
-            } catch (MalformedURLException e1) {
-                e1.printStackTrace();
-            }
-        });
+        add(Menu.getMenu(app), BorderLayout.NORTH);
 
         // Title
         gbc.gridy = 0;
