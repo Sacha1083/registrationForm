@@ -38,7 +38,7 @@ public class UsuarioRepository implements IUsuarioRepository{
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                usuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+                usuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -95,7 +95,7 @@ public class UsuarioRepository implements IUsuarioRepository{
 
             usuarios = new ArrayList<>();
             while (rs.next()) {
-                usuarios.add(new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                usuarios.add(new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
