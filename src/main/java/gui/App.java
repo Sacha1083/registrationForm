@@ -77,6 +77,10 @@ public class App extends JFrame {
         cardLayout.previous(mainPanel);
     }
 
+    public void showPanel(JPanel panel) {
+        cardLayout.show(mainPanel, panel.getName());
+    }
+
     public void showStatistics(JPanel statisticsPanel) {
         mainPanel.add(statisticsPanel, statisticsPanel.getName());
         cardLayout.show(mainPanel, statisticsPanel.getName());
@@ -88,12 +92,14 @@ public class App extends JFrame {
     }
 
     public boolean containsPanel(JPanel panel) {
-        List<Component> components = List.of(mainPanel.getComponents());
-        for (Component comp : components) {
-            if (comp.equals(panel)) {
+        List<Component> panels = List.of(mainPanel.getComponents());
+
+        for (Component p : panels) {
+            if (p.getName().equals(panel.getName())) {
                 return true;
             }
         }
+
         return false;
     }
 

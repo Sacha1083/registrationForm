@@ -8,49 +8,50 @@ import java.util.List;
 
 public class StatisticsPanel {
     public static void getStatisticsPanel(App app, JPanel previousPanel) {
-        UsuarioController usuarioController = new UsuarioController();
         JPanel statisticsPanel = new JPanel(new BorderLayout());
-        JPanel dataPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
         statisticsPanel.setName("statisticsPanel");
 
-        List<Usuario> usuarios = usuarioController.getAllUsers();
-        String[] columnNames = {"ID", "Nombre", "Correo", "Contraseña"};
-        Object[][] data = new Object[usuarios.size()][4];
-        for (int i = 0; i < usuarios.size(); i++) {
-            data[i][0] = usuarios.get(i).getId();
-            data[i][1] = usuarios.get(i).getName();
-            data[i][2] = usuarios.get(i).getEmail();
-            data[i][3] = usuarios.get(i).getPassword();
-        }
+        // If the panel is not in the app, create it. Prevents creating multiple instances of the same panel.
+        if (app.containsPanel(statisticsPanel)) {
+            UsuarioController usuarioController = new UsuarioController();
+            JPanel dataPanel = new JPanel(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
 
-        JTable table = new JTable(data, columnNames);
-        JScrollPane scrollPane = new JScrollPane(table);
+            List<Usuario> usuarios = usuarioController.getAllUsers();
+            String[] columnNames = {"ID", "Nombre", "Correo", "Contraseña"};
+            Object[][] data = new Object[usuarios.size()][4];
+            for (int i = 0; i < usuarios.size(); i++) {
+                data[i][0] = usuarios.get(i).getId();
+                data[i][1] = usuarios.get(i).getName();
+                data[i][2] = usuarios.get(i).getEmail();
+                data[i][3] = usuarios.get(i).getPassword();
+            }
 
-        gbc.gridy = 0;
-        gbc.gridx = 0;
-        dataPanel.add(new JLabel("Usuarios: "), gbc);
+            JTable table = new JTable(data, columnNames);
+            JScrollPane scrollPane = new JScrollPane(table);
 
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = 2;
-        gbc.gridy = 1;
-        dataPanel.add(scrollPane, gbc);
+            gbc.gridy = 0;
+            gbc.gridx = 0;
+            dataPanel.add(new JLabel("Usuarios: "), gbc);
 
-        JButton backButton = new JButton("Back");
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.gridwidth = 2;
+            gbc.gridy = 1;
+            dataPanel.add(scrollPane, gbc);
 
-        statisticsPanel.add(Menu.getMenu(app, previousPanel), BorderLayout.NORTH);
-        statisticsPanel.add(dataPanel, BorderLayout.CENTER);
-        statisticsPanel.add(backButton, BorderLayout.SOUTH);
+            JButton backButton = new JButton("Back");
 
-        if (!app.containsPanel(statisticsPanel)) {
+            statisticsPanel.add(Menu.getMenu(app, previousPanel), BorderLayout.NORTH);
+            statisticsPanel.add(dataPanel, BorderLayout.CENTER);
+            statisticsPanel.add(backButton, BorderLayout.SOUTH);
+
             app.showStatistics(statisticsPanel);
-            System.out.println("se añade el panel");
-        } else {
-            System.out.println("No se vuelve a añadir el panel");
-        }
 
-        backButton.addActionListener(l -> {
-            app.quitStatistics(statisticsPanel, previousPanel);
-        });
+            backButton.addActionListener(l -> {
+                app.quitStatistics(statisticsPanel, previousPanel);
+            });
+        } else {
+            app.showPanel(statisticsPanel);
+        }
     }
 }
