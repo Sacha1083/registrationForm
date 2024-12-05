@@ -121,8 +121,7 @@ public class App extends JFrame {
         gbc.gridwidth = 2;
         gbc.gridy = 1;
         dataPanel.add(scrollPane, gbc);
-
-        // button back
+        
         JButton backButton = new JButton("Back");
 
         statisticsPanel.add(Menu.getMenu(app), BorderLayout.NORTH);
