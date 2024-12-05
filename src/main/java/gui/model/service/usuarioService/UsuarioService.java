@@ -4,6 +4,7 @@ import gui.model.entity.Usuario;
 import gui.model.repository.usuarioRepository.UsuarioRepository;
 
 import java.util.Base64;
+import java.util.List;
 
 public class UsuarioService implements IUsuarioService {
     private final UsuarioRepository usuarioRepository;
@@ -38,5 +39,10 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public Boolean deleteUser(int id) {
         return usuarioRepository.deleteUser(id);
+    }
+
+    @Override
+    public List<Usuario> getAllUsers() {
+        return usuarioRepository.getAllUsers();
     }
 }

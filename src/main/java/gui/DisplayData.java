@@ -121,7 +121,6 @@ public class DisplayData extends JPanel {
             }
         });
 
-
         // Add form panel
         gbc.gridy = 1;
         gbc.gridx = 0;

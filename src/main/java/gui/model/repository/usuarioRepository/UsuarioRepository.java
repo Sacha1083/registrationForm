@@ -4,6 +4,8 @@ import gui.model.entity.Usuario;
 
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsuarioRepository implements IUsuarioRepository{
     private final String fileResource;
@@ -81,5 +83,25 @@ public class UsuarioRepository implements IUsuarioRepository{
         }
 
         return delete;
+    }
+
+    public List<Usuario> getAllUsers() {
+        String sql = "SELECT * FROM Users;";
+        List<Usuario> usuarios;
+
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            usuarios = new ArrayList<>();
+            while (rs.next()) {
+                usuarios.add(new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            usuarios = null;
+        }
+
+        return usuarios;
     }
 }
