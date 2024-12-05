@@ -19,7 +19,6 @@ public class StatisticsPanel {
         JPanel statisticsPanel = new JPanel(new BorderLayout());
         statisticsPanel.setName("statisticsPanel");
 
-        // If the panel is not in the app, create it. Prevents creating multiple instances of the same panel.
         if (!app.containsPanel(statisticsPanel)) {
             UsuarioController usuarioController = new UsuarioController();
             List<Usuario> usuarios = usuarioController.getAllUsers();
@@ -41,13 +40,17 @@ public class StatisticsPanel {
 
             gbc.gridy = 0;
             gbc.gridx = 0;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.gridwidth = GridBagConstraints.CENTER;
+            gbc.weightx = 0.7;
+            gbc.weighty = 0.3;
             JLabel title = new JLabel("Usuarios: ");
             title.setFont(TextFont.titleFont());
             dataPanel.add(title, gbc);
 
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            gbc.gridwidth = 2;
             gbc.gridy = 1;
+            gbc.weighty = 0.7;
+            gbc.fill = GridBagConstraints.BOTH;
             dataPanel.add(scrollPane, gbc);
 
             // Parte gráficos
@@ -56,11 +59,7 @@ public class StatisticsPanel {
                 usersPerYear[i] = usuarios.get(i).getRegisterYear();
             }
 
-            // Crear gráfico usando la librería JFreeChart, la cual ya está incluida en el proyecto.
-            int anchoGrafico = dataPanel.getWidth();
-            int altoGrafico = 400;
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
             Map<Integer, Integer> usersCountPerYear = new HashMap<>();
             for (int year : usersPerYear) {
                 usersCountPerYear.put(year, usersCountPerYear.getOrDefault(year, 0) + 1);
@@ -71,17 +70,16 @@ public class StatisticsPanel {
 
             JFreeChart chart = ChartFactory.createBarChart("Usuarios por año", "Año", "Usuarios", dataset, PlotOrientation.VERTICAL, false, true, false);
             ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(anchoGrafico, altoGrafico));
+            chartPanel.setPreferredSize(new Dimension(dataPanel.getWidth(), 500)); // Ajusta la altura del gráfico
 
             gbc.gridy = 2;
-            gbc.gridwidth = GridBagConstraints.REMAINDER;
+            gbc.weighty = 1.0; // Ajusta la altura del chartPanel
             dataPanel.add(chartPanel, gbc);
 
             // Parte botones
             JPanel buttonsPanel = new JPanel(new FlowLayout());
             JButton backButton = new JButton("Back");
             buttonsPanel.add(backButton);
-
 
             // Parte Final
             statisticsPanel.add(Menu.getMenu(app, previousPanel), BorderLayout.NORTH);

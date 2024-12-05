@@ -22,8 +22,9 @@ public class DisplayData extends JPanel {
     private final JButton saveToFile;
 
     public DisplayData(App app) {
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
         setName("DisplayData");
+        JPanel panelData = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
         // Title
@@ -34,7 +35,7 @@ public class DisplayData extends JPanel {
         gbc.anchor = NORTH;
         JLabel titleLabel = new JLabel(TextData.getText("userDataTitle"));
         titleLabel.setFont(TextFont.titleFont());
-        add(titleLabel, gbc);
+        panelData.add(titleLabel, gbc);
 
         // Form Panel
         JPanel formPanel = new JPanel(new GridBagLayout());
@@ -130,7 +131,7 @@ public class DisplayData extends JPanel {
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.anchor = NORTH;
-        add(formPanel, gbc);
+        panelData.add(formPanel, gbc);
 
         // Buttons
         gbc.weighty = 0;
@@ -141,7 +142,7 @@ public class DisplayData extends JPanel {
         gbc.fill = NONE;
         JButton backButton = new JButton(TextData.getText("buttonBack"));
         backButton.addActionListener(e -> app.previousPanel());
-        add(backButton, gbc);
+        panelData.add(backButton, gbc);
 
         gbc.gridx = 1;
         gbc.anchor = SOUTHEAST;
@@ -156,7 +157,10 @@ public class DisplayData extends JPanel {
                 nextButton.doClick();
             }
         });
-        add(nextButton, gbc);
+        panelData.add(nextButton, gbc);
+
+        add(Menu.getMenu(app, this), BorderLayout.NORTH);
+        add(panelData, BorderLayout.CENTER);
 
         updateData(app);
     }
