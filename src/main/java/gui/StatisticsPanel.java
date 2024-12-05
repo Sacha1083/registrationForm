@@ -12,7 +12,7 @@ public class StatisticsPanel {
         statisticsPanel.setName("statisticsPanel");
 
         // If the panel is not in the app, create it. Prevents creating multiple instances of the same panel.
-        if (app.containsPanel(statisticsPanel)) {
+        if (!app.containsPanel(statisticsPanel)) {
             UsuarioController usuarioController = new UsuarioController();
             JPanel dataPanel = new JPanel(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
@@ -46,6 +46,7 @@ public class StatisticsPanel {
             statisticsPanel.add(backButton, BorderLayout.SOUTH);
 
             app.showStatistics(statisticsPanel);
+            System.out.println("Showing statistics panel");
 
             backButton.addActionListener(l -> {
                 app.quitStatistics(statisticsPanel, previousPanel);
