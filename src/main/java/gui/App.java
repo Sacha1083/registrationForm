@@ -121,7 +121,7 @@ public class App extends JFrame {
         gbc.gridwidth = 2;
         gbc.gridy = 1;
         dataPanel.add(scrollPane, gbc);
-        
+
         JButton backButton = new JButton("Back");
 
         statisticsPanel.add(Menu.getMenu(app), BorderLayout.NORTH);
@@ -132,7 +132,6 @@ public class App extends JFrame {
         cardLayout.show(mainPanel, "dataPanel");
 
         backButton.addActionListener(e -> {
-            // eliminar el dataPanel del cardLayout
             mainPanel.remove(statisticsPanel);
             cardLayout.show(mainPanel, "PrincipalPanel");
         });
