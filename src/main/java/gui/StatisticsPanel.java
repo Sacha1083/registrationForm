@@ -26,13 +26,14 @@ public class StatisticsPanel {
             GridBagConstraints gbc = new GridBagConstraints();
 
             // Parte Mostrar todos los usuarios
-            String[] columnNames = {"ID", "Nombre", "Correo", "Contraseña"};
-            Object[][] data = new Object[usuarios.size()][4];
+            String[] columnNames = {"ID", "Nombre", "Correo", "Contraseña", "Año Registro"};
+            Object[][] data = new Object[usuarios.size()][5];
             for (int i = 0; i < usuarios.size(); i++) {
                 data[i][0] = usuarios.get(i).getId();
                 data[i][1] = usuarios.get(i).getName();
                 data[i][2] = usuarios.get(i).getEmail();
                 data[i][3] = usuarios.get(i).getPassword();
+                data[i][4] = usuarios.get(i).getRegisterYear();
             }
 
             JTable table = new JTable(data, columnNames);
