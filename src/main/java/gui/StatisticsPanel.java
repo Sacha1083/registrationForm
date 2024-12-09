@@ -10,9 +10,11 @@ import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StatisticsPanel {
     public static void getStatisticsPanel(App app, JPanel previousPanel) {
@@ -61,17 +63,15 @@ public class StatisticsPanel {
             }
 
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-            Map<Integer, Integer> usersCountPerYear = new HashMap<>();
-            for (int year : usersPerYear) {
-                usersCountPerYear.put(year, usersCountPerYear.getOrDefault(year, 0) + 1);
-            }
-            for (Map.Entry<Integer, Integer> entry : usersCountPerYear.entrySet()) {
-                dataset.addValue(entry.getValue(), "Usuarios", String.valueOf(entry.getKey()));
-            }
+            Map<Integer, Long> usersCountPerYear = Arrays.stream(usersPerYear)
+                    .boxed()
+                    .collect(Collectors.groupingBy(year -> year, Collectors.counting()));
+
+            usersCountPerYear.forEach((year, count) -> dataset.addValue(count, "Usuarios", String.valueOf(year)));
 
             JFreeChart chart = ChartFactory.createBarChart("Usuarios por año", "Año", "Usuarios", dataset, PlotOrientation.VERTICAL, false, true, false);
             ChartPanel chartPanel = new ChartPanel(chart);
-            chartPanel.setPreferredSize(new Dimension(dataPanel.getWidth(), 500)); // Ajusta la altura del gráfico
+            chartPanel.setPreferredSize(new Dimension(dataPanel.getWidth(), 900));
 
             gbc.gridy = 2;
             gbc.weighty = 1.0; // Ajusta la altura del chartPanel
@@ -80,7 +80,7 @@ public class StatisticsPanel {
             // Grafico lineal
             JFreeChart chart2 = ChartFactory.createLineChart("Usuarios por año", "Año", "Usuarios", dataset, PlotOrientation.VERTICAL, true, true, false);
             ChartPanel chartPanel2 = new ChartPanel(chart2);
-            chartPanel2.setPreferredSize(new Dimension(dataPanel.getWidth(), 500));
+            chartPanel2.setPreferredSize(new Dimension(dataPanel.getWidth(), 900));
 
             gbc.gridy = 3;
             gbc.weighty = 1.0;
