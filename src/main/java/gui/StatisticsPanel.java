@@ -77,6 +77,24 @@ public class StatisticsPanel {
             gbc.weighty = 1.0; // Ajusta la altura del chartPanel
             dataPanel.add(chartPanel, gbc);
 
+            // Grafico lineal
+            DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+            Map<Integer, Integer> usersCountPerYear2 = new HashMap<>();
+            for (int year : usersPerYear) {
+                usersCountPerYear2.put(year, usersCountPerYear2.getOrDefault(year, 0) + 1);
+            }
+            for (Map.Entry<Integer, Integer> entry : usersCountPerYear2.entrySet()) {
+                dataset2.addValue(entry.getValue(), "Usuarios", String.valueOf(entry.getKey()));
+            }
+
+            JFreeChart chart2 = ChartFactory.createLineChart("Usuarios por año", "Año", "Usuarios", dataset2, PlotOrientation.VERTICAL, true, true, false);
+            ChartPanel chartPanel2 = new ChartPanel(chart2);
+            chartPanel2.setPreferredSize(new Dimension(dataPanel.getWidth(), 500));
+
+            gbc.gridy = 3;
+            gbc.weighty = 1.0;
+            dataPanel.add(chartPanel2, gbc);
+
             // Parte botones
             JPanel buttonsPanel = new JPanel(new FlowLayout());
             JButton backButton = new JButton("Back");
