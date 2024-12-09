@@ -49,7 +49,7 @@ public class UsuarioRepository implements IUsuarioRepository{
     }
 
     public Boolean insertUser(Usuario user) {
-        String sql = "INSERT INTO Users(name, email, password) VALUES(?, ?, ?);";
+        String sql = "INSERT INTO Users(name, email, password, registerDate) VALUES(?, ?, ?, ?);";
         Boolean insert;
 
         try (Connection conn = getConnection();
@@ -58,6 +58,7 @@ public class UsuarioRepository implements IUsuarioRepository{
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
+            pstmt.setString(4, user.getRegisterDate());
 
             insert = pstmt.executeUpdate() > 0;
         } catch (SQLException e) {

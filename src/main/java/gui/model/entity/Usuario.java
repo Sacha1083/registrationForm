@@ -23,6 +23,7 @@ public class Usuario implements Serializable {
         this.email = email;
         this.password = password;
         this.registerDate = new Date(System.currentTimeMillis()).toString();
+        System.out.println(registerDate);
     }
     // Constructor used to create a user from the database
     public Usuario(int id, String name, String email, String password, String registerDate) {
