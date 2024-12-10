@@ -20,8 +20,9 @@ public class PrincipalPanel extends JPanel {
         JPanel principalPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         setLayout(new BorderLayout());
+        setName("PrincipalPanel");
 
-        add(Menu.getMenu(app), BorderLayout.NORTH);
+        add(Menu.getMenu(app, this), BorderLayout.NORTH);
 
         // Title
         gbc.gridy = 0;

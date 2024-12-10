@@ -21,6 +21,7 @@ public class CountryPanel extends JPanel {
     public CountryPanel(App app) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        setName("CountryPanel");
 
         // Read country data from file
         List<String> countryData = new ArrayList<>();

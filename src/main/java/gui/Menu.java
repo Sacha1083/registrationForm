@@ -10,7 +10,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class Menu {
-    public static JMenuBar getMenu(App app) {
+    public static JMenuBar getMenu(App app, JPanel previousPanel) {
         JMenuBar menuBar = new JMenuBar();
 
         // File menu
@@ -22,7 +22,7 @@ public class Menu {
         menuBar.add(fileMenu);
 
         showStatsMenuItem.addActionListener(e -> {
-            app.showStatistics(app);
+            StatisticsPanel.getStatisticsPanel(app, previousPanel);
         });
 
         exitMenuItem.addActionListener(e -> {

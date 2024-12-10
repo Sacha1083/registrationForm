@@ -2,20 +2,14 @@ import com.formdev.flatlaf.FlatLightLaf;
 import gui.App;
 import gui.LoginWindow;
 import gui.SplashScreen;
-import gui.model.entity.Usuario;
 import util.TextData;
 import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.concurrent.CountDownLatch;
 
 public class Main {

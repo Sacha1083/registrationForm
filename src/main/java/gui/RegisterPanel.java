@@ -15,6 +15,7 @@ public class RegisterPanel extends JPanel {
     private final JPasswordField password;
     public RegisterPanel(App app) {
         setLayout(new BorderLayout());
+        setName("NextPanel");
         JPanel registerPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -132,7 +133,7 @@ public class RegisterPanel extends JPanel {
         backButton.addActionListener(new RegisterListener(app, "back", name, eMail, password));
         registerPanel.add(backButton, gbc);
 
-        add(Menu.getMenu(app), BorderLayout.NORTH);
+        add(Menu.getMenu(app, this), BorderLayout.NORTH);
         add(registerPanel, BorderLayout.CENTER);
     }
 
