@@ -38,11 +38,15 @@ public class Main {
 
     /**
      * <h1>Start of the program</h1>
+     *
      * <p>
      *     Load the application, if the integrity of the files is correct. <br>
      *     If the integrity of the files is not correct, it displays a message indicating this. <br>
      *     If an error occurs, the program ends. The @exits tag contains information about each exit code.
      * </p>
+     *
+     * @since JDK21.0.5
+     *
      * @see FlatLightLaf#setup()  - FlatLaf library
      * @see TextData - Using the constuctor, the user selects a language and the program obtains from there the text to be displayed later.
      * @see TextData#getText(String)  - Gets the text depending on the language
@@ -50,7 +54,7 @@ public class Main {
      * @see JOptionPane - Dialog window
      * @see #checkFileIntegrity() - Method that checks the integrity of the files
      * @see #loadApp() - Method that loads the application
-     * @since JDK21.0.5
+     *
      * @exits 0 - User canceled theme selection, 1 - Error loading theme, 2 - Error loading login window, 3 - Error loading splash screen, 4 - Error loading program, 5 - File integrity check failed
      */
     public static void main(String[] args) {
@@ -71,11 +75,46 @@ public class Main {
         }
     }
 
+    /**
+     * <h1>Check the integrity of the files</h1>
+     *
+     * <p>
+     *     Check if the userData.db file exists. <br>
+     *     If the file exists, the method returns true. <br>
+     *     If the file does not exist, the method returns false.
+     * </p>
+     *
+     * @since JDK21.0.5
+     *
+     * @see Paths
+     * @see Files
+     * @see #userDataPath
+     *
+     * @return boolean - true if the file exists, false if the file does not exist
+     */
     private static boolean checkFileIntegrity() {
         userDataPath = Paths.get(System.getProperty("user.dir"), "data", "userData.db");
         return Files.exists(userDataPath);
     }
 
+    /**
+     * <h1>Load the application</h1>
+     *
+     * <p>
+     *     Load the application.<br>
+     *     If an error occurs, the program ends. The @exits tag contains information about each exit code.
+     * </p>
+     *
+     * @since JDK21.0.5
+     *
+     * @see JOptionPane - Dialog window
+     * @see LoginWindow - The user logs in to the program
+     * @see SplashScreen - The splash screen is displayed
+     * @see App - Using the constructor of this class, the program starts.
+     * @see CountDownLatch - The program waits for the login window to be loaded
+     * @see Thread - The program waits for the login window to be loaded
+     * @exits 0 - User canceled theme selection, 1 - Error loading theme, 2 - Error loading login window, 3 - Error loading splash screen, 4 - Error loading program
+     */
     private static void loadApp() {
         try {
             String[] options = {TextData.getText("theme.light"), TextData.getText("theme.dark")};
