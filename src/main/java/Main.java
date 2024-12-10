@@ -54,8 +54,6 @@ public class Main {
      * @see JOptionPane - Dialog window
      * @see #checkFileIntegrity() - Method that checks the integrity of the files
      * @see #loadApp() - Method that loads the application
-     *
-     * @exits 0 - User canceled theme selection, 1 - Error loading theme, 2 - Error loading login window, 3 - Error loading splash screen, 4 - Error loading program, 5 - File integrity check failed
      */
     public static void main(String[] args) {
         FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
