@@ -49,7 +49,7 @@ public class Main {
      *
      * @see FlatLightLaf#setup()  - FlatLaf library
      * @see TextData - Using the constuctor, the user selects a language and the program obtains from there the text to be displayed later.
-     * @see TextData#getText(String)  - Gets the text depending on the language
+     * @                                                                                                                    TextData#getText(String)  - Gets the text depending on the language
      * @see JDialog - Dialog window
      * @see JOptionPane - Dialog window
      * @see #checkFileIntegrity() - Method that checks the integrity of the files
