@@ -8,6 +8,17 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * <h1>Usuario class</h1>
+ * <p>
+ *     Entity class representing a user. <br>
+ *     Provides methods for getting and setting user attributes, and for serializing the user object.
+ * </p>
+ * @see Serializable - Interface for serializing the user object
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class Usuario implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -17,7 +28,18 @@ public class Usuario implements Serializable {
     private String password;
     private String registerDate;
 
-    // Constructor used to create a new user
+    /**
+     * <h1>Constructor for creating a new user</h1>
+     * <p>
+     *     Initializes a new user with the specified name, email, and password. <br>
+     *     Sets the registration date to the current date.
+     * </p>
+     * @param name The user's name
+     * @param email The user's email
+     * @param password The user's password
+     * @see Date - Class for getting the current date
+     * @since JDK21.0.5
+     */
     public Usuario(String name, String email, String password) {
         this.name = name;
         this.email = email;
@@ -25,7 +47,19 @@ public class Usuario implements Serializable {
         this.registerDate = new Date(System.currentTimeMillis()).toString();
         System.out.println(registerDate);
     }
-    // Constructor used to create a user from the database
+
+    /**
+     * <h1>Constructor for creating a user from the database</h1>
+     * <p>
+     *     Initializes a user with the specified ID, name, email, password, and registration date.
+     * </p>
+     * @param id The user's ID
+     * @param name The user's name
+     * @param email The user's email
+     * @param password The user's password
+     * @param registerDate The user's registration date
+     * @since JDK21.0.5
+     */
     public Usuario(int id, String name, String email, String password, String registerDate) {
         this.id = id;
         this.name = name;
@@ -54,6 +88,17 @@ public class Usuario implements Serializable {
         return registerDate;
     }
 
+    /**
+     * <h1>Get the registration year</h1>
+     * <p>
+     *     Parses the registration date and returns the year.
+     * </p>
+     * @see SimpleDateFormat - Class for parsing
+     * @see Calendar - Class for getting the year
+     * @see ParseException - Exception for parsing errors
+     * @return int - The registration year
+     * @since JDK21.0.5
+     */
     public int getRegisterYear() {
         try {
             Date date = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH).parse(registerDate);
