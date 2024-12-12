@@ -14,10 +14,35 @@ import java.util.Objects;
 
 import static java.awt.GridBagConstraints.*;
 
+/**
+ * <h1>CountryPanel class</h1>
+ * <p>
+ * Panel for selecting the country and province of the user. <br>
+ * It displays a list of countries and provinces for the user to choose from. <br>
+ * The user can proceed to the next panel.
+ * </p>
+ * @see App - The main application class
+ * @see TextData - Class for managing text data
+ * @see TextFont - Class for managing text fonts
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class CountryPanel extends JPanel {
     private static JComboBox<CountryItem> countrySelector;
     private static JComboBox<String> provinceSelector;
 
+    /**
+     * <h1>CountryPanel constructor</h1>
+     * <p>
+     * Initializes the country selection panel. <br>
+     * It displays a list of countries and provinces for the user to choose from. <br>
+     * The user can proceed to the next panel.
+     * </p>
+     * @param app The main application class
+     * @see App - The main application class
+     * @since JDK21.0.5
+     */
     public CountryPanel(App app) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -179,10 +204,26 @@ public class CountryPanel extends JPanel {
         add(backButton, gbc);
     }
 
+    /**
+     * <h1>Get country</h1>
+     * <p>
+     * Returns the selected country.
+     * </p>
+     * @return The selected country
+     * @since JDK21.0.5
+     */
     public String getCountry() {
         return ((CountryItem) Objects.requireNonNull(countrySelector.getSelectedItem())).getName();
     }
 
+    /**
+     * <h1>Get province</h1>
+     * <p>
+     * Returns the selected province.
+     * </p>
+     * @return The selected province
+     * @since JDK21.0.5
+     */
     public String getProvince() {
         return (String) provinceSelector.getSelectedItem();
     }
@@ -210,6 +251,13 @@ public class CountryPanel extends JPanel {
         }
     }
 
+    /**
+     * <h1>CountryItemRenderer class</h1>
+     * <p>
+     * Custom renderer for the country selector.
+     * </p>
+     * @since JDK21.0.5
+     */
     private static class CountryItemRenderer extends JLabel implements ListCellRenderer<CountryItem> {
         @Override
         public Component getListCellRendererComponent(JList<? extends CountryItem> list, CountryItem value, int index, boolean isSelected, boolean cellHasFocus) {

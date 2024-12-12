@@ -7,11 +7,36 @@ import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.util.Objects;
 
-// https://docs.oracle.com/javase/tutorial/uiswing/misc/splashscreen.html
+/**
+ * <h1>SplashScreen class</h1>
+ * <p>
+ *     Class for displaying a splash screen when the application starts. <br>
+ *     It shows the application logo and a progress bar while the application loads.
+ * </p>
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class SplashScreen extends JWindow  {
+
+    /**
+     * <h1>SplashScreen constructor</h1>
+     * <p>
+     *     Initializes the splash screen.
+     * </p>
+     * @since JDK21.0.5
+     */
     public SplashScreen() {
     }
 
+    /**
+     * <h1>Show splash screen</h1>
+     * <p>
+     *     Displays the splash screen with the application logo and a progress bar. <br>
+     *     The progress bar fills up randomly to simulate loading.
+     * </p>
+     * @since JDK21.0.5
+     */
     public void showSplash() {
         configSplashScreen();
         JPanel imagePanel = new JPanel(new GridBagLayout());

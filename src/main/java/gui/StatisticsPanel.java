@@ -16,7 +16,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * <h1>StatisticsPanel class</h1>
+ * <p>
+ *     Class for displaying user statistics in the application. <br>
+ *     It shows a table with all users and two charts: a bar chart and a line chart showing the number of users per year.
+ *     The user can go back to the previous panel.
+ * </p>
+ * @see App - The main application class
+ * @see UsuarioController - Controller for managing user data using SQLite
+ * @see Usuario - Entity class for user data
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class StatisticsPanel {
+
+    /**
+     * <h1>Get statistics panel</h1>
+     * <p>
+     *     Creates a panel with user statistics and displays it. <br>
+     *     The panel shows a table with all users and two charts: a bar chart and a line chart showing the number of users per year. <br>
+     *     The user can go back to the previous panel.
+     * </p>
+     * @param app The main application class
+     * @param previousPanel The panel to return to when the user clicks the back button
+     * @see App - The main application class
+     * @see UsuarioController - Controller for managing user data using SQLite
+     * @see Usuario - Entity class for user data
+     * @since JDK21.0.5
+     */
     public static void getStatisticsPanel(App app, JPanel previousPanel) {
         JPanel statisticsPanel = new JPanel(new BorderLayout());
         statisticsPanel.setName("statisticsPanel");

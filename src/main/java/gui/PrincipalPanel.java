@@ -14,8 +14,32 @@ import java.util.ResourceBundle;
 
 import static java.awt.GridBagConstraints.*;
 
+/**
+ * <h1>PrincipalPanel class</h1>
+ * <p>
+ *     Panel for the main menu of the application. <br>
+ *     It displays the application title and instructions for the user. <br>
+ *     The user can proceed to the next panel.
+ * </p>
+ * @see App - The main application class
+ * @see Menu - Panel for the application menu
+ * @see TextData - Class for managing text data
+ * @see TextFont - Class for managing text fonts
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class PrincipalPanel extends JPanel {
 
+    /**
+     * <h1>PrincipalPanel constructor</h1>
+     * <p>
+     *     Initializes the main menu panel.
+     * </p>
+     * @param app The main application class
+     * @see App - The main application class
+     * @since JDK21.0.5
+     */
     public PrincipalPanel(App app) {
         JPanel principalPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

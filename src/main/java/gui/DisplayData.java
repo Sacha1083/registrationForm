@@ -13,6 +13,20 @@ import java.io.IOException;
 
 import static java.awt.GridBagConstraints.*;
 
+/**
+ * <h1>DisplayData class</h1>
+ * <p>
+ * Panel for displaying the user data. <br>
+ * It shows the user's name, email, password, country, and province. <br>
+ * The user can save the data to a file.
+ * </p>
+ * @see App - The main application class
+ * @see TextData - Class for managing text data
+ * @see TextFont - Class for managing text fonts
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class DisplayData extends JPanel {
     private final JLabel nameLabel;
     private final JLabel emailLabel;
@@ -21,6 +35,17 @@ public class DisplayData extends JPanel {
     private final JLabel provinceLabel;
     private final JButton saveToFile;
 
+    /**
+     * <h1>DisplayData constructor</h1>
+     * <p>
+     * Initializes the user data display panel. <br>
+     * It shows the user's name, email, password, country, and province. <br>
+     * The user can save the data to a file.
+     * </p>
+     * @param app The main application class
+     * @see App - The main application class
+     * @since JDK21.0.5
+     */
     public DisplayData(App app) {
         setLayout(new BorderLayout());
         setName("DisplayData");
@@ -165,6 +190,15 @@ public class DisplayData extends JPanel {
         updateData(app);
     }
 
+    /**
+     * <h1>Update data</h1>
+     * <p>
+     * Updates the user data in the app class.
+     * </p>
+     * @param app The main application class
+     * @see App - The main application class
+     * @since JDK21.0.5
+     */
     public void updateData(App app) {
         nameLabel.setText(app.getUserName());
         emailLabel.setText(app.geteMail());
@@ -173,6 +207,17 @@ public class DisplayData extends JPanel {
         provinceLabel.setText(app.getProvince());
     }
 
+    /**
+     * <h1>Save data to file</h1>
+     * <p>
+     * Saves the user data to a file.
+     * </p>
+     * @see JFileChooser - A JFileChooser is a quick and easy way to prompt the user to choose a file or a file saving location
+     * @see File - An abstract representation of file and directory pathnames
+     * @see FileWriter - Convenience class for writing character files
+     * @see IOException - Signals that an I/O exception of some sort has occurred
+     * @since JDK21.0.5
+     */
     private void saveDataToFile() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);

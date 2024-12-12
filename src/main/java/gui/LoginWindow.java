@@ -17,9 +17,30 @@ import java.util.concurrent.CountDownLatch;
 
 import static java.awt.GridBagConstraints.*;
 
+/**
+ * <h1>LoginWindow class</h1>
+ * <p>
+ *     Class for creating the login window of the application. <br>
+ *     It allows the user to log in with their email and password. <br>
+ *     The user can exit the application or log in.
+ * </p>
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class LoginWindow extends JFrame {
     private UsuarioController usuarioController;
 
+    /**
+     * <h1>LoginWindow constructor</h1>
+     * <p>
+     *     Initializes the login window with the user and password fields. <br>
+     *     The user can exit the application or log in.
+     * </p>
+     * @param latch The countdown latch for the login window
+     * @see CountDownLatch - Synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes
+     * @since JDK21.0.5
+     */
     public LoginWindow(CountDownLatch latch) {
         configLoginPanel(latch);
 
@@ -95,6 +116,16 @@ public class LoginWindow extends JFrame {
         add(login, gbc);
     }
 
+    /**
+     * <h1>configLoginPanel method</h1>
+     * <p>
+     *     Configures the login window with the user and password fields. <br>
+     *     The user can exit the application or log in.
+     * </p>
+     * @param latch The countdown latch for the login window
+     * @see CountDownLatch - Synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes
+     * @since JDK21.0.5
+     */
     private void configLoginPanel(CountDownLatch latch) {
         setTitle("Login");
         setSize(400, 300);

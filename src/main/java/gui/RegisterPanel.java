@@ -9,6 +9,22 @@ import java.awt.*;
 
 import static java.awt.GridBagConstraints.*;
 
+/**
+ * <h1>RegisterPanel class</h1>
+ * <p>
+ *     Panel for user registration. <br>
+ *     It contains fields for the user's name, email, and password. <br>
+ *     The user can clear the fields, go back to the previous panel, or proceed to the next panel.
+ * </p>
+ * @see App - The main application class
+ * @see RegisterListener - Listener for user registration
+ * @see Menu - Panel for the application menu
+ * @see TextData - Class for managing text data
+ * @see TextFont - Class for managing text fonts
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class RegisterPanel extends JPanel {
     private final JTextField name;
     private final JTextField eMail;
@@ -137,18 +153,52 @@ public class RegisterPanel extends JPanel {
         add(registerPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * <h1>Get user name</h1>
+     * <p>
+     *     Retrieves the user name from the name field.
+     * </p>
+     * @see RegisterPanel#name - The name field
+     * @since JDK21.0.5
+     * @return String - The user name
+     */
     public String getUserName() {
         return name.getText();
     }
 
+    /**
+     * <h1>Get user email</h1>
+     * <p>
+     *     Retrieves the user email from the eMail field.
+     * </p>
+     * @see RegisterPanel#eMail - The eMail field
+     * @since JDK21.0.5
+     * @return String - The user email
+     */
     public String geteMail() {
         return eMail.getText();
     }
 
+    /**
+     * <h1>Get user password</h1>
+     * <p>
+     *     Retrieves the user password from the password field.
+     * </p>
+     * @see RegisterPanel#password - The password field
+     * @since JDK21.0.5
+     * @return String - The user password
+     */
     public String getPassword() {
         return new String(password.getPassword());
     }
 
+    /**
+     * <h1>Clear fields</h1>
+     * <p>
+     *     Clears the name, eMail, and password fields.
+     * </p>
+     * @since JDK21.0.5
+     */
     public void clearFields() {
         name.setText("");
         eMail.setText("");
