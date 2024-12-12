@@ -8,7 +8,30 @@ import java.awt.*;
 
 import static java.awt.GridBagConstraints.*;
 
+/**
+ * <h1>FinishPanel class</h1>
+ * <p>
+ *     Panel for the final screen of the application. <br>
+ *     It displays a message to the user and allows them to exit the application.
+ * </p>
+ * @see App - The main application class
+ * @see TextData - Class for managing text data
+ * @see TextFont - Class for managing text fonts
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class FinishPanel extends JPanel {
+
+    /**
+     * <h1>FinishPanel constructor</h1>
+     * <p>
+     *     Initializes the final screen panel.
+     * </p>
+     * @param app The main application class
+     * @see App - The main application class
+     * @since JDK21.0.5
+     */
     public FinishPanel(App app) {
         setLayout(new GridBagLayout());
         setName("FinishPanel");

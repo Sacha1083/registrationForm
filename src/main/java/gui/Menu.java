@@ -9,7 +9,31 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+/**
+ * <h1>Menu class</h1>
+ * <p>
+ *     Class for creating the application menu. <br>
+ *     It contains the file and info menus with their respective items.
+ * </p>
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class Menu {
+
+    /**
+     * <h1>Get menu</h1>
+     * <p>
+     *     Creates the application menu with the file and info menus. <br>
+     *     It adds the menu items to the menus and sets up the action listeners for each item.
+     * </p>
+     * @param app The main application class
+     * @param previousPanel The previous panel
+     * @return The application menu
+     * @see App - The main application class
+     * @see JPanel - Container for the different panels
+     * @since JDK21.0.5
+     */
     public static JMenuBar getMenu(App app, JPanel previousPanel) {
         JMenuBar menuBar = new JMenuBar();
 

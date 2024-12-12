@@ -12,6 +12,20 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h1>RegisterListener class</h1>
+ * <p>
+ *     Class for managing the registration of a new user. <br>
+ *     It validates the user data and registers the user in the application. <br>
+ *     It also shows error messages if the data is incorrect.
+ * </p>
+ * @see App - The main application class
+ * @see UsuarioController - Controller for managing user data using SQLite
+ * @see Usuario - Entity class for user data
+ * @autor Sacha1083
+ * @version 2.0
+ * @since JDK21.0.5
+ */
 public class RegisterListener extends Component implements ActionListener {
     private final App app;
     private final String option;
@@ -21,6 +35,19 @@ public class RegisterListener extends Component implements ActionListener {
     private List<Usuario> userList;
     private UsuarioController usuarioController;
 
+    /**
+     * <h1>RegisterListener constructor</h1>
+     * <p>
+     *     Initializes the listener for user registration.
+     * </p>
+     * @param app The main application class
+     * @param option The option to perform: login or back
+     * @param name The user's name
+     * @param eMail The user's email
+     * @param password The user's password
+     * @see App - The main application class
+     * @since JDK21.0.5
+     */
     public RegisterListener(App app, String option, JTextField name, JTextField eMail, JPasswordField password) {
         System.out.println("LoginListener created");
         this.app = app;
@@ -32,7 +59,14 @@ public class RegisterListener extends Component implements ActionListener {
         usuarioController = new UsuarioController();
     }
 
-    // Method to perform the action
+    /**
+     * <h1>Action performed method</h1>
+     * <p>
+     *     Method to perform the action according to the option selected.
+     * </p>
+     * @param e The action event
+     * @since JDK21.0.5
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Action performed");
@@ -47,7 +81,13 @@ public class RegisterListener extends Component implements ActionListener {
         }
     }
 
-    // Method to validate the login
+    /**
+     * <h1>Login method</h1>
+     * <p>
+     *     Method to validate the user data and register the user in the application.
+     * </p>
+     * @since JDK21.0.5
+     */
     private void login() {
         // Get data
         String nameText = name.getText();
