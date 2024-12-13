@@ -1,5 +1,6 @@
 package gui;
 
+import util.BackupData;
 import util.TextData;
 
 import javax.swing.*;
@@ -40,17 +41,21 @@ public class Menu {
         // File menu
         JMenu fileMenu = new JMenu(TextData.getText("menuFile"));
         JMenuItem showStatsMenuItem = new JMenuItem(TextData.getText("menuFileItem1"));
+        JMenuItem backupMenuItem = new JMenuItem(TextData.getText("menuFileItem3"));
         JMenuItem exitMenuItem = new JMenuItem(TextData.getText("menuFileItem2"));
         fileMenu.add(showStatsMenuItem);
+        fileMenu.add(backupMenuItem);
         fileMenu.add(exitMenuItem);
         menuBar.add(fileMenu);
 
-        showStatsMenuItem.addActionListener(e -> {
-            StatisticsPanel.getStatisticsPanel(app, previousPanel);
-        });
-
-        exitMenuItem.addActionListener(e -> {
-            System.exit(0);
+        showStatsMenuItem.addActionListener((e) -> StatisticsPanel.getStatisticsPanel(app, previousPanel));
+        exitMenuItem.addActionListener((e) -> System.exit(0));
+        backupMenuItem.addActionListener((e) -> {
+            if (BackupData.updateData()) {
+                JOptionPane.showMessageDialog(app, TextData.getText("backupSuccess"), TextData.getText("backupSuccessTitle"), JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(app, TextData.getText("backupError"), TextData.getText("backupErrorTitle"), JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         // Info menu
@@ -59,16 +64,13 @@ public class Menu {
         infoMenu.add(helpMenuItem);
         menuBar.add(infoMenu);
 
-        helpMenuItem.addActionListener(e -> {
-            URL url = null;
+        helpMenuItem.addActionListener((e) -> {
             try {
-                url = new URL("https://github.com/Sacha1083/");
+                URL url = new URL("https://github.com/Sacha1083/");
                 try {
                     Desktop.getDesktop().browse(url.toURI());
-                } catch (IOException ex) {
+                } catch (IOException | URISyntaxException ex) {
                     ex.printStackTrace();
-                } catch (URISyntaxException exe) {
-                    exe.printStackTrace();
                 }
             } catch (MalformedURLException e1) {
                 e1.printStackTrace();

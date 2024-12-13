@@ -2,6 +2,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import gui.App;
 import gui.LoginWindow;
 import gui.SplashScreen;
+import io.github.cdimascio.dotenv.Dotenv;
 import util.TextData;
 import util.TextFont;
 
@@ -58,6 +59,7 @@ public class Main {
     public static void main(String[] args) {
         FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
         new TextData();
+        loadEnvVariables();
 
         if (checkFileIntegrity()) {
             loadApp();
@@ -205,6 +207,16 @@ public class Main {
             JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println(message + " - " + e.getMessage());
             System.exit(4);
+        }
+    }
+
+    private static void loadEnvVariables() {
+        try {
+            Dotenv dotenv = Dotenv.configure().directory(System.getProperty("user.dir")).load();
+            dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+            System.out.println("Variables de entorno cargadas correctamente");
+        } catch (Exception e) {
+            System.out.println("Error al cargar las variables de entorno: " + e.getMessage());
         }
     }
 }
