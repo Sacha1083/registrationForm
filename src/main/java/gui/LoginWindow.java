@@ -1,6 +1,7 @@
 package gui;
 
 import gui.model.entity.Usuario;
+import util.BackupData;
 import util.TextData;
 import util.TextFont;
 
@@ -10,6 +11,7 @@ import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,16 +102,38 @@ public class LoginWindow extends JFrame {
         });
 
         login.addActionListener(e -> {
-            Usuario loginUsuario = usuarioController.authenticateUser(userTextField.getText(), new String(passwordField.getPassword()));
+            Path filePath = Paths.get(System.getProperty("user.dir"), "data", "userData.db");
+            boolean databaseExists = filePath.toFile().exists();
+            if (!databaseExists) {
+                if (filePath.getParent().toFile().exists() || filePath.getParent().toFile().mkdirs()) {
+                    int option = JOptionPane.showConfirmDialog(null, TextData.getText("downloadData"), "Download", JOptionPane.YES_NO_OPTION);
+                    if (option == JOptionPane.YES_OPTION) {
+                        if (BackupData.downloadData()) {
+                            JOptionPane.showMessageDialog(null, TextData.getText("downloadSuccess"), "Download", JOptionPane.INFORMATION_MESSAGE);
+                            databaseExists = true;
+                        } else {
+                            JOptionPane.showMessageDialog(null, TextData.getText("downloadError"), "Download", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, TextData.getText("errorData"), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
 
-            if (loginUsuario != null) {
-                JOptionPane.showMessageDialog(null, TextData.getText("welcome") + loginUsuario.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
-                setVisible(false);
-                latch.countDown();
+            if (databaseExists) {
+                Usuario loginUsuario = usuarioController.authenticateUser(userTextField.getText(), new String(passwordField.getPassword()));
+
+                if (loginUsuario != null) {
+                    JOptionPane.showMessageDialog(null, TextData.getText("welcome") + loginUsuario.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
+                    setVisible(false);
+                    latch.countDown();
+                } else {
+                    JOptionPane.showMessageDialog(null, TextData.getText("incorrectLogin"), "Login", JOptionPane.ERROR_MESSAGE);
+                    userTextField.setText("");
+                    passwordField.setText("");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, TextData.getText("incorrectLogin"), "Login", JOptionPane.ERROR_MESSAGE);
-                userTextField.setText("");
-                passwordField.setText("");
+                JOptionPane.showMessageDialog(null, "No se ha podido iniciar sesión porque no hay base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 

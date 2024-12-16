@@ -3,6 +3,7 @@ import gui.App;
 import gui.LoginWindow;
 import gui.SplashScreen;
 import io.github.cdimascio.dotenv.Dotenv;
+import util.BackupData;
 import util.TextData;
 import util.TextFont;
 
@@ -94,7 +95,8 @@ public class Main {
      */
     private static boolean checkFileIntegrity() {
         userDataPath = Paths.get(System.getProperty("user.dir"), "data", "userData.db");
-        return Files.exists(userDataPath);
+        //return Files.exists(userDataPath);
+        return true;
     }
 
     /**
