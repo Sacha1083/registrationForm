@@ -28,6 +28,12 @@ import static java.awt.GridBagConstraints.*;
  * </p>
  * @autor Sacha1083
  * @version 2.0
+ * @see JFrame - Top-level container for the application window
+ * @see UsuarioController - Controller for the Usuario entity
+ * @see BackupData - Class for working
+ * @see BackupData#downloadData() - Downloads the data from the S3 bucket
+ * @see TextData - Class for working with the text data
+ * @see TextFont - Class for working with the text font
  * @since JDK21.0.5
  */
 public class LoginWindow extends JFrame {
@@ -36,11 +42,19 @@ public class LoginWindow extends JFrame {
     /**
      * <h1>LoginWindow constructor</h1>
      * <p>
-     *     Initializes the login window with the user and password fields. <br>
+     *     Creates the login window with the user and password fields. <br>
      *     The user can exit the application or log in.
+     * </p>
+     * <p>
+     *     If the database does not exist, the user is prompted to download the data. <br>
+     *     If the download is successful, the user can log in. <br>
+     *     Data is downloaded from the S3 bucket, by Storj.io.
      * </p>
      * @param latch The countdown latch for the login window
      * @see CountDownLatch - Synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes
+     * @see UsuarioController - Controller for the Usuario entity
+     * @see BackupData - Class for working with the S3 bucket
+     * @see BackupData#downloadData() - Downloads the data from the S3 bucket
      * @since JDK21.0.5
      */
     public LoginWindow(CountDownLatch latch) {

@@ -9,9 +9,7 @@ import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -28,7 +26,7 @@ import java.util.concurrent.CountDownLatch;
  * @see JDialog - Dialog window
  * @see JOptionPane - Dialog window
  * @see App - Using the constructor of this class, the program starts.
- * @see #checkFileIntegrity() - Method that checks the integrity of the files
+ * @see #checkS3Bucket() - Method to check S3 bucket.
  * @see #loadApp() - Method that loads the application
  * @autor Sacha1083
  * @version 2.0
@@ -50,11 +48,10 @@ public class Main {
      * @since JDK21.0.5
      *
      * @see FlatLightLaf#setup()  - FlatLaf library
-     * @see TextData - Using the constuctor, the user selects a language and the program obtains from there the text to be displayed later.
-     * @                                                                                                                    TextData#getText(String)  - Gets the text depending on the language
+     * @see TextData - Using the constuctor, the user selects a language and the program obtains from there the text to be displayed later.TextData#getText(String)  - Gets the text depending on the language
      * @see JDialog - Dialog window
      * @see JOptionPane - Dialog window
-     * @see #checkFileIntegrity() - Method that checks the integrity of the files
+     * @see #checkS3Bucket() - Method to check S3 bucket.
      * @see #loadApp() - Method that loads the application
      */
     public static void main(String[] args) {
@@ -62,12 +59,12 @@ public class Main {
         new TextData();
         loadEnvVariables();
 
-        if (checkFileIntegrity()) {
+        if (checkS3Bucket()) {
             loadApp();
 
         } else {
             // There is a problem with the files. Please reinstall the program.
-            String message = TextData.getText("console&err.fileIntegrityCheckFailed");
+            String message = TextData.getText("bucketS3Error");
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
             JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
@@ -77,26 +74,14 @@ public class Main {
     }
 
     /**
-     * <h1>Check the integrity of the files</h1>
+     * Checks if the S3 bucket exists and if the user has access to it.
      *
-     * <p>
-     *     Check if the userData.db file exists. <br>
-     *     If the file exists, the method returns true. <br>
-     *     If the file does not exist, the method returns false.
-     * </p>
-     *
+     * @return true if the bucket exists and the user has access, false otherwise
+     * @see BackupData#checkS3Bucket() - Method that checks the S3 bucket
      * @since JDK21.0.5
-     *
-     * @see Paths
-     * @see Files
-     * @see #userDataPath
-     *
-     * @return boolean - true if the file exists, false if the file does not exist
      */
-    private static boolean checkFileIntegrity() {
-        userDataPath = Paths.get(System.getProperty("user.dir"), "data", "userData.db");
-        //return Files.exists(userDataPath);
-        return true;
+    private static boolean checkS3Bucket() {
+        return BackupData.checkS3Bucket();
     }
 
     /**

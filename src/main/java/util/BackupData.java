@@ -45,9 +45,33 @@ public class BackupData {
         return uploadToS3(filePath);
     }
 
+    /**
+     * Downloads the data from the S3 bucket.
+     * @return true if the data was downloaded successfully, false otherwise
+     */
     public static boolean downloadData() {
         Path filePath = Paths.get(System.getProperty("user.dir"), "data", "userData.db");
         return downloadToS3(filePath);
+    }
+
+    /**
+     * Checks if the S3 bucket exists and the user has access to it.
+     * @return true if the bucket exists, false otherwise
+     */
+    public static boolean checkS3Bucket() {
+        try (S3Client s3 = S3Client.builder()
+                .region(Region.EU_SOUTH_1)
+                .endpointOverride(URI.create(ENDPOINT))
+                .credentialsProvider(StaticCredentialsProvider.create(awsCreds))
+                .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
+                .build()) {
+            s3.headBucket(builder -> builder.bucket(BUCKET_NAME));
+            System.out.println("Bucket exists.");
+            return true;
+        } catch (S3Exception e) {
+            System.err.println(e.awsErrorDetails().errorMessage());
+            return false;
+        }
     }
 
     /**
