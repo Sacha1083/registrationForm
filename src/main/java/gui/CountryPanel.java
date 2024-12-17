@@ -15,7 +15,7 @@ import java.util.Objects;
 import static java.awt.GridBagConstraints.*;
 
 /**
- * <h1>CountryPanel class</h1>
+ * CountryPanel class
  * <p>
  * Panel for selecting the country and province of the user. <br>
  * It displays a list of countries and provinces for the user to choose from. <br>
@@ -33,7 +33,7 @@ public class CountryPanel extends JPanel {
     private static JComboBox<String> provinceSelector;
 
     /**
-     * <h1>CountryPanel constructor</h1>
+     * CountryPanel constructor
      * <p>
      * Initializes the country selection panel. <br>
      * It displays a list of countries and provinces for the user to choose from. <br>
@@ -205,7 +205,7 @@ public class CountryPanel extends JPanel {
     }
 
     /**
-     * <h1>Get country</h1>
+     * Get country
      * <p>
      * Returns the selected country.
      * </p>
@@ -217,7 +217,7 @@ public class CountryPanel extends JPanel {
     }
 
     /**
-     * <h1>Get province</h1>
+     * Get province
      * <p>
      * Returns the selected province.
      * </p>
@@ -252,7 +252,7 @@ public class CountryPanel extends JPanel {
     }
 
     /**
-     * <h1>CountryItemRenderer class</h1>
+     * CountryItemRenderer class
      * <p>
      * Custom renderer for the country selector.
      * </p>

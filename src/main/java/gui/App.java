@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * <h1>App class</h1>
+ * App class
  * <p>
  *     The main application class that sets up and manages the different panels of the application. <br>
  *     It uses a CardLayout to switch between different panels. <br>
@@ -21,7 +21,7 @@ import java.util.Objects;
  * @see DisplayData - Panel for displaying the user data
  * @see FinishPanel - Panel for finishing the application
  * @see UsuarioController - Controller for managing user data using SQLite
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */
@@ -36,7 +36,7 @@ public class App extends JFrame {
     private UsuarioController usuarioController;
 
     /**
-     * <h1>App constructor</h1>
+     * App constructor
      * <p>
      *     Configures the application window and initializes the different panels. <br>
      *     Adds the panels to the main panel and sets up the CardLayout for navigation.
@@ -77,7 +77,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Configure the application</h1>
+     * Configure the application
      * <p>
      *     Sets the title, size, location, and close operation of the application window. <br>
      *     Initializes the UsuarioController and sets the application icon.
@@ -97,7 +97,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Add the application icon</h1>
+     * Add the application icon
      * <p>
      *     Sets the icon image for the application window. <br>
      *     If the icon cannot be loaded, displays an error message and exits the application.
@@ -118,7 +118,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Navigate to the next panel</h1>
+     * Navigate to the next panel
      * <p>
      *     Switches to the next panel in the CardLayout. <br>
      *     Updates the data displayed in the DisplayData panel.
@@ -132,7 +132,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Navigate to the previous panel</h1>
+     * Navigate to the previous panel
      * <p>
      *     Switches to the previous panel in the CardLayout.
      * </p>
@@ -144,7 +144,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Show a specific panel</h1>
+     * Show a specific panel
      * <p>
      *     Displays the specified panel by name in the CardLayout.
      * </p>
@@ -157,7 +157,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Show the statistics panel</h1>
+     * Show the statistics panel
      * <p>
      *     Adds and displays the statistics panel in the CardLayout.
      * </p>
@@ -170,7 +170,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Quit the statistics panel</h1>
+     * Quit the statistics panel
      * <p>
      *     Removes the statistics panel from the CardLayout and returns to the previous panel.
      * </p>
@@ -186,7 +186,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Check if a panel is already added</h1>
+     * Check if a panel is already added
      * <p>
      *     Checks if the specified panel is already added to the main panel.
      * </p>
@@ -210,7 +210,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Get the user name</h1>
+     * Get the user name
      * <p>
      *     Retrieves the user name from the RegisterPanel.
      * </p>
@@ -223,7 +223,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Get the user email</h1>
+     * Get the user email
      * <p>
      *     Retrieves the user email from the RegisterPanel.
      * </p>
@@ -236,7 +236,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Get the user password</h1>
+     * Get the user password
      * <p>
      *     Retrieves the user password from the RegisterPanel.
      * </p>
@@ -249,7 +249,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Get the user country</h1>
+     * Get the user country
      * <p>
      *     Retrieves the user country from the CountryPanel.
      * </p>
@@ -262,7 +262,7 @@ public class App extends JFrame {
     }
 
     /**
-     * <h1>Get the user province</h1>
+     * Get the user province
      * <p>
      *     Retrieves the user province from the CountryPanel.
      * </p>
