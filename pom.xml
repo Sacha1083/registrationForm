@@ -84,7 +84,7 @@
                     <show>public</show>
                     <breakiterator>true</breakiterator>
                     <locale>es_ES</locale>
-                    <outputDirectory>javadoc</outputDirectory>
+                    <outputDirectory>src/main/resources/javadoc</outputDirectory>
                 </configuration>
             </plugin>
 

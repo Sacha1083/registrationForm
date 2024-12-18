@@ -66,14 +66,14 @@ public class Menu {
 
         helpMenuItem.addActionListener((e) -> {
             try {
-                URL url = new URL("https://github.com/Sacha1083/");
-                try {
+                URL url = Menu.class.getClassLoader().getResource("javadoc/apidocs/index.html");
+                if (url != null) {
                     Desktop.getDesktop().browse(url.toURI());
-                } catch (IOException | URISyntaxException ex) {
-                    ex.printStackTrace();
+                } else {
+                    JOptionPane.showMessageDialog(app, TextData.getText("javadocNotFound"), TextData.getText("errorTitle"), JOptionPane.ERROR_MESSAGE);
                 }
-            } catch (MalformedURLException e1) {
-                e1.printStackTrace();
+            } catch (IOException | URISyntaxException ex) {
+                ex.printStackTrace();
             }
         });
 
