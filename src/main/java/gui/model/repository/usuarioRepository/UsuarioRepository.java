@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <h1>UsuarioRepository class</h1>
+ * UsuarioRepository class
  * <p>
  *     Repository class for managing user data in the SQLite database. <br>
  *     Provides methods for user authentication, insertion, deletion, and retrieval of user data.
@@ -18,7 +18,7 @@ import java.util.List;
  * @see ResultSet - Result set of a query
  * @see Usuario - User entity class
  * @see DriverManager - Manages a list of database drivers
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */
@@ -27,7 +27,7 @@ public class UsuarioRepository implements IUsuarioRepository {
     private Connection conn;
 
     /**
-     * <h1>UsuarioRepository constructor</h1>
+     * UsuarioRepository constructor
      * <p>
      *     Initializes the path to the SQLite database file.
      * </p>
@@ -40,7 +40,7 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     /**
-     * <h1>Get database connection</h1>
+     * Get database connection
      * <p>
      *     Establishes and returns a connection to the SQLite database.
      * </p>
@@ -63,7 +63,7 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     /**
-     * <h1>Authenticate user</h1>
+     * Authenticate user
      * <p>
      *     Authenticates a user by email and password.
      * </p>
@@ -97,7 +97,7 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     /**
-     * <h1>Insert user</h1>
+     * Insert user
      * <p>
      *     Inserts a new user into the database.
      * </p>
@@ -129,7 +129,7 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     /**
-     * <h1>Delete user</h1>
+     * Delete user
      * <p>
      *     Deletes a user from the database by ID.
      * </p>
@@ -156,13 +156,13 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     /**
-     * <h1>Get all users</h1>
+     * Get all users
      * <p>
      *     Retrieves a list of all users from the database.
      * </p>
      * @see Usuario - User entity class
      * @see #getConnection() - Get database connection
-     * @return List<Usuario> - A list of all users
+     * @return {@code List<Usuario>} - A list of all users
      * @since JDK21.0.5
      */
     public List<Usuario> getAllUsers() {

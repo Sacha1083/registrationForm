@@ -26,7 +26,7 @@ import static java.awt.GridBagConstraints.*;
  *     It allows the user to log in with their email and password. <br>
  *     The user can exit the application or log in.
  * </p>
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @see JFrame - Top-level container for the application window
  * @see UsuarioController - Controller for the Usuario entity

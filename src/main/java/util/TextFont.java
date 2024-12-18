@@ -4,9 +4,8 @@ import java.awt.*;
 
 /**
  * TextFont class to set the font of the text
- * @return Font
  * @see Font
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */

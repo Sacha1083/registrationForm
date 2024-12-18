@@ -14,12 +14,17 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * Main class
- * <p>
  *     The main class of the program. <br>
  *     It checks the integrity of the files and loads the application if the integrity is correct. <br>
  *     If the integrity of the files is not correct, it displays a message indicating this. <br>
  *     If an error occurs, the program ends. The @exits tag contains information about each exit code.
- * </p>
+ *     <ul>
+ *         <li>exits 0 - User canceled theme selection</li>
+ *         <li>exits 1 - Error loading theme</li>
+ *         <li>exits 2 - Error loading login window</li>
+ *         <li>exits 3 - Error loading splash screen</li>
+ *         <li>exits 4 - Error loading program</li>
+ *     </ul>
  * @see FlatLightLaf#setup()  - FlatLaf library
  * @see TextData - The user selects a language and the program obtains from there the text to be displayed later.
  * @see TextData#getText(String)  - Gets the text depending on the language
@@ -28,10 +33,9 @@ import java.util.concurrent.CountDownLatch;
  * @see App - Using the constructor of this class, the program starts.
  * @see #checkS3Bucket() - Method to check S3 bucket.
  * @see #loadApp() - Method that loads the application
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
- * @exits 0 - User canceled theme selection, 1 - Error loading theme, 2 - Error loading login window, 3 - Error loading splash screen, 4 - Error loading program, 5 - File integrity check failed
  */
 public class Main {
     private static Path userDataPath;
@@ -46,6 +50,7 @@ public class Main {
      * </p>
      *
      * @since JDK21.0.5
+     * @param args The command line arguments
      *
      * @see FlatLightLaf#setup()  - FlatLaf library
      * @see TextData - Using the constuctor, the user selects a language and the program obtains from there the text to be displayed later.TextData#getText(String)  - Gets the text depending on the language
@@ -89,7 +94,14 @@ public class Main {
      *
      * <p>
      *     Load the application.<br>
-     *     If an error occurs, the program ends. The @exits tag contains information about each exit code.
+     *     If an error occurs, the program ends.<br>
+     *     <ul>
+     *         <li>exits 0 - User canceled theme selection</li>
+     *         <li>exits 1 - Error loading theme</li>
+     *         <li>exits 2 - Error loading login window</li>
+     *         <li>exits 3 - Error loading splash screen</li>
+     *         <li>exits 4 - Error loading program</li>
+     *     </ul>
      * </p>
      *
      * @since JDK21.0.5
@@ -100,7 +112,6 @@ public class Main {
      * @see App - Using the constructor of this class, the program starts.
      * @see CountDownLatch - The program waits for the login window to be loaded
      * @see Thread - The program waits for the login window to be loaded
-     * @exits 0 - User canceled theme selection, 1 - Error loading theme, 2 - Error loading login window, 3 - Error loading splash screen, 4 - Error loading program
      */
     private static void loadApp() {
         try {

@@ -7,13 +7,13 @@ import java.util.Base64;
 import java.util.List;
 
 /**
- * <h1>UsuarioService class</h1>
+ * UsuarioService class
  * <p>
  *     Service class for user-related operations. <br>
  *     Provides methods for user authentication, registration, and retrieval of user data.
  * </p>
  * @see UsuarioRepository - Repository class for user-related operations
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */
@@ -21,7 +21,7 @@ public class UsuarioService implements IUsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     /**
-     * <h1>UsuarioService constructor</h1>
+     * UsuarioService constructor
      * <p>
      *     Initializes the UsuarioRepository.
      * </p>
@@ -33,7 +33,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     /**
-     * <h1>Authenticate user</h1>
+     * Authenticate user
      * <p>
      *     Authenticates a user by email and password.
      * </p>
@@ -59,7 +59,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     /**
-     * <h1>Register user</h1>
+     * Register user
      * <p>
      *     Registers a new user.
      * </p>
@@ -77,7 +77,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     /**
-     * <h1>Delete user</h1>
+     * Delete user
      * <p>
      *     Deletes a user by id.
      * </p>
@@ -92,12 +92,12 @@ public class UsuarioService implements IUsuarioService {
     }
 
     /**
-     * <h1>Get all users</h1>
+     * Get all users
      * <p>
      *     Retrieves a list of all users.
      * </p>
      * @see UsuarioRepository#getAllUsers() - Method in UsuarioRepository class
-     * @return List<Usuario> - A list of all users
+     * @return {@code List<Usuario>} - A list of all users
      * @since JDK21.0.5
      */
     @Override

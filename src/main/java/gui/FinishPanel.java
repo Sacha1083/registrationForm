@@ -17,7 +17,7 @@ import static java.awt.GridBagConstraints.*;
  * @see App - The main application class
  * @see TextData - Class for managing text data
  * @see TextFont - Class for managing text fonts
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */

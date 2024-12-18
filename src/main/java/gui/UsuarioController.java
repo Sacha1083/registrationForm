@@ -12,7 +12,7 @@ import java.util.List;
  *     Provides methods for user authentication, registration, and retrieval of user data.
  * </p>
  * @see UsuarioService - Service class for user-related operations
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */
@@ -66,7 +66,7 @@ public class UsuarioController {
      *     Retrieves a list of all users.
      * </p>
      * @see UsuarioService#getAllUsers() - Method in UsuarioService class
-     * @return List<Usuario> - A list of all users
+     * @return {@code List<Usuario>} - A list of all users
      * @since JDK21.0.5
      */
     public List<Usuario> getAllUsers() {

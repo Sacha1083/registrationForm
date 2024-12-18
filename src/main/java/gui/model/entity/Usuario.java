@@ -9,13 +9,13 @@ import java.util.Locale;
 import java.util.Objects;
 
 /**
- * <h1>Usuario class</h1>
+ * Usuario class
  * <p>
  *     Entity class representing a user. <br>
  *     Provides methods for getting and setting user attributes, and for serializing the user object.
  * </p>
  * @see Serializable - Interface for serializing the user object
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */
@@ -29,7 +29,7 @@ public class Usuario implements Serializable {
     private String registerDate;
 
     /**
-     * <h1>Constructor for creating a new user</h1>
+     * Constructor for creating a new user
      * <p>
      *     Initializes a new user with the specified name, email, and password. <br>
      *     Sets the registration date to the current date.
@@ -49,7 +49,7 @@ public class Usuario implements Serializable {
     }
 
     /**
-     * <h1>Constructor for creating a user from the database</h1>
+     * Constructor for creating a user from the database
      * <p>
      *     Initializes a user with the specified ID, name, email, password, and registration date.
      * </p>
@@ -89,7 +89,7 @@ public class Usuario implements Serializable {
     }
 
     /**
-     * <h1>Get the registration year</h1>
+     * Get the registration year
      * <p>
      *     Parses the registration date and returns the year.
      * </p>
@@ -111,26 +111,51 @@ public class Usuario implements Serializable {
         }
     }
 
+    /**
+     * Set the user's ID
+     * @param id The user's ID
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Set the user's name
+     * @param name The user's name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Set the user's email
+     * @param email The user's email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Set the user's password
+     * @param password The user's password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Set the user's registration date
+     * @param registerDate The user's registration date
+     */
     public void setRegisterDate(String registerDate) {
         this.registerDate = registerDate;
     }
 
+    /**
+     * Compare two user objects by ID and email
+     * @param o The user object to compare
+     * @return boolean - True if the user objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -138,11 +163,19 @@ public class Usuario implements Serializable {
         return id == usuario.id && Objects.equals(email, usuario.email);
     }
 
+    /**
+     * Get the hash code of the user object
+     * @return int - The hash code of the user object
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, email);
     }
 
+    /**
+     * Get the string representation of the user object
+     * @return String - The string representation of the user object
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

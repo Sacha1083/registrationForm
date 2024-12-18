@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <h1>RegisterListener class</h1>
+ * RegisterListener class
  * <p>
  *     Class for managing the registration of a new user. <br>
  *     It validates the user data and registers the user in the application. <br>
@@ -22,7 +22,7 @@ import java.util.List;
  * @see App - The main application class
  * @see UsuarioController - Controller for managing user data using SQLite
  * @see Usuario - Entity class for user data
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */
@@ -36,7 +36,7 @@ public class RegisterListener extends Component implements ActionListener {
     private UsuarioController usuarioController;
 
     /**
-     * <h1>RegisterListener constructor</h1>
+     * RegisterListener constructor
      * <p>
      *     Initializes the listener for user registration.
      * </p>
@@ -60,7 +60,7 @@ public class RegisterListener extends Component implements ActionListener {
     }
 
     /**
-     * <h1>Action performed method</h1>
+     * Action performed method
      * <p>
      *     Method to perform the action according to the option selected.
      * </p>
@@ -82,7 +82,7 @@ public class RegisterListener extends Component implements ActionListener {
     }
 
     /**
-     * <h1>Login method</h1>
+     * Login method
      * <p>
      *     Method to validate the user data and register the user in the application.
      * </p>

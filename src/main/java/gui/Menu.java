@@ -16,7 +16,7 @@ import java.net.URL;
  *     Class for creating the application menu. <br>
  *     It contains the file and info menus with their respective items.
  * </p>
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */

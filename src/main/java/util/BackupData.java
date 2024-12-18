@@ -34,7 +34,12 @@ public class BackupData {
     private static final String ENDPOINT = dotenv.get("ENDPOINT");
     private static final String ACCESS_KEY = dotenv.get("ACCESS_KEY");
     private static final String SECRET_KEY = dotenv.get("SECRET_KEY");
-    private static AwsBasicCredentials awsCreds = AwsBasicCredentials.create(ACCESS_KEY, SECRET_KEY);
+    private static final AwsBasicCredentials awsCreds = AwsBasicCredentials.create(ACCESS_KEY, SECRET_KEY);
+
+    /**
+     * Default constructor.
+     */
+    public BackupData() {}
 
     /**
      * Uploads the data to the S3 bucket.

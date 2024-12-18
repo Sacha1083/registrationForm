@@ -13,7 +13,7 @@ import java.util.Objects;
  *     Class for displaying a splash screen when the application starts. <br>
  *     It shows the application logo and a progress bar while the application loads.
  * </p>
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */

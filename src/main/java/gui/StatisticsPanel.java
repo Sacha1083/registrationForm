@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @see App - The main application class
  * @see UsuarioController - Controller for managing user data using SQLite
  * @see Usuario - Entity class for user data
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */

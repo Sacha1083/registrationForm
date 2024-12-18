@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
  * @see ResourceBundle#getBundle(String, Locale)
  * @see ResourceBundle#getString(String)
  * @see Locale#forLanguageTag(String)
- * @autor Sacha1083
+ * @author Sacha1083
  * @version 2.0
  * @since JDK21.0.5
  */
