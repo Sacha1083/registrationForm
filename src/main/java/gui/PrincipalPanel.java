@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import static java.awt.GridBagConstraints.*;
 
 /**
- * <h1>PrincipalPanel class</h1>
+ * PrincipalPanel class
  * <p>
  *     Panel for the main menu of the application. <br>
  *     It displays the application title and instructions for the user. <br>
@@ -32,7 +32,7 @@ import static java.awt.GridBagConstraints.*;
 public class PrincipalPanel extends JPanel {
 
     /**
-     * <h1>PrincipalPanel constructor</h1>
+     * PrincipalPanel constructor
      * <p>
      *     Initializes the main menu panel.
      * </p>

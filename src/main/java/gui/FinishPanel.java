@@ -9,7 +9,7 @@ import java.awt.*;
 import static java.awt.GridBagConstraints.*;
 
 /**
- * <h1>FinishPanel class</h1>
+ * FinishPanel class
  * <p>
  *     Panel for the final screen of the application. <br>
  *     It displays a message to the user and allows them to exit the application.
@@ -24,7 +24,7 @@ import static java.awt.GridBagConstraints.*;
 public class FinishPanel extends JPanel {
 
     /**
-     * <h1>FinishPanel constructor</h1>
+     * FinishPanel constructor
      * <p>
      *     Initializes the final screen panel.
      * </p>

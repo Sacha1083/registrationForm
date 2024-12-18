@@ -11,7 +11,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * <h1>Menu class</h1>
+ * Menu class
  * <p>
  *     Class for creating the application menu. <br>
  *     It contains the file and info menus with their respective items.
@@ -23,7 +23,7 @@ import java.net.URL;
 public class Menu {
 
     /**
-     * <h1>Get menu</h1>
+     * Get menu
      * <p>
      *     Creates the application menu with the file and info menus. <br>
      *     It adds the menu items to the menus and sets up the action listeners for each item.

@@ -6,7 +6,7 @@ import gui.model.service.usuarioService.UsuarioService;
 import java.util.List;
 
 /**
- * <h1>UsuarioController class</h1>
+ * UsuarioController class
  * <p>
  *     Controller class for managing user data using the UsuarioService. <br>
  *     Provides methods for user authentication, registration, and retrieval of user data.
@@ -20,7 +20,7 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     /**
-     * <h1>UsuarioController constructor</h1>
+     * UsuarioController constructor
      * <p>
      *     Initializes the UsuarioService.
      * </p>
@@ -32,7 +32,7 @@ public class UsuarioController {
     }
 
     /**
-     * <h1>Authenticate user</h1>
+     * Authenticate user
      * <p>
      *     Authenticates a user by email and password.
      * </p>
@@ -47,7 +47,7 @@ public class UsuarioController {
     }
 
     /**
-     * <h1>Register user</h1>
+     * Register user
      * <p>
      *     Registers a new user.
      * </p>
@@ -61,7 +61,7 @@ public class UsuarioController {
     }
 
     /**
-     * <h1>Get all users</h1>
+     * Get all users
      * <p>
      *     Retrieves a list of all users.
      * </p>

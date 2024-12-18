@@ -20,7 +20,7 @@ import java.util.concurrent.CountDownLatch;
 import static java.awt.GridBagConstraints.*;
 
 /**
- * <h1>LoginWindow class</h1>
+ * CoginWindow class
  * <p>
  *     Class for creating the login window of the application. <br>
  *     It allows the user to log in with their email and password. <br>
@@ -40,7 +40,7 @@ public class LoginWindow extends JFrame {
     private UsuarioController usuarioController;
 
     /**
-     * <h1>LoginWindow constructor</h1>
+     * CoginWindow constructor
      * <p>
      *     Creates the login window with the user and password fields. <br>
      *     The user can exit the application or log in.
@@ -155,7 +155,7 @@ public class LoginWindow extends JFrame {
     }
 
     /**
-     * <h1>configLoginPanel method</h1>
+     * ConfigLoginPanel method
      * <p>
      *     Configures the login window with the user and password fields. <br>
      *     The user can exit the application or log in.

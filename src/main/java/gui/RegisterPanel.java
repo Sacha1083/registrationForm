@@ -10,7 +10,7 @@ import java.awt.*;
 import static java.awt.GridBagConstraints.*;
 
 /**
- * <h1>RegisterPanel class</h1>
+ * RegisterPanel class
  * <p>
  *     Panel for user registration. <br>
  *     It contains fields for the user's name, email, and password. <br>
@@ -154,7 +154,7 @@ public class RegisterPanel extends JPanel {
     }
 
     /**
-     * <h1>Get user name</h1>
+     * Get user name
      * <p>
      *     Retrieves the user name from the name field.
      * </p>
@@ -167,7 +167,7 @@ public class RegisterPanel extends JPanel {
     }
 
     /**
-     * <h1>Get user email</h1>
+     * Get user email
      * <p>
      *     Retrieves the user email from the eMail field.
      * </p>
@@ -180,7 +180,7 @@ public class RegisterPanel extends JPanel {
     }
 
     /**
-     * <h1>Get user password</h1>
+     * Get user password
      * <p>
      *     Retrieves the user password from the password field.
      * </p>
@@ -193,7 +193,7 @@ public class RegisterPanel extends JPanel {
     }
 
     /**
-     * <h1>Clear fields</h1>
+     * Clear fields
      * <p>
      *     Clears the name, eMail, and password fields.
      * </p>

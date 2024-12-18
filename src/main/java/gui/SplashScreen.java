@@ -8,7 +8,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.util.Objects;
 
 /**
- * <h1>SplashScreen class</h1>
+ * SplashScreen class
  * <p>
  *     Class for displaying a splash screen when the application starts. <br>
  *     It shows the application logo and a progress bar while the application loads.
@@ -20,7 +20,7 @@ import java.util.Objects;
 public class SplashScreen extends JWindow  {
 
     /**
-     * <h1>SplashScreen constructor</h1>
+     * SplashScreen constructor
      * <p>
      *     Initializes the splash screen.
      * </p>
@@ -30,7 +30,7 @@ public class SplashScreen extends JWindow  {
     }
 
     /**
-     * <h1>Show splash screen</h1>
+     * Show splash screen
      * <p>
      *     Displays the splash screen with the application logo and a progress bar. <br>
      *     The progress bar fills up randomly to simulate loading.

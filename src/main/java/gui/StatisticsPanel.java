@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * <h1>StatisticsPanel class</h1>
+ * StatisticsPanel class
  * <p>
  *     Class for displaying user statistics in the application. <br>
  *     It shows a table with all users and two charts: a bar chart and a line chart showing the number of users per year.
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class StatisticsPanel {
 
     /**
-     * <h1>Get statistics panel</h1>
+     * Get statistics panel
      * <p>
      *     Creates a panel with user statistics and displays it. <br>
      *     The panel shows a table with all users and two charts: a bar chart and a line chart showing the number of users per year. <br>

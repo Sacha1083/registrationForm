@@ -14,7 +14,7 @@ import java.io.IOException;
 import static java.awt.GridBagConstraints.*;
 
 /**
- * <h1>DisplayData class</h1>
+ * DisplayData class
  * <p>
  * Panel for displaying the user data. <br>
  * It shows the user's name, email, password, country, and province. <br>
@@ -36,7 +36,7 @@ public class DisplayData extends JPanel {
     private final JButton saveToFile;
 
     /**
-     * <h1>DisplayData constructor</h1>
+     * DisplayData constructor
      * <p>
      * Initializes the user data display panel. <br>
      * It shows the user's name, email, password, country, and province. <br>
@@ -191,7 +191,7 @@ public class DisplayData extends JPanel {
     }
 
     /**
-     * <h1>Update data</h1>
+     * Update data
      * <p>
      * Updates the user data in the app class.
      * </p>
@@ -208,7 +208,7 @@ public class DisplayData extends JPanel {
     }
 
     /**
-     * <h1>Save data to file</h1>
+     * Save data to file
      * <p>
      * Saves the user data to a file.
      * </p>

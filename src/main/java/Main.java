@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * <h1>Main class</h1>
+ * Main class
  * <p>
  *     The main class of the program. <br>
  *     It checks the integrity of the files and loads the application if the integrity is correct. <br>
@@ -37,7 +37,7 @@ public class Main {
     private static Path userDataPath;
 
     /**
-     * <h1>Start of the program</h1>
+     * Start of the program
      *
      * <p>
      *     Load the application, if the integrity of the files is correct. <br>
@@ -85,7 +85,7 @@ public class Main {
     }
 
     /**
-     * <h1>Load the application</h1>
+     * Load the application
      *
      * <p>
      *     Load the application.<br>
