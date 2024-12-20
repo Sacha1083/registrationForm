@@ -9,6 +9,7 @@ import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.nio.file.Path;
 import java.util.concurrent.CountDownLatch;
 
@@ -65,16 +66,13 @@ public class Main {
         loadEnvVariables();
 
         if (checkS3Bucket()) {
-            loadApp();
-
+            if (checkFileIntegrity()) {
+                loadApp();
+            } else {
+                showErrorDialog(TextData.getText("fileError"), 5);
+            }
         } else {
-            // There is a problem with the files. Please reinstall the program.
-            String message = TextData.getText("bucketS3Error");
-            JDialog dialog = new JDialog();
-            dialog.setAlwaysOnTop(true);
-            JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println(message);
-            System.exit(5);
+            showErrorDialog(TextData.getText("s3Error"), 5);
         }
     }
 
@@ -87,6 +85,16 @@ public class Main {
      */
     private static boolean checkS3Bucket() {
         return BackupData.checkS3Bucket();
+    }
+
+    /**
+     * Check the integrity of the files
+     * if the .env file exists return true, otherwise return false
+     * @return true if the .env file exists, false otherwise
+     */
+    private static boolean checkFileIntegrity() {
+        File file = new File(System.getProperty("user.dir"));
+        return file.exists();
     }
 
     /**
@@ -152,12 +160,7 @@ public class Main {
                     System.exit(0);
                 }
             } catch (Exception e) {
-                JDialog dialog = new JDialog();
-                dialog.setAlwaysOnTop(true);
-                String message = TextData.getText("console&err.errorLoadingTheme");
-                JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
-                System.out.println(message + " - " + e.getMessage());
-                System.exit(1);
+                showErrorDialog(TextData.getText("console&err.errorLoadingTheme"), 1);
             }
 
             // Login JWindow
@@ -167,12 +170,7 @@ public class Main {
                     LoginWindow loginWindow = new LoginWindow(latch);
                     loginWindow.setVisible(true);
                 } catch (Exception e) {
-                    String message = TextData.getText("console&err.errorLoadingLoginWindow");
-                    System.out.println(message + " - " + e.getMessage());
-                    JDialog dialog = new JDialog();
-                    dialog.setAlwaysOnTop(true);
-                    JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
-                    System.exit(2);
+                    showErrorDialog(TextData.getText("console&err.errorLoadingLoginWindow"), 2);
                 }
 
             });
@@ -185,12 +183,7 @@ public class Main {
                 gui.SplashScreen splash = new SplashScreen();
                 splash.showSplash();
             } catch (Exception ex) {
-                String message = TextData.getText("console&err.errorLoadingSplashScreen");
-                System.out.println(message + " - " + ex.getMessage());
-                JDialog dialog = new JDialog();
-                dialog.setAlwaysOnTop(true);
-                JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
-                System.exit(3);
+                showErrorDialog(TextData.getText("console&err.errorLoadingSplashScreen"), 3);
             }
 
             // Start the app
@@ -199,15 +192,26 @@ public class Main {
                 app.setVisible(true);
             });
         } catch (Exception e) {
-            String message = TextData.getText("console&err.errorLoadingProgram");
-            JDialog dialog = new JDialog();
-            dialog.setAlwaysOnTop(true);
-            JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println(message + " - " + e.getMessage());
-            System.exit(4);
+            showErrorDialog(TextData.getText("console&err.errorLoadingProgram"), 4);
         }
     }
 
+    /**
+     * Show an error dialog
+     * @param message the message to display
+     * @param exitCode the exit code
+     */
+    private static void showErrorDialog(String message, int exitCode) {
+        JDialog dialog = new JDialog();
+        dialog.setAlwaysOnTop(true);
+        JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
+        System.out.println(message);
+        System.exit(exitCode);
+    }
+
+    /**
+     * Load the environment variables from the .env file
+     */
     private static void loadEnvVariables() {
         try {
             Dotenv dotenv = Dotenv.configure().directory(System.getProperty("user.dir")).load();

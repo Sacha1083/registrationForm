@@ -44,7 +44,8 @@ public class CountryPanel extends JPanel {
      * @since JDK21.0.5
      */
     public CountryPanel(App app) {
-        setLayout(new GridBagLayout());
+        setLayout(new BorderLayout());
+        JPanel contentPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         setName("CountryPanel");
 
@@ -103,7 +104,7 @@ public class CountryPanel extends JPanel {
             }
         });
 
-        add(imageLabel, gbc);
+        contentPanel.add(imageLabel, gbc);
 
         // Title Section
         gbc.gridy = 0;
@@ -118,7 +119,7 @@ public class CountryPanel extends JPanel {
         JLabel titleForm = new JLabel(TextData.getText("titleCountryPanel"));
         titleForm.setHorizontalAlignment(SwingConstants.CENTER);
         titleForm.setFont(TextFont.titleFont());
-        add(titleForm, gbc);
+        contentPanel.add(titleForm, gbc);
 
         // Selector Section
         JPanel selectorPanel = new JPanel(new GridBagLayout());
@@ -169,7 +170,7 @@ public class CountryPanel extends JPanel {
         gbc.weighty = 1.0;
         gbc.anchor = NORTH;
         gbc.fill = HORIZONTAL;
-        add(selectorPanel, gbc);
+        contentPanel.add(selectorPanel, gbc);
 
         // Buttons Section
         gbc.gridy = 2;
@@ -187,7 +188,7 @@ public class CountryPanel extends JPanel {
                 nextButton.doClick();
             }
         });
-        add(nextButton, gbc);
+        contentPanel.add(nextButton, gbc);
 
         gbc.gridy = 2;
         gbc.gridwidth = REMAINDER;
@@ -201,7 +202,10 @@ public class CountryPanel extends JPanel {
                 app.previousPanel();
             }
         });
-        add(backButton, gbc);
+        contentPanel.add(backButton, gbc);
+
+        add(Menu.getMenu(app, this), BorderLayout.NORTH);
+        add(contentPanel, BorderLayout.CENTER);
     }
 
     /**
