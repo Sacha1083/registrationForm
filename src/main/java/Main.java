@@ -62,7 +62,7 @@ public class Main {
      */
     public static void main(String[] args) {
         FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
-        new TextData();
+        new TextData(); // Load bundle properties with the leanguage selected by the user
         loadEnvVariables();
 
         if (checkS3Bucket()) {
@@ -205,6 +205,7 @@ public class Main {
         JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
         JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
+        dialog.setVisible(true);
         System.out.println(message);
         System.exit(exitCode);
     }
