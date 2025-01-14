@@ -2,6 +2,8 @@
 
 This project is a practice exercise for the subject of Interface Development (DI) in Java.
 
+[Download Program](https://github.com/Sacha1083/registrationForm/releases/download/V2.0/registrationFormInstaller.exe)
+
 ## Features
 
 - **Data Display and Save**: Displays received data and asks the user if they want to save it. If the user chooses to save, a pop-up window appears to select the destination folder. [#18](https://github.com/Sacha1083/registrationForm/issues/18)
@@ -10,7 +12,7 @@ This project is a practice exercise for the subject of Interface Development (DI
 
 ## Requirements
 
-- Java 8 or higher
+- Java 8 or higher (JDK 21.0.5 recommended)
 - Maven 3.6.3 or higher
 - IntelliJ IDEA (recommended for development)
 
