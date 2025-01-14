@@ -206,7 +206,7 @@ public class Main {
         dialog.setAlwaysOnTop(true);
         JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
         dialog.setVisible(true);
-        System.out.println(message);
+        System.err.println(message);
         System.exit(exitCode);
     }
 
@@ -219,7 +219,7 @@ public class Main {
             dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
             System.out.println("Variables de entorno cargadas correctamente");
         } catch (Exception e) {
-            System.out.println("Error al cargar las variables de entorno: " + e.getMessage());
+            showErrorDialog(TextData.getText("fileError"), 5);
         }
     }
 }
