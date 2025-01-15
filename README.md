@@ -2,7 +2,7 @@
 
 This project is a practice exercise for the subject of Interface Development (DI) in Java.
 
-[Download Program](https://github.com/Sacha1083/registrationForm/releases/download/V2.0/registrationFormInstaller.exe)
+[Download Program](https://github.com/Sacha1083/registrationForm/releases/download/V2.0/registrationFormInstaller.exe) - Requires administrator if installed for all users
 
 ## Features
 
