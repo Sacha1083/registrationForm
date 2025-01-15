@@ -10,6 +10,15 @@ This project is a practice exercise for the subject of Interface Development (DI
 - **Load Provinces/States from File**: Loads provinces or states from a text file located in the `files` directory. [#16](https://github.com/Sacha1083/registrationForm/issues/16)
 - **Maven Integration**: The project has been converted to use Maven for better project management and dependency handling. [#12](https://github.com/Sacha1083/registrationForm/issues/12)
 
+## App images
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/fcb6bcd7-8183-4e4d-94f4-3fdf0653cf27" alt="Captura de pantalla 2025-01-15 145245"/>
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/da80b231-c5e9-4811-a36c-73d7ce838bdd" alt="Captura de pantalla 2025-01-15 145417" width="400"/>
+  <img src="https://github.com/user-attachments/assets/1fff4226-47a0-4abc-8d24-94ea16a4c6b9" alt="Captura de pantalla 2025-01-15 145429" width="400"/>
+</p>
+
 ## Requirements
 
 - Java 8 or higher (JDK 21.0.5 recommended)
