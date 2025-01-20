@@ -13,6 +13,7 @@ import software.amazon.awssdk.services.s3.model.S3Exception;
 import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 /**
  * This class is responsible for backing up the data to the S3 bucket.
@@ -66,7 +67,7 @@ public class BackupData {
     public static boolean checkS3Bucket() {
         try (S3Client s3 = S3Client.builder()
                 .region(Region.EU_SOUTH_1)
-                .endpointOverride(URI.create(ENDPOINT))
+                .endpointOverride(URI.create(Objects.requireNonNull(ENDPOINT)))
                 .credentialsProvider(StaticCredentialsProvider.create(awsCreds))
                 .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
                 .build()) {

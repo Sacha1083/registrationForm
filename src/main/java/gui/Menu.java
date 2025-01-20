@@ -6,9 +6,9 @@ import util.TextData;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Paths;
 
 /**
  * Menu class
@@ -66,7 +66,7 @@ public class Menu {
 
         helpMenuItem.addActionListener((e) -> {
             try {
-                URL url = Menu.class.getClassLoader().getResource("javadoc/apidocs/index.html");
+                URL url = Paths.get(System.getProperty("user.dir"), "javadoc", "apidocs", "index.html").toUri().toURL();
                 if (url != null) {
                     Desktop.getDesktop().browse(url.toURI());
                 } else {
@@ -74,9 +74,24 @@ public class Menu {
                 }
             } catch (IOException | URISyntaxException ex) {
                 ex.printStackTrace();
+                showErrorDialog(TextData.getText("javadocError"), 5);
             }
         });
 
         return menuBar;
+    }
+
+    /**
+     * Show an error dialog
+     * @param message the message to display
+     * @param exitCode the exit code
+     */
+    private static void showErrorDialog(String message, int exitCode) {
+        JDialog dialog = new JDialog();
+        dialog.setAlwaysOnTop(true);
+        JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
+        dialog.setVisible(true);
+        System.err.println(message);
+        System.exit(exitCode);
     }
 }

@@ -6,7 +6,7 @@
 
     <groupId>groupId</groupId>
     <artifactId>registrationForm</artifactId>
-    <version>2.0</version>
+    <version>2.1</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
-            <version>3.5.2</version>
+            <version>3.5.4</version>
             <scope>compile</scope>
         </dependency>
 
@@ -35,7 +35,7 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.47.1.0</version>
+            <version>3.48.0.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
@@ -84,7 +84,7 @@
                     <show>public</show>
                     <breakiterator>true</breakiterator>
                     <locale>es_ES</locale>
-                    <outputDirectory>src/main/resources/javadoc</outputDirectory>
+                    <outputDirectory>javadoc</outputDirectory>
                 </configuration>
             </plugin>
 
