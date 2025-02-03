@@ -42,7 +42,6 @@ public class TextData {
         String[] options = {"English", "Spanish"};
         int choice = JOptionPane.showOptionDialog(dialog, "Choose a language", "Language Selection",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        // Locale locale;
         if (choice == 1) {
             locale = Locale.forLanguageTag("es");
             bundle = ResourceBundle.getBundle("messages", locale);
