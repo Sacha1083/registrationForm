@@ -1,5 +1,6 @@
 package gui;
 
+import util.Menu;
 import util.TextData;
 import util.TextFont;
 
@@ -21,7 +22,7 @@ import static java.awt.GridBagConstraints.*;
  * It displays a list of countries and provinces for the user to choose from. <br>
  * The user can proceed to the next panel.
  * </p>
- * @see App - The main application class
+ * @see View - The main application class
  * @see TextData - Class for managing text data
  * @see TextFont - Class for managing text fonts
  * @author Sacha1083
@@ -39,11 +40,11 @@ public class CountryPanel extends JPanel {
      * It displays a list of countries and provinces for the user to choose from. <br>
      * The user can proceed to the next panel.
      * </p>
-     * @param app The main application class
-     * @see App - The main application class
+     * @param view The main application class
+     * @see View - The main application class
      * @since JDK21.0.5
      */
-    public CountryPanel(App app) {
+    public CountryPanel(View view) {
         setLayout(new BorderLayout());
         JPanel contentPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -180,7 +181,7 @@ public class CountryPanel extends JPanel {
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton nextButton = new JButton(TextData.getText("button.next"));
-        nextButton.addActionListener(e -> app.nextPanel());
+        nextButton.addActionListener(e -> view.nextPanel());
         nextButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         nextButton.getActionMap().put("clickButton", new AbstractAction() {
             @Override
@@ -199,12 +200,12 @@ public class CountryPanel extends JPanel {
         backButton.addActionListener(e -> {
             int option = JOptionPane.showConfirmDialog(this, TextData.getText("userDataBackMessage"), TextData.getText("userDataBackTitle"), JOptionPane.YES_NO_OPTION);
             if (option == JOptionPane.YES_OPTION) {
-                app.previousPanel();
+                view.previousPanel();
             }
         });
         contentPanel.add(backButton, gbc);
 
-        add(Menu.getMenu(app, this), BorderLayout.NORTH);
+        add(Menu.getMenu(view, this), BorderLayout.NORTH);
         add(contentPanel, BorderLayout.CENTER);
     }
 

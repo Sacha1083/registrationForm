@@ -1,5 +1,6 @@
 package gui;
 
+import util.Menu;
 import util.TextData;
 import util.TextFont;
 
@@ -20,7 +21,7 @@ import static java.awt.GridBagConstraints.*;
  * It shows the user's name, email, password, country, and province. <br>
  * The user can save the data to a file.
  * </p>
- * @see App - The main application class
+ * @see View - The main application class
  * @see TextData - Class for managing text data
  * @see TextFont - Class for managing text fonts
  * @author Sacha1083
@@ -42,11 +43,11 @@ public class DisplayData extends JPanel {
      * It shows the user's name, email, password, country, and province. <br>
      * The user can save the data to a file.
      * </p>
-     * @param app The main application class
-     * @see App - The main application class
+     * @param view The main application class
+     * @see View - The main application class
      * @since JDK21.0.5
      */
-    public DisplayData(App app) {
+    public DisplayData(View view) {
         setLayout(new BorderLayout());
         setName("DisplayData");
         JPanel panelData = new JPanel(new GridBagLayout());
@@ -166,14 +167,14 @@ public class DisplayData extends JPanel {
         gbc.anchor = SOUTHWEST;
         gbc.fill = NONE;
         JButton backButton = new JButton(TextData.getText("buttonBack"));
-        backButton.addActionListener(e -> app.previousPanel());
+        backButton.addActionListener(e -> view.previousPanel());
         panelData.add(backButton, gbc);
 
         gbc.gridx = 1;
         gbc.anchor = SOUTHEAST;
         JButton nextButton = new JButton(TextData.getText("button.next"));
         nextButton.addActionListener(e -> {
-            app.nextPanel();
+            view.nextPanel();
         });
         nextButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         nextButton.getActionMap().put("clickButton", new AbstractAction() {
@@ -184,10 +185,10 @@ public class DisplayData extends JPanel {
         });
         panelData.add(nextButton, gbc);
 
-        add(Menu.getMenu(app, this), BorderLayout.NORTH);
+        add(Menu.getMenu(view, this), BorderLayout.NORTH);
         add(panelData, BorderLayout.CENTER);
 
-        updateData(app);
+        updateData(view);
     }
 
     /**
@@ -195,16 +196,16 @@ public class DisplayData extends JPanel {
      * <p>
      * Updates the user data in the app class.
      * </p>
-     * @param app The main application class
-     * @see App - The main application class
+     * @param view The main application class
+     * @see View - The main application class
      * @since JDK21.0.5
      */
-    public void updateData(App app) {
-        nameLabel.setText(app.getUserName());
-        emailLabel.setText(app.geteMail());
-        passwordLabel.setText(app.getPassword());
-        countryLabel.setText(app.getCountry());
-        provinceLabel.setText(app.getProvince());
+    public void updateData(View view) {
+        nameLabel.setText(view.getUserName());
+        emailLabel.setText(view.geteMail());
+        passwordLabel.setText(view.getPassword());
+        countryLabel.setText(view.getCountry());
+        provinceLabel.setText(view.getProvince());
     }
 
     /**

@@ -14,7 +14,7 @@ import static java.awt.GridBagConstraints.*;
  *     Panel for the final screen of the application. <br>
  *     It displays a message to the user and allows them to exit the application.
  * </p>
- * @see App - The main application class
+ * @see View - The main application class
  * @see TextData - Class for managing text data
  * @see TextFont - Class for managing text fonts
  * @author Sacha1083
@@ -28,11 +28,11 @@ public class FinishPanel extends JPanel {
      * <p>
      *     Initializes the final screen panel.
      * </p>
-     * @param app The main application class
-     * @see App - The main application class
+     * @param view The main application class
+     * @see View - The main application class
      * @since JDK21.0.5
      */
-    public FinishPanel(App app) {
+    public FinishPanel(View view) {
         setLayout(new GridBagLayout());
         setName("FinishPanel");
         GridBagConstraints gbc = new GridBagConstraints();
@@ -65,7 +65,7 @@ public class FinishPanel extends JPanel {
         gbc.gridwidth = 1;
         gbc.anchor = SOUTHWEST;
         JButton previousButton = new JButton(TextData.getText("buttonBack"));
-        previousButton.addActionListener(e -> app.previousPanel());
+        previousButton.addActionListener(e -> view.previousPanel());
         add(previousButton, gbc);
 
         gbc.gridx = 1;

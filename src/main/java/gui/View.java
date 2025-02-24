@@ -1,5 +1,7 @@
 package gui;
 
+import util.controller.UsuarioController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -25,7 +27,7 @@ import java.util.Objects;
  * @version 2.0
  * @since JDK21.0.5
  */
-public class App extends JFrame {
+public class View extends JFrame {
     private static CardLayout cardLayout;
     private static JPanel mainPanel;
     private static PrincipalPanel principalPanel;
@@ -51,7 +53,7 @@ public class App extends JFrame {
      * @see FinishPanel - Panel for finishing the application
      * @since JDK21.0.5
      */
-    public App() {
+    public View() {
         // Configure the app & app icon
         configApp();
 
@@ -87,7 +89,7 @@ public class App extends JFrame {
      * @since JDK21.0.5
      */
     private void configApp() {
-        setTitle("App");
+        setTitle("registrationForm");
         setSize(900, 700);
         setMinimumSize(new Dimension(900, 700));
         setLocationRelativeTo(null);

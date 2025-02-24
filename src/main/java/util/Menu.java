@@ -1,7 +1,7 @@
-package gui;
+package util;
 
-import util.BackupData;
-import util.TextData;
+import gui.View;
+import gui.StatisticsPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,14 +28,14 @@ public class Menu {
      *     Creates the application menu with the file and info menus. <br>
      *     It adds the menu items to the menus and sets up the action listeners for each item.
      * </p>
-     * @param app The main application class
+     * @param view The main application class
      * @param previousPanel The previous panel
      * @return The application menu
-     * @see App - The main application class
+     * @see View - The main application class
      * @see JPanel - Container for the different panels
      * @since JDK21.0.5
      */
-    public static JMenuBar getMenu(App app, JPanel previousPanel) {
+    public static JMenuBar getMenu(View view, JPanel previousPanel) {
         JMenuBar menuBar = new JMenuBar();
 
         // File menu
@@ -48,13 +48,13 @@ public class Menu {
         fileMenu.add(exitMenuItem);
         menuBar.add(fileMenu);
 
-        showStatsMenuItem.addActionListener((e) -> StatisticsPanel.getStatisticsPanel(app, previousPanel));
+        showStatsMenuItem.addActionListener((e) -> StatisticsPanel.getStatisticsPanel(view, previousPanel));
         exitMenuItem.addActionListener((e) -> System.exit(0));
         backupMenuItem.addActionListener((e) -> {
             if (BackupData.updateData()) {
-                JOptionPane.showMessageDialog(app, TextData.getText("backupSuccess"), TextData.getText("backupSuccessTitle"), JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(view, TextData.getText("backupSuccess"), TextData.getText("backupSuccessTitle"), JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(app, TextData.getText("backupError"), TextData.getText("backupErrorTitle"), JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(view, TextData.getText("backupError"), TextData.getText("backupErrorTitle"), JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -70,7 +70,7 @@ public class Menu {
                 if (url != null) {
                     Desktop.getDesktop().browse(url.toURI());
                 } else {
-                    JOptionPane.showMessageDialog(app, TextData.getText("javadocNotFound"), TextData.getText("errorTitle"), JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(view, TextData.getText("javadocNotFound"), TextData.getText("errorTitle"), JOptionPane.ERROR_MESSAGE);
                 }
             } catch (IOException | URISyntaxException ex) {
                 ex.printStackTrace();

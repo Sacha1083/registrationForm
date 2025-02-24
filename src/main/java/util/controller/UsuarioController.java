@@ -1,7 +1,7 @@
-package gui;
+package util.controller;
 
-import gui.model.entity.Usuario;
-import gui.model.service.usuarioService.UsuarioService;
+import util.model.entity.Usuario;
+import util.model.service.usuarioService.UsuarioService;
 
 import java.util.List;
 

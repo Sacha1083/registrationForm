@@ -1,4 +1,4 @@
-package gui.model.entity;
+package util.model.entity;
 
 import java.io.*;
 import java.text.ParseException;

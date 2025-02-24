@@ -1,6 +1,6 @@
-package gui.model.service.usuarioService;
+package util.model.service.usuarioService;
 
-import gui.model.entity.Usuario;
+import util.model.entity.Usuario;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package gui.model.repository.usuarioRepository;
+package util.model.repository.usuarioRepository;
 
-import gui.model.entity.Usuario;
+import util.model.entity.Usuario;
 
 import java.sql.Connection;
 import java.util.List;

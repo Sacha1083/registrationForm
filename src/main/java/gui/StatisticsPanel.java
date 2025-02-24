@@ -1,6 +1,8 @@
 package gui;
 
-import gui.model.entity.Usuario;
+import util.Menu;
+import util.controller.UsuarioController;
+import util.model.entity.Usuario;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -11,7 +13,6 @@ import util.TextFont;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
  *     It shows a table with all users and two charts: a bar chart and a line chart showing the number of users per year.
  *     The user can go back to the previous panel.
  * </p>
- * @see App - The main application class
+ * @see View - The main application class
  * @see UsuarioController - Controller for managing user data using SQLite
  * @see Usuario - Entity class for user data
  * @author Sacha1083
@@ -39,18 +40,18 @@ public class StatisticsPanel {
      *     The panel shows a table with all users and two charts: a bar chart and a line chart showing the number of users per year. <br>
      *     The user can go back to the previous panel.
      * </p>
-     * @param app The main application class
+     * @param view The main application class
      * @param previousPanel The panel to return to when the user clicks the back button
-     * @see App - The main application class
+     * @see View - The main application class
      * @see UsuarioController - Controller for managing user data using SQLite
      * @see Usuario - Entity class for user data
      * @since JDK21.0.5
      */
-    public static void getStatisticsPanel(App app, JPanel previousPanel) {
+    public static void getStatisticsPanel(View view, JPanel previousPanel) {
         JPanel statisticsPanel = new JPanel(new BorderLayout());
         statisticsPanel.setName("statisticsPanel");
 
-        if (!app.containsPanel(statisticsPanel)) {
+        if (!view.containsPanel(statisticsPanel)) {
             UsuarioController usuarioController = new UsuarioController();
             List<Usuario> usuarios = usuarioController.getAllUsers();
             JPanel dataPanel = new JPanel(new GridBagLayout());
@@ -121,18 +122,18 @@ public class StatisticsPanel {
             buttonsPanel.add(backButton);
 
             // Parte Final
-            statisticsPanel.add(Menu.getMenu(app, previousPanel), BorderLayout.NORTH);
+            statisticsPanel.add(Menu.getMenu(view, previousPanel), BorderLayout.NORTH);
             statisticsPanel.add(dataPanel, BorderLayout.CENTER);
             statisticsPanel.add(buttonsPanel, BorderLayout.SOUTH);
 
-            app.showStatistics(statisticsPanel);
+            view.showStatistics(statisticsPanel);
             System.out.println("Showing statistics panel");
 
             backButton.addActionListener(l -> {
-                app.quitStatistics(statisticsPanel, previousPanel);
+                view.quitStatistics(statisticsPanel, previousPanel);
             });
         } else {
-            app.showPanel(statisticsPanel);
+            view.showPanel(statisticsPanel);
         }
     }
 }

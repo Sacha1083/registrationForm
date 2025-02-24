@@ -1,6 +1,7 @@
 package gui;
 
-import gui.listeners.RegisterListener;
+import util.Menu;
+import util.listeners.RegisterListener;
 import util.TextData;
 import util.TextFont;
 
@@ -16,7 +17,7 @@ import static java.awt.GridBagConstraints.*;
  *     It contains fields for the user's name, email, and password. <br>
  *     The user can clear the fields, go back to the previous panel, or proceed to the next panel.
  * </p>
- * @see App - The main application class
+ * @see View - The main application class
  * @see RegisterListener - Listener for user registration
  * @see Menu - Panel for the application menu
  * @see TextData - Class for managing text data
@@ -29,7 +30,7 @@ public class RegisterPanel extends JPanel {
     private final JTextField name;
     private final JTextField eMail;
     private final JPasswordField password;
-    public RegisterPanel(App app) {
+    public RegisterPanel(View view) {
         setLayout(new BorderLayout());
         setName("NextPanel");
         JPanel registerPanel = new JPanel(new GridBagLayout());
@@ -129,7 +130,7 @@ public class RegisterPanel extends JPanel {
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton nextButton = new JButton(TextData.getText("button.next"));
-        nextButton.addActionListener(new RegisterListener(app, "login", name, eMail, password));
+        nextButton.addActionListener(new RegisterListener(view, "login", name, eMail, password));
         nextButton.getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "clickButton");
         nextButton.getActionMap().put("clickButton", new AbstractAction() {
             @Override
@@ -146,10 +147,10 @@ public class RegisterPanel extends JPanel {
         gbc.fill = NONE;
         gbc.insets = new Insets(10, 10, 10, 10);
         JButton backButton = new JButton(TextData.getText("buttonBack"));
-        backButton.addActionListener(new RegisterListener(app, "back", name, eMail, password));
+        backButton.addActionListener(new RegisterListener(view, "back", name, eMail, password));
         registerPanel.add(backButton, gbc);
 
-        add(Menu.getMenu(app, this), BorderLayout.NORTH);
+        add(util.Menu.getMenu(view, this), BorderLayout.NORTH);
         add(registerPanel, BorderLayout.CENTER);
     }
 

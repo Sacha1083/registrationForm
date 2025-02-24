@@ -1,8 +1,8 @@
-package gui.listeners;
+package util.listeners;
 
-import gui.App;
-import gui.UsuarioController;
-import gui.model.entity.Usuario;
+import gui.View;
+import util.controller.UsuarioController;
+import util.model.entity.Usuario;
 import util.TextData;
 
 import javax.swing.*;
@@ -19,7 +19,7 @@ import java.util.List;
  *     It validates the user data and registers the user in the application. <br>
  *     It also shows error messages if the data is incorrect.
  * </p>
- * @see App - The main application class
+ * @see View - The main application class
  * @see UsuarioController - Controller for managing user data using SQLite
  * @see Usuario - Entity class for user data
  * @author Sacha1083
@@ -27,7 +27,7 @@ import java.util.List;
  * @since JDK21.0.5
  */
 public class RegisterListener extends Component implements ActionListener {
-    private final App app;
+    private final View view;
     private final String option;
     private final JTextField name;
     private final JTextField eMail;
@@ -40,17 +40,17 @@ public class RegisterListener extends Component implements ActionListener {
      * <p>
      *     Initializes the listener for user registration.
      * </p>
-     * @param app The main application class
+     * @param view The main application class
      * @param option The option to perform: login or back
      * @param name The user's name
      * @param eMail The user's email
      * @param password The user's password
-     * @see App - The main application class
+     * @see View - The main application class
      * @since JDK21.0.5
      */
-    public RegisterListener(App app, String option, JTextField name, JTextField eMail, JPasswordField password) {
+    public RegisterListener(View view, String option, JTextField name, JTextField eMail, JPasswordField password) {
         System.out.println("LoginListener created");
-        this.app = app;
+        this.view = view;
         this.option = option;
         this.name = name;
         this.eMail = eMail;
@@ -75,7 +75,7 @@ public class RegisterListener extends Component implements ActionListener {
             login();
         } else if (option.equals("back")) {
             System.out.println("Back");
-            app.previousPanel();
+            view.previousPanel();
         } else {
             System.out.println("❗ Invalid option ❗");
         }
@@ -135,6 +135,6 @@ public class RegisterListener extends Component implements ActionListener {
 
         // Next panel if everything is correct
         System.out.println("Next panel");
-        app.nextPanel();
+        view.nextPanel();
     }
 }

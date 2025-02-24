@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2025-01-20">
-<meta name="description" content="declaration: package: gui.listeners, class: RegisterListener">
+<meta name="description" content="declaration: package: util.listeners, class: RegisterListener">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../script-dir/jquery-ui.min.css" title="Style">
@@ -83,12 +83,12 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">gui.listeners</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">util.listeners</a></div>
 <h1 title="Class RegisterListener" class="title">Class RegisterListener</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
 <div class="inheritance"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/java/awt/Component.html" title="class or interface in java.awt" class="external-link">java.awt.Component</a>
-<div class="inheritance">gui.listeners.RegisterListener</div>
+<div class="inheritance">util.listeners.RegisterListener</div>
 </div>
 </div>
 <section class="class-description" id="class-description">
@@ -118,7 +118,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.desk
 <ul class="tag-list-long">
 <li><a href="../App.html" title="class in gui"><code>- The main application class</code></a></li>
 <li><a href="../UsuarioController.html" title="class in gui"><code>- Controller for managing user data using SQLite</code></a></li>
-<li><a href="../model/entity/Usuario.html" title="class in gui.model.entity"><code>- Entity class for user data</code></a></li>
+<li><a href="../model/entity/Usuario.html" title="class in util.model.entity"><code>- Entity class for user data</code></a></li>
 <li><a href="../../serialized-form.html#gui.listeners.RegisterListener">Serialized Form</a></li>
 </ul>
 </dd>
@@ -155,7 +155,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.desk
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(gui.App,java.lang.String,javax.swing.JTextField,javax.swing.JTextField,javax.swing.JPasswordField)" class="member-name-link">RegisterListener</a><wbr>(<a href="../App.html" title="class in gui">App</a>&nbsp;app,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(gui.App,java.lang.String,javax.swing.JTextField,javax.swing.JTextField,javax.swing.JPasswordField)" class="member-name-link">RegisterListener</a><wbr>(<a href="../App.html" title="class in gui">App</a>&nbsp;view,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;option,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/swing/JTextField.html" title="class or interface in javax.swing" class="external-link">JTextField</a>&nbsp;name,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/swing/JTextField.html" title="class or interface in javax.swing" class="external-link">JTextField</a>&nbsp;eMail,
@@ -205,7 +205,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.desk
 <li>
 <section class="detail" id="&lt;init&gt;(gui.App,java.lang.String,javax.swing.JTextField,javax.swing.JTextField,javax.swing.JPasswordField)">
 <h3>RegisterListener</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RegisterListener</span><wbr><span class="parameters">(<a href="../App.html" title="class in gui">App</a>&nbsp;app,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RegisterListener</span><wbr><span class="parameters">(<a href="../App.html" title="class in gui">App</a>&nbsp;view,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;option,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/swing/JTextField.html" title="class or interface in javax.swing" class="external-link">JTextField</a>&nbsp;name,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.desktop/javax/swing/JTextField.html" title="class or interface in javax.swing" class="external-link">JTextField</a>&nbsp;eMail,
@@ -216,7 +216,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.desk
  </p></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>app</code> - The main application class</dd>
+<dd><code>view</code> - The main application class</dd>
 <dd><code>option</code> - The option to perform: login or back</dd>
 <dd><code>name</code> - The user's name</dd>
 <dd><code>eMail</code> - The user's email</dd>

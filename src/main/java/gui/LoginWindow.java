@@ -1,20 +1,15 @@
 package gui;
 
-import gui.model.entity.Usuario;
+import util.controller.UsuarioController;
+import util.model.entity.Usuario;
 import util.BackupData;
 import util.TextData;
 import util.TextFont;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import static java.awt.GridBagConstraints.*;

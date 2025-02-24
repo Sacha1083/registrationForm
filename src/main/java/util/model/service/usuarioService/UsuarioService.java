@@ -1,7 +1,7 @@
-package gui.model.service.usuarioService;
+package util.model.service.usuarioService;
 
-import gui.model.entity.Usuario;
-import gui.model.repository.usuarioRepository.UsuarioRepository;
+import util.model.entity.Usuario;
+import util.model.repository.usuarioRepository.UsuarioRepository;
 
 import java.util.Base64;
 import java.util.List;

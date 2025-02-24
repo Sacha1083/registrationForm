@@ -1,5 +1,5 @@
 import com.formdev.flatlaf.FlatLightLaf;
-import gui.App;
+import gui.View;
 import gui.LoginWindow;
 import gui.SplashScreen;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -31,7 +31,7 @@ import java.util.concurrent.CountDownLatch;
  * @see TextData#getText(String)  - Gets the text depending on the language
  * @see JDialog - Dialog window
  * @see JOptionPane - Dialog window
- * @see App - Using the constructor of this class, the program starts.
+ * @see View - Using the constructor of this class, the program starts.
  * @see #checkS3Bucket() - Method to check S3 bucket.
  * @see #loadApp() - Method that loads the application
  * @author Sacha1083
@@ -117,7 +117,7 @@ public class Main {
      * @see JOptionPane - Dialog window
      * @see LoginWindow - The user logs in to the program
      * @see SplashScreen - The splash screen is displayed
-     * @see App - Using the constructor of this class, the program starts.
+     * @see View - Using the constructor of this class, the program starts.
      * @see CountDownLatch - The program waits for the login window to be loaded
      * @see Thread - The program waits for the login window to be loaded
      */
@@ -188,8 +188,8 @@ public class Main {
 
             // Start the app
             java.awt.EventQueue.invokeLater(() -> {
-                App app = new App();
-                app.setVisible(true);
+                View view = new View();
+                view.setVisible(true);
             });
         } catch (Exception e) {
             showErrorDialog(TextData.getText("console&err.errorLoadingProgram"), 4);
