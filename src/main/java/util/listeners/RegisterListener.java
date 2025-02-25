@@ -50,7 +50,7 @@ public class RegisterListener extends Component implements ActionListener {
      * @since JDK21.0.5
      */
     public RegisterListener(View view, String option, JTextField name, JTextField eMail, JPasswordField password) {
-        System.out.println("LoginListener created");
+        Log.config("RegisterListener initialized");
         this.view = view;
         this.option = option;
         this.name = name;

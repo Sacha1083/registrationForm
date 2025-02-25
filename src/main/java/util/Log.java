@@ -2,10 +2,7 @@ package util;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
+import java.util.logging.*;
 
 public class Log {
     private static final String LOG_DIR = Paths.get("").toAbsolutePath().toString();
@@ -15,6 +12,8 @@ public class Log {
     static {
         try {
             logger = Logger.getLogger("AppLogger");
+            logger.setUseParentHandlers(false); // Disable console output
+
             FileHandler fileHandler = new FileHandler(LOG_FILE, true);
             fileHandler.setFormatter(new SimpleFormatter());
             logger.addHandler(fileHandler);
