@@ -66,7 +66,7 @@ public class Menu {
 
         helpMenuItem.addActionListener((e) -> {
             try {
-                String enlace = "https://sacha1083.github.io/registrationForm/";
+                String enlace = "https://github.com/Sacha1083/registrationForm";
                 Desktop.getDesktop().browse(new URL(enlace).toURI());
             } catch (IOException | URISyntaxException ex) {
                 ex.printStackTrace();
