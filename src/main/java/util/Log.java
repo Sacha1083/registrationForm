@@ -2,7 +2,6 @@ package util;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.time.format.DateTimeFormatter;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,8 +10,6 @@ import java.util.logging.SimpleFormatter;
 public class Log {
     private static final String LOG_DIR = Paths.get("").toAbsolutePath().toString();
     private static final String LOG_FILE = Paths.get(LOG_DIR, "app.log").toString();
-    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss - dd/MM/yyyy");
-
     private static Logger logger;
 
     static {
