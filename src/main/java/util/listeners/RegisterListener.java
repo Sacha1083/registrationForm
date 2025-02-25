@@ -1,6 +1,7 @@
 package util.listeners;
 
 import gui.View;
+import util.Log;
 import util.controller.UsuarioController;
 import util.model.entity.Usuario;
 import util.TextData;
@@ -69,15 +70,13 @@ public class RegisterListener extends Component implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Action performed");
         if (option.equals("login")) {
-            System.out.println("Login");
+            Log.info("Login");
             login();
         } else if (option.equals("back")) {
-            System.out.println("Back");
             view.previousPanel();
         } else {
-            System.out.println("❗ Invalid option ❗");
+            Log.warn("Invalid option");
         }
     }
 
@@ -96,19 +95,19 @@ public class RegisterListener extends Component implements ActionListener {
 
         // Validations
         if (nameText.isEmpty() || eMailText.isEmpty() || passwordText.isEmpty()) {
-            System.out.println("All fields are required");
+            Log.warn("All fields are required");
             JOptionPane.showMessageDialog(this, "All fields are required", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (!eMailText.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
-            System.out.println("Invalid e-mail format");
+            Log.warn("Invalid e-mail format");
             JOptionPane.showMessageDialog(this, "Invalid e-mail format", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (!passwordText.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,16}$")) {
-            System.out.println("Invalid password format");
+           Log.warn("Invalid password format");
             JOptionPane.showMessageDialog(this, "Invalid password format", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -119,22 +118,21 @@ public class RegisterListener extends Component implements ActionListener {
 
         if (userAdded == null) {
             msg = TextData.getText("userAddError");
-            System.out.println(msg);
+            Log.error(msg);
             JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         } else if (userAdded) {
             msg = TextData.getText("userAdded");
-            System.out.println(msg);
+            Log.error(msg);
             JOptionPane.showMessageDialog(this, msg, TextData.getText("successfullyTitle"), JOptionPane.INFORMATION_MESSAGE);
         } else {
             msg = TextData.getText("userExists");
-            System.out.println(msg);
+            Log.error(msg);
             JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Next panel if everything is correct
-        System.out.println("Next panel");
+        Log.success("User registered successfully");
         view.nextPanel();
     }
 }
