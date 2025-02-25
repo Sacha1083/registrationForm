@@ -64,6 +64,7 @@ public class Menu {
         infoMenu.add(helpMenuItem);
         menuBar.add(infoMenu);
 
+        // Open the project's GitHub page
         helpMenuItem.addActionListener((e) -> {
             try {
                 String enlace = "https://github.com/Sacha1083/registrationForm";
