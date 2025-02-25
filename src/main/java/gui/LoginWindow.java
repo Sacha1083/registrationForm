@@ -1,5 +1,6 @@
 package gui;
 
+import util.Log;
 import util.controller.UsuarioController;
 import util.model.entity.Usuario;
 import util.BackupData;
@@ -134,15 +135,18 @@ public class LoginWindow extends JFrame {
 
                 if (loginUsuario != null) {
                     JOptionPane.showMessageDialog(null, TextData.getText("welcome") + loginUsuario.getName(), "Login", JOptionPane.INFORMATION_MESSAGE);
+                    Log.info("Login successful");
                     setVisible(false);
                     latch.countDown();
                 } else {
                     JOptionPane.showMessageDialog(null, TextData.getText("incorrectLogin"), "Login", JOptionPane.ERROR_MESSAGE);
                     userTextField.setText("");
                     passwordField.setText("");
+                    Log.warn("Incorrect login");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha podido iniciar sesión porque no hay base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                Log.error("No se ha podido iniciar sesión porque no hay base de datos.");
             }
         });
 

@@ -1,5 +1,6 @@
 package gui;
 
+import util.Log;
 import util.TextFont;
 
 import javax.swing.*;
@@ -48,10 +49,11 @@ public class SplashScreen extends JWindow  {
             Image img = (new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("img/logo.jpg"))).getImage());
             Image newImg = img.getScaledInstance(500, 500, Image.SCALE_SMOOTH);
             imageLabel.setIcon(new ImageIcon(newImg));
+            Log.config("Splash screen loaded");
         } catch (NullPointerException e) {
             imageLabel.setText("Image not found");
             imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            System.out.println("Image not found - " + e.getMessage());
+            Log.error("Image not found - " + e.getMessage());
         }
 
         JProgressBar progressBar = new JProgressBar();
@@ -79,9 +81,11 @@ public class SplashScreen extends JWindow  {
                     Thread.sleep(200);
                 }
             } catch (InterruptedException e) {
-                System.out.println("Error in the splash screen - " + e.getMessage());
+                Log.error("Error in the splash screen - " + e.getMessage());
             }
+            Log.info("Loading progress: " + i + "%");
         }
+        Log.config("Splash screen loaded");
 
         setVisible(false);
     }

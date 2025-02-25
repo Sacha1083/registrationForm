@@ -1,5 +1,6 @@
 package gui;
 
+import util.Log;
 import util.Menu;
 import util.controller.UsuarioController;
 import util.model.entity.Usuario;
@@ -127,7 +128,7 @@ public class StatisticsPanel {
             statisticsPanel.add(buttonsPanel, BorderLayout.SOUTH);
 
             view.showStatistics(statisticsPanel);
-            System.out.println("Showing statistics panel");
+            Log.info("Statistics panel displayed");
 
             backButton.addActionListener(l -> {
                 view.quitStatistics(statisticsPanel, previousPanel);

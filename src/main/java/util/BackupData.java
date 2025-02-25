@@ -72,10 +72,10 @@ public class BackupData {
                 .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
                 .build()) {
             s3.headBucket(builder -> builder.bucket(BUCKET_NAME));
-            System.out.println("Bucket exists.");
+            Log.success("Bucket exists and you have access to it.");
             return true;
         } catch (S3Exception e) {
-            System.err.println(e.awsErrorDetails().errorMessage());
+            Log.error(e.awsErrorDetails().errorMessage());
             return false;
         }
     }
@@ -88,7 +88,7 @@ public class BackupData {
     private static boolean uploadToS3(Path filePath) {
         try (S3Client s3 = S3Client.builder()
                 .region(Region.EU_SOUTH_1)
-                .endpointOverride(URI.create(ENDPOINT))
+                .endpointOverride(URI.create(Objects.requireNonNull(ENDPOINT)))
                 .credentialsProvider(StaticCredentialsProvider.create(awsCreds))
                 .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
                 .build()) {
@@ -98,10 +98,10 @@ public class BackupData {
                     .build();
 
             s3.putObject(putObjectRequest, filePath);
-            System.out.println("File uploaded successfully to S3.");
+            Log.success("File uploaded successfully to S3.");
             return true;
         } catch (S3Exception e) {
-            System.err.println(e.awsErrorDetails().errorMessage());
+            Log.error(e.awsErrorDetails().errorMessage());
             return false;
         }
     }
@@ -113,7 +113,7 @@ public class BackupData {
     private static boolean downloadToS3(Path filePath) {
         try (S3Client s3 = S3Client.builder()
                 .region(Region.EU_SOUTH_1)
-                .endpointOverride(URI.create(ENDPOINT))
+                .endpointOverride(URI.create(Objects.requireNonNull(ENDPOINT)))
                 .credentialsProvider(StaticCredentialsProvider.create(awsCreds))
                 .serviceConfiguration(S3Configuration.builder().pathStyleAccessEnabled(true).build())
                 .build()) {
@@ -123,10 +123,10 @@ public class BackupData {
                     .build();
 
             s3.getObject(getObjectRequest, filePath);
-            System.out.println("File downloaded successfully from S3.");
+            Log.success("File downloaded successfully from S3.");
             return true;
         } catch (S3Exception e) {
-            System.err.println(e.awsErrorDetails().errorMessage());
+            Log.error(e.awsErrorDetails().errorMessage());
             return false;
         }
     }

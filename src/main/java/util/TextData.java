@@ -37,19 +37,23 @@ public class TextData {
      * @since JDK21.0.5
      */
     public TextData() {
+        Log.info("Selecting language");
         JDialog dialog = new JDialog();
         dialog.setAlwaysOnTop(true);
         String[] options = {"English", "Spanish"};
         int choice = JOptionPane.showOptionDialog(dialog, "Choose a language", "Language Selection",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        Log.info("Language selected: " + choice);
         if (choice == 1) {
+            Log.info("Spanish language selected");
             locale = Locale.forLanguageTag("es");
             bundle = ResourceBundle.getBundle("messages", locale);
         } else if (choice == 0) {
+            Log.info("English language selected");
             locale = Locale.forLanguageTag("en");
             bundle = ResourceBundle.getBundle("messages", locale);
         } else {
-            System.out.println("User canceled language selection");
+            Log.info("User canceled theme selection");
             System.exit(0);
         }
     }
@@ -66,8 +70,12 @@ public class TextData {
     public static String getText(String keyValue) {
         bundle = ResourceBundle.getBundle("messages", locale);
         try {
-            return bundle.getString(keyValue);
+            Log.info("Getting text: " + keyValue);
+            String text = bundle.getString(keyValue);
+            Log.info("Text found: " + text);
+            return text;
         } catch (MissingResourceException e) {
+            Log.error("Key not found: " + keyValue);
             return "Key not found: " + keyValue;
         }
     }

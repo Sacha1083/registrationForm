@@ -1,5 +1,6 @@
 package gui;
 
+import util.Log;
 import util.controller.UsuarioController;
 
 import javax.swing.*;
@@ -114,7 +115,7 @@ public class View extends JFrame {
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
             JOptionPane.showMessageDialog(dialog, "Error loading app icon", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("Error loading app icon");
+            Log.error("Error loading app icon" + e.getMessage());
             System.exit(0);
         }
     }

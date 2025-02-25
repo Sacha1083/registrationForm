@@ -1,5 +1,6 @@
 package util.model.repository.usuarioRepository;
 
+import util.Log;
 import util.model.entity.Usuario;
 
 import java.nio.file.Paths;
@@ -55,9 +56,9 @@ public class UsuarioRepository implements IUsuarioRepository {
         String DB_URL = "jdbc:sqlite:" + fileResource;
         try {
             conn = DriverManager.getConnection(DB_URL);
-            System.out.println("Connection to SQLite has been established.");
+            Log.success("Connection to SQLite has been established.");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage());
         }
         return conn;
     }
@@ -89,7 +90,7 @@ public class UsuarioRepository implements IUsuarioRepository {
                 usuario = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage());
             usuario = null;
         }
 
@@ -121,7 +122,7 @@ public class UsuarioRepository implements IUsuarioRepository {
 
             insert = pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage());
             insert = null;
         }
 
@@ -148,7 +149,7 @@ public class UsuarioRepository implements IUsuarioRepository {
 
             delete = pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage());
             delete = null;
         }
 
@@ -178,7 +179,7 @@ public class UsuarioRepository implements IUsuarioRepository {
                 usuarios.add(new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Log.error(e.getMessage());
             usuarios = null;
         }
 

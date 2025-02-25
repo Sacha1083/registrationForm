@@ -71,6 +71,7 @@ public class Menu {
                 Desktop.getDesktop().browse(new URL(enlace).toURI());
             } catch (IOException | URISyntaxException ex) {
                 ex.printStackTrace();
+                Log.warn("Error opening the project's GitHub page");
                 showErrorDialog(TextData.getText("javadocError"), 5);
             }
         });
@@ -88,7 +89,7 @@ public class Menu {
         dialog.setAlwaysOnTop(true);
         JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
         dialog.setVisible(true);
-        System.err.println(message);
+        Log.error(message);
         System.exit(exitCode);
     }
 }

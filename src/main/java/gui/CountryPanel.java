@@ -1,5 +1,6 @@
 package gui;
 
+import util.Log;
 import util.Menu;
 import util.TextData;
 import util.TextFont;
@@ -63,7 +64,7 @@ public class CountryPanel extends JPanel {
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
             JOptionPane.showMessageDialog(dialog, msg, "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println(msg);
+            Log.info(msg);
             System.exit(0);
         }
 
@@ -88,7 +89,7 @@ public class CountryPanel extends JPanel {
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
             JOptionPane.showMessageDialog(dialog, msg, "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println(msg);
+            Log.info(msg);
             System.exit(0);
         }
         Image originalImage = imageIcon.getImage();

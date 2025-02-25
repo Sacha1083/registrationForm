@@ -1,5 +1,6 @@
 package util.model.service.usuarioService;
 
+import util.Log;
 import util.model.entity.Usuario;
 import util.model.repository.usuarioRepository.UsuarioRepository;
 
@@ -52,7 +53,7 @@ public class UsuarioService implements IUsuarioService {
         if (user != null) {
             user.setPassword(new String(Base64.getDecoder().decode(user.getPassword())));
         } else {
-            System.out.println("User not found");
+            Log.error("Authentication failed for user: " + email);
         }
 
         return user;

@@ -4,6 +4,7 @@ import gui.LoginWindow;
 import gui.SplashScreen;
 import io.github.cdimascio.dotenv.Dotenv;
 import util.BackupData;
+import util.Log;
 import util.TextData;
 import util.TextFont;
 
@@ -150,13 +151,13 @@ public class Main {
 
             try {
                 if (choice == 1) {
-                    System.out.println(TextData.getText("console&label.darkThemeSelected"));
+                    Log.info(TextData.getText("console&label.darkThemeSelected"));
                     FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacDarkLaf());
                 } else if (choice == 0) {
-                    System.out.println(TextData.getText("console&label.lightThemeSelected"));
+                    Log.info(TextData.getText("console&label.lightThemeSelected"));
                     FlatLightLaf.setup(new com.formdev.flatlaf.themes.FlatMacLightLaf());
                 } else {
-                    System.out.println(TextData.getText("console&err.userCanceledThemeSelection"));
+                    Log.info(TextData.getText("console&err.userCanceledThemeSelection"));
                     System.exit(0);
                 }
             } catch (Exception e) {
@@ -206,7 +207,7 @@ public class Main {
         dialog.setAlwaysOnTop(true);
         JOptionPane.showMessageDialog(dialog, message, "Error", JOptionPane.ERROR_MESSAGE);
         dialog.setVisible(true);
-        System.err.println(message);
+        Log.error(message);
         System.exit(exitCode);
     }
 
@@ -217,7 +218,7 @@ public class Main {
         try {
             Dotenv dotenv = Dotenv.configure().directory(System.getProperty("user.dir")).load();
             dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
-            System.out.println("Variables de entorno cargadas correctamente");
+            Log.info("Environment variables loaded");
         } catch (Exception e) {
             showErrorDialog(TextData.getText("fileError"), 5);
         }
