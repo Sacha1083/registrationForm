@@ -66,12 +66,8 @@ public class Menu {
 
         helpMenuItem.addActionListener((e) -> {
             try {
-                URL url = Paths.get(System.getProperty("user.dir"), "javadoc", "apidocs", "index.html").toUri().toURL();
-                if (url != null) {
-                    Desktop.getDesktop().browse(url.toURI());
-                } else {
-                    JOptionPane.showMessageDialog(view, TextData.getText("javadocNotFound"), TextData.getText("errorTitle"), JOptionPane.ERROR_MESSAGE);
-                }
+                String enlace = "https://sacha1083.github.io/registrationForm/";
+                Desktop.getDesktop().browse(new URL(enlace).toURI());
             } catch (IOException | URISyntaxException ex) {
                 ex.printStackTrace();
                 showErrorDialog(TextData.getText("javadocError"), 5);
